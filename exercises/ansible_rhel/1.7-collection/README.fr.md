@@ -257,7 +257,7 @@ Une fois que `httpd` a été vérifié comme étant en fonctionnement, vérifiez
 ---
 **Navigation**
 <br>
-[Exercice précédent](../1.6-templates/README.fr.md) - [Exercice suivant](../1.8-troubleshoot/README.fr.md)
+[Exercice précédent](../1.6-templates/README.fr.md) - [Exercice suivant](../1.9-troubleshoot/README.fr.md)
 
 [Cliquez ici pour revenir à l'atelier Ansible pour Red Hat Enterprise Linux](../README.md#section-1---ansible-engine-exercises)
 

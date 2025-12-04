@@ -20,7 +20,7 @@ In automation controller, inventories define and organize the hosts your playboo
 The _Workshop Inventory_ is preloaded in your lab environment, representing a static inventory configuration.
 
 - **Accessing the Inventory:** Navigate to **Automation Execution → Infrastructure → Inventories** in the web UI, and select _Workshop Inventory_.
-- **Viewing Hosts:** Navigate to **Automation Execution → Infrastructure → Hosts** to see the predefined hosts, similar to those in a traditional Ansible inventory file.
+- **Viewing Hosts:** Within the _Workshop Inventory_, open the **Hosts** tab to see the predefined hosts, similar to those in a traditional Ansible inventory file.
 
 ![Hosts](images/hosts.png)
 
@@ -28,7 +28,7 @@ The _Workshop Inventory_ is preloaded in your lab environment, representing a st
 ### 3. Understanding Machine Credentials
 Machine credentials are essential for establishing secure SSH connections to managed hosts.
 
-- **Accessing Credentials:** Navigate to **Automation Execution → Infrastructure→ Credentials** and select _Workshop Credentials_.
+- **Accessing Credentials:** Navigate to **Access Management → Credentials** and select _Workshop Credentials_.
 - **Credential Details:** The 'Workshop Credentials' is configured with:
   - **Credential Type:** Machine (for SSH).
   - **Username:** A predefined user, such as `ec2-user`.
@@ -49,5 +49,5 @@ This workshop introduces the essential concepts of inventories and credentials w
 ---
 **Navigation**
 <br>[Previous Exercise](../2.1-intro) | [Next Exercise](../2.3-projects)  
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-tower-exercises)
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-automation-platform-exercises)
 

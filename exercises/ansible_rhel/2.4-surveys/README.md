@@ -128,6 +128,12 @@ Review your inputs and click Finish.
 
 Verify that the output result is as expected.
 
+### Optional: Make this template available in a self-service view
+
+- Grant launch permissions to the intended users or teams via RBAC
+- Keep the survey enabled to collect required inputs
+- Organize or tag templates per your organization’s portal conventions so users can easily find and launch approved automation
+
 
 ![Run Command](images/run_command.png)
 

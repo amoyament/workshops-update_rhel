@@ -165,6 +165,8 @@ In this exercise, you've explored essential debugging techniques and error handl
 ---
 **Navigation**
 <br>
-[Previous Exercise](../1.7-role) - [Next Exercise](../2.1-intro)
+[Previous Exercise](../1.8-navigator-ee) - [Next Exercise](../2.1-intro)
 
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-1---ansible-engine-exercises)
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)
+
+

@@ -257,7 +257,7 @@ Una vez que se haya verificado que `httpd` está corriendo, comprueba si el serv
 ---
 **Navegación**
 <br>
-[Ejercicio anterior](../1.6-templates/README.es.md) - [Próximo ejercicio](../1.8-troubleshoot/README.es.md)
+[Ejercicio anterior](../1.6-templates/README.es.md) - [Próximo ejercicio](../1.9-troubleshoot/README.es.md)
 
 [Haz clic aquí para volver al taller de Ansible para Red Hat Enterprise Linux](../README.md#section-1---ansible-engine-exercises)
 

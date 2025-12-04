@@ -6,7 +6,7 @@
 
 If you’re new to Ansible Automation, but want a quicker version of the original RHEL workshop, this 90-minute workshop provides you with fewer exercises, focused on cloud provisioning, converting bash/shell commands to Ansible, all the way to utilizing RHEL System Roles.
 
-**This is documentation for Ansible Automation Platform 2**
+**This is documentation for Ansible Automation Platform 2.6**
 
 ## Table of Contents
 
@@ -37,13 +37,14 @@ This workshop was created to last about 90 minutes and focuses more on targeting
 
 ## Ansible Automation Platform Exercises
 
- - [Exercise 1 - Overview of public cloud provisioning](1-setup)
- - [Exercise 2 - The Ansible Basics](2-thebasics)
- - [Exercise 3 - Deploying applications to linux hosts](3-playbook)
- - [Exercise 4 - Retrieving information from automation hosts](4-variables)
- - [Exercise 5 - Projects & Job Templates](5-projects)
- - [Exercise 6 - Self-service IT via surveys](6-surveys)
- - [Exercise 7 - Overview of system roles for RHEL](7-system-roles)
+ - [Exercise 1 - Overview of public cloud provisioning](../ansible_rhel/1.1-setup)
+ - [Exercise 2 - The Ansible Basics](../ansible_rhel/1.2-thebasics)
+ - [Exercise 3 - Deploying applications to linux hosts](../ansible_rhel/1.3-playbook)
+ - [Exercise 4 - Retrieving information from automation hosts](../ansible_rhel/1.4-variables)
+ - [Exercise 5 - Projects & Job Templates](../ansible_rhel/2.3-projects)
+ - [Navigator + Execution Environments (optional)](../ansible_rhel/1.8-navigator-ee)
+ - [Exercise 6 - Self-service IT via surveys](../ansible_rhel/2.4-surveys)
+ - [Exercise 7 - System roles](../ansible_rhel/supplemental/system-roles)
 
 ---
 ![Red Hat Ansible Automation](../../images/rh-ansible-automation-platform.png)

@@ -27,6 +27,28 @@ Playbooks in Ansible are essentially scripts written in YAML format. They are
 used to define the tasks and configurations that Ansible will apply to your
 servers.
 
+### Step 0 - Inventory basics
+An inventory tells Ansible what hosts to target and how to group them. In this lab, your working directory `~/lab_inventory` contains the inventory used in prior exercises.
+
+Open the inventory to review hosts and groups:
+
+```bash
+cd ~/lab_inventory
+cat hosts
+```
+
+An example INI-style inventory might look like:
+```ini
+[web]
+node1
+node2
+
+[db]
+node3
+```
+
+In a playbook, the `hosts` key selects which inventory hosts/groups to target.
+
 ### Step 1 - Playbook Basics
 First, create a text file in YAML format for your playbook. Remember:
 - Start with three dashes (`---`).
@@ -79,29 +101,29 @@ The basic structure looks as follows:
 
 ### Step 3 - Running the Playbook
 
-Execute your playbook using the `ansible-navigator` command:
+Execute your playbook using the `ansible-playbook` command:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 Review the output to ensure each task is completed successfully.
 
 ```bash
 
-PLAY [Basic System Setup] ******************************************************
+PLAY [Basic System Setup] ****************************************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] ************************************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ************************************
+TASK [Update all security-related packages] ****************************************************
 changed: [node1]
 
-TASK [Create a new user] *******************************************************
+TASK [Create a new user] ************************************************************************
 changed: [node1]
 
-PLAY RECAP *********************************************************************
-node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+PLAY RECAP **************************************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 
@@ -128,28 +150,28 @@ Now, let’s create a second playbook for post-configuration checks, named `syst
 Run the checks playbook:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Review the output to ensure the user creation was successful.
 
 ```bash
 
-PLAY [System Configuration Checks] *********************************************
+PLAY [System Configuration Checks] **************************************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] ************************************************************************
 ok: [node1]
 
-TASK [Check user existence] ****************************************************
+TASK [Check user existence] ********************************************************************
 changed: [node1]
 
-TASK [Report user status] ******************************************************
+TASK [Report user status] **********************************************************************
 ok: [node1] => {
     "msg": "User 'myuser' exists."
 }
 
-PLAY RECAP *********************************************************************
-node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+PLAY RECAP **************************************************************************************
+node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ---
