@@ -128,7 +128,7 @@ The `ansible.builtin.template` module takes the `motd.j2` template and generates
 Run the playbook to apply your custom MOTD across all managed hosts:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 

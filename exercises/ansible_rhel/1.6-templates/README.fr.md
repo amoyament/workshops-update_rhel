@@ -125,7 +125,7 @@ Le module `ansible.builtin.template` prend le modèle `motd.j2` et génère un f
 Exécutez le playbook pour appliquer votre MOTD personnalisé sur tous les hôtes gérés :
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 ```plaintext

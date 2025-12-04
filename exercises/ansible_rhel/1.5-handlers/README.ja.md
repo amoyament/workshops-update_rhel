@@ -222,7 +222,7 @@ Ansible のループを使用すると、異なる値を使って複数回タス
 すべてのノードで新しいユーザーを作成するための出力のスニペットです。
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [基本的なシステム設定] ******************************************************
 

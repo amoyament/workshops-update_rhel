@@ -228,7 +228,7 @@ When you run the updated playbook, this task is executed three times, once for e
 Snippet of the output for creating a new user on all the nodes.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Basic System Setup] ******************************************************
 

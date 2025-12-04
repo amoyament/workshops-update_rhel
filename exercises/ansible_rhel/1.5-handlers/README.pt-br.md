@@ -222,7 +222,7 @@ Quando você executa o playbook atualizado, essa tarefa é executada três vezes
 Trecho da saída para a criação de um novo usuário em todos os nós.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuração Básica do Sistema] ******************************************************
 

@@ -90,7 +90,7 @@ Before we build the collection, let's clean up any previous Apache installations
 Now run the playbook to clean the environment
 
 ```bash
-ansible-navigator run cleanup.yml -m stdout
+ansible-playbook -i hosts cleanup.yml
 ```
 
 ## Step 3 - Building an Apache Collection
@@ -247,10 +247,10 @@ ansible-galaxy collection install -r requirements.yml
 
 ## Step 6 - Collection Execution and Validation
 
-Run the playbook using `ansible-navigator`:
+Run the playbook using `ansible-playbook`:
 
 ```bash
-ansible-navigator run deploy_apache.yml -m stdout
+ansible-playbook -i hosts deploy_apache.yml
 ```
 ```text
 PLAY [Deploy Apache using Collection] ******************************************

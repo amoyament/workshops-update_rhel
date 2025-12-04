@@ -74,10 +74,10 @@ La structure de base se présente comme suit :
 
 ### Étape 3 - Exécution du Playbook
 
-Exécutez votre playbook en utilisant la commande `ansible-navigator` :
+Exécutez votre playbook en utilisant la commande `ansible-playbook` :
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 Revoyez la sortie pour vous assurer que chaque tâche est terminée avec succès.
@@ -105,7 +105,7 @@ Maintenant, créons un second playbook pour les vérifications post-configuratio
 Exécutez le playbook de vérifications :
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Revoyez la sortie pour vous assurer que la création de l'utilisateur a été réussie.

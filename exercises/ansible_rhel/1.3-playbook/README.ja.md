@@ -73,10 +73,10 @@ cd ~/lab_inventory
 
 ### ステップ3 - プレイブックの実行
 
-`ansible-navigator`コマンドを使用してプレイブックを実行します:
+`ansible-playbook` コマンドを使用してプレイブックを実行します:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 各タスクが正常に完了したことを確認するために出力を確認してください。
@@ -104,7 +104,7 @@ cd ~/lab_inventory
 チェック用のプレイブックを実行します:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 ユーザー作成が成功したことを確認するために出力を確認してください。

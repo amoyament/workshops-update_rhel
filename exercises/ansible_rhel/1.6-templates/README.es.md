@@ -115,7 +115,7 @@ El módulo `ansible.builtin.template` toma la plantilla `motd.j2` y genera un ar
 Ejecuta el playbook para aplicar tu MOTD personalizado en todos los hosts gestionados:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuración Básica del Sistema] ****************************************
 .

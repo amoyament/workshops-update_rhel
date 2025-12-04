@@ -241,7 +241,7 @@ Lorsque vous exécutez le playbook mis à jour, cette tâche est exécutée troi
 Extrait de la sortie pour la création d'un nouvel utilisateur sur tous les nœuds.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuration Système de Base] ******************************************************
 

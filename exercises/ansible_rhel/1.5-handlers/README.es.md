@@ -223,7 +223,7 @@ Cuando ejecutes el libro de jugadas actualizado, esta tarea se ejecutará tres v
 Fragmento de la salida para crear un nuevo usuario en todos los nodos.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuración Básica del Sistema] ******************************************************
 

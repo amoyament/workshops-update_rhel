@@ -182,7 +182,7 @@ Apacheのインストールとサービス管理のタスクを含むように `
 デザインされたWebサーバーにApacheを設定するためにプレイブックを起動します：
 
 ```bash
-ansible-navigator run deploy_apache.yml -m stdout
+ansible-playbook -i hosts deploy_apache.yml
 ```
 
 #### 出力：

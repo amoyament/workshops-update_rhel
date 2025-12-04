@@ -182,7 +182,7 @@ Incruste el rol `apache` en un playbook llamado `deploy_apache.yml` dentro de `/
 Lanza tu playbook para configurar Apache en los servidores web designados:
 
 ```bash
-ansible-navigator run deploy_apache.yml -m stdout
+ansible-playbook -i hosts deploy_apache.yml
 ```
 
 #### Salida:

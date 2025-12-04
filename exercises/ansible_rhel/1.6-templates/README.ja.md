@@ -115,7 +115,7 @@ OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
 管理されているすべてのホストにカスタム MOTD を適用するために、プレイブックを実行します:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 ```plaintext
