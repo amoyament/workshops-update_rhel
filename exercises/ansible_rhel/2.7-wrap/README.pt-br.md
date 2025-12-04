@@ -19,7 +19,7 @@ Esse é o desafio final em que tentamos reunir a maior parte do que você aprend
 
 ## Vamos montar o stage
 
-Sua equipe de operações e sua equipe de desenvolvimento de aplicações gostam do que vêem no Tower. Para realmente usá-lo em seu ambiente, eles reuniram esses requisitos:
+Sua equipe de operações e sua equipe de desenvolvimento de aplicações gostam do que vêem no Ansible Automation Controller. Para realmente usá-lo em seu ambiente, eles reuniram esses requisitos:
 
 - Todos os servidores web (`node1`, `node2` e `node3`) devem entrar em um grupo
 
@@ -37,7 +37,7 @@ Sua equipe de operações e sua equipe de desenvolvimento de aplicações gostam
 
 ## O repositório Git
 
-Todo o código já está no lugar - afinal, este é um laboratório da Tower. Confira o repositório git **Workshop Project** em **https://github.com/ansible/workshop-examples**. Lá você encontrará o Plabook `webcontent.yml`, que chama a role `role_webcontent`.
+Todo o código já está no lugar - afinal, este é um laboratório do Automation Controller. Confira o repositório git **Workshop Project** em **https://github.com/ansible/workshop-examples**. Lá você encontrará o playbook `webcontent.yml`, que chama a role `role_webcontent`.
 
 Comparado à role de instalação anterior do Apache, há uma grande diferença: agora existem duas versões de um playbook `index.html` e uma task de implantar o arquivo de template que possui uma variável como parte do nome do arquivo de origem:
 
@@ -176,8 +176,8 @@ Você já executou todas as etapas de configuração necessárias no laboratóri
 
 # Fim
 
-Parabéns, você terminou seus laboratórios\! Esperamos que você tenha gostado do seu primeiro encontro com o Ansible Tower, tanto quanto gostamos de criar os laboratórios.
+Parabéns, você terminou seus laboratórios\! Esperamos que você tenha gostado do seu primeiro encontro com o Ansible Automation Controller, tanto quanto gostamos de criar os laboratórios.
 
 ----
 
-[Clique aqui para retornar ao Workshop Ansible for Red Hat Enterprise Linux](../README.pt-br.md#seção-2---exercícios-do-ansible-tower)
+[Clique aqui para retornar ao Workshop Ansible for Red Hat Enterprise Linux](../README.pt-br.md#seção-2---exercícios-do-ansible-automation-platform)

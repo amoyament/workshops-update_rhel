@@ -155,7 +155,7 @@ En este ejercicio, has explorado técnicas esenciales de depuración y mecanismo
 ---
 **Navegación**
 <br>
-[Ejercicio Anterior](../1.7-role) - [Próximo Ejercicio](../2.1-intro)
+[Ejercicio Anterior](../1.8-navigator-ee/README.md) - [Próximo Ejercicio](../2.1-intro/README.es.md)
 
-[Haz clic aquí para volver al Taller de Ansible para Red Hat Enterprise Linux](../README.md#section-1---ansible-engine-exercises)
+[Haz clic aquí para volver al Taller de Ansible para Red Hat Enterprise Linux](../README.md#section-1---command-line-ansible-exercises)
 

@@ -24,7 +24,7 @@ Este es el desafío final en el que tratamos de juntar la mayor parte de lo que 
 
 ## Vamos a preparar el escenario
 
-A su equipo de operaciones y a su equipo de desarrollo de aplicaciones le gusta lo que ven en Ansible Tower. Para realmente usarlo en su entorno, armaron estos requisitos:
+A su equipo de operaciones y a su equipo de desarrollo de aplicaciones le gusta lo que ven en Ansible Automation Controller. Para realmente usarlo en su entorno, armaron estos requisitos:
 
 - Todos los servidores web (`node1`, `node2` y `node3`) deben ir en un grupo
 
@@ -42,7 +42,7 @@ A su equipo de operaciones y a su equipo de desarrollo de aplicaciones le gusta 
 
 ## El Repositorio de Git
 
-Todo el código ya está en su lugar - este es un laboratorio Tower después de todo. Echa un vistazo al repositorio git **Workshop Project** en https://github.com/ansible/workshop-examples**. Allí encontrará el playbook `webcontent.yml`, que llama el role `role_webcontent`.
+Todo el código ya está en su lugar - este es un laboratorio del Automation Controller después de todo. Echa un vistazo al repositorio git **Workshop Project** en https://github.com/ansible/workshop-examples**. Allí encontrará el playbook `webcontent.yml`, que llama el role `role_webcontent`.
 
 En comparación con el role de instalación de Apache anterior, hay una diferencia importante: ahora hay dos versiones de una plantilla `index.html` y una tarea que implementa el archivo de plantilla que tiene una variable como parte del nombre del archivo de origen:
 
@@ -112,7 +112,7 @@ Por supuesto, hay más de una manera de lograr esto, pero esto es lo que debe ha
 
 ## Verificar los resultados
 
-Esta vez utilizamos el poder de Ansible para comprobar los resultados: ejecute curl para obtener el contenido web de cada nodo, orquestado por un comando ad hoc en la línea de comandos de su host de control de Tower:
+Esta vez utilizamos el poder de Ansible para comprobar los resultados: ejecute curl para obtener el contenido web de cada nodo, orquestado por un comando ad hoc en la línea de comandos de su host del controlador de automatización:
 
 > **Consejo**
 >
@@ -153,7 +153,7 @@ Observe la advertencia en la primera línea sobre no utilizar `curl` a través d
 
 - Ejecutar la encuesta como usuario `wweb`
 
-Compruebe los resultados de nuevo desde el host de control del Tower. Puesto que recibimos una advertencia la última vez usando `curl` a través del módulo `command`, esta vez usaremos el módulo `uri` dedicado. Como argumentos, necesita la dirección URL real y una bandera para generar el cuerpo en los resultados.
+Compruebe los resultados de nuevo desde el host del controlador de automatización. Puesto que recibimos una advertencia la última vez usando `curl` a través del módulo `command`, esta vez usaremos el módulo `uri` dedicado. Como argumentos, necesita la dirección URL real y una bandera para generar el cuerpo en los resultados.
 
 <!-- {% raw %} -->
 ```bash
@@ -194,11 +194,11 @@ Usted ha hecho todos los pasos de configuración requeridos en el laboratorio ya
 
 # El Fin
 
-¡Felicidades, terminaste tus laboratorios! Esperamos que haya disfrutado de su primer encuentro con Ansible Tower tanto como nosotros disfrutamos creando los laboratorios.
+¡Felicidades, terminaste tus laboratorios! Esperamos que haya disfrutado de su primer encuentro con Ansible Automation Controller tanto como nosotros disfrutamos creando los laboratorios.
 
 ----
 **Navegación**
 <br>
 [Ejercicio anterior](../2.6-workflows/README.es.md)
 
-[Haga clic aquí para volver al Taller Ansible for Red Hat Enterprise Linux](../README.es.md#Sección-2---Ejercicios-de-Ansible-Tower)
+[Haga clic aquí para volver al Taller Ansible for Red Hat Enterprise Linux](../README.es.md#Sección-2---Ejercicios-de-Ansible-Automation-Platform)

@@ -42,16 +42,18 @@ Si su experiencia es diferente al programar estos talleres, por favor háganoslo
 ## Sección 1 - Ejercicios de Ansible en línea de comandos
 
 - [Ejercicio 1.1 - Validación de los pre-requisitos](1.1-setup/README.es.md)
-- [Ejercicio 1.2 - Ejecución de comandos Ad-hoc](1.2-adhoc/README.es.md)
+- [Ejercicio 1.2 - Los fundamentos de Ansible](1.2-thebasics/README.es.md)
 - [Ejercicio 1.3 - Escribir su primer Playbook](1.3-playbook/README.es.md)
 - [Ejercicio 1.4 - Uso de Variables](1.4-variables/README.es.md)
 - [Ejercicio 1.5 - Condicionales, controladores y bucles](1.5-handlers/README.es.md)
 - [Ejercicio 1.6 - Plantillas](1.6-templates/README.es.md)
-- [Ejercicio 1.7 - Roles](1.7-role/README.es.md)
+- [Ejercicio 1.7 - Colecciones](1.7-collection/README.es.md)
+- [Ejercicio 1.8 - Ansible Navigator y Execution Environments (básico)](1.8-navigator-ee/README.md)
+- [Ejercicio 1.9 - Depuración y Manejo de Errores](1.9-troubleshoot/README.es.md)
 
 ## Sección 2 - Ejercicios de Ansible Automation Platform
 
-- [Ejercicio 2.1 - Introducción a Tower](2.1-intro/README.es.md)
+- [Ejercicio 2.1 - Introducción a Ansible Automation Platform](2.1-intro/README.es.md)
 - [Ejercicio 2.2 - Inventarios, credenciales y comandos ad hoc](2.2-cred/README.es.md)
 - [Ejercicio 2.3 - Proyectos y plantillas de trabajo](2.3-projects/README.es.md)
 - [Ejercicio 2.4 - Encuestas](2.4-surveys/README.es.md)

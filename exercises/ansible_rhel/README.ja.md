@@ -57,7 +57,9 @@ Automation](../../decks/ansible_rhel.pdf)
 * [演習 1.4 - 変数の使用](1.4-variables/README.ja.md)
 * [演習 1.5 - 条件、ハンドラー、ループ](1.5-handlers/README.ja.md)
 * [演習 1.6 - テンプレート](1.6-templates/README.ja.md)
-* [演習 1.7 - ロール](1.7-role/README.ja.md)
+* [演習 1.7 - コレクション](1.7-collection/README.ja.md)
+* [演習 1.8 - Ansible Navigator と Execution Environments（基礎）](1.8-navigator-ee/README.md)
+* [演習 1.9 - デバッグとエラーハンドリング](1.9-troubleshoot/README.ja.md)
 
 ## セクション 2 - Ansible Automation Platform の演習
 

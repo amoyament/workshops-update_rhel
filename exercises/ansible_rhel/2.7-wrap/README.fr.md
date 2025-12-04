@@ -24,7 +24,7 @@ C'est le dernier défi où nous essayons de rassembler la plupart de ce que vous
 
 ## Préparons le terrain
 
-Votre équipe d'exploitation et votre équipe de développement d'applications aiment ce qu'ils voient dans Ansible Tower. Pour vraiment l'utiliser dans leur environnement, ils ont mis en place ces exigences:
+Votre équipe d'exploitation et votre équipe de développement d'applications aiment ce qu'ils voient dans Ansible Automation Controller. Pour vraiment l'utiliser dans leur environnement, ils ont mis en place ces exigences:
 
 - Tous les serveurs Web (`node1`, `node2` et `node3`) doivent aller dans un seul groupe
 
@@ -42,7 +42,7 @@ Votre équipe d'exploitation et votre équipe de développement d'applications a
 
 ## Le référentiel Git
 
-Tout le code est déjà en place - c'est un Atelier pour Tower apres tout. Consultez le **Workshop Project** à **https: //github.com/ansible/workshop-examples**. Vous y trouverez le playbook `webcontent.yml`, qui appelle le rôle` role_webcontent`.
+Tout le code est déjà en place - c'est un atelier pour Automation Controller après tout. Consultez le **Workshop Project** à **https: //github.com/ansible/workshop-examples**. Vous y trouverez le playbook `webcontent.yml`, qui appelle le rôle `role_webcontent`.
 
 Par rapport au précédent rôle d'installation d'Apache, il y a une différence majeure: il existe maintenant deux versions d'un modèle `index.html` et une tâche de déploiement du fichier modèle qui a une variable dans le nom du fichier source:
 
@@ -113,7 +113,7 @@ Il y a bien sûr plus d'une façon d'y parvenir, mais voici ce que vous devez fa
 
 ## Vérifiez les résultats
 
-Cette fois, nous utilisons la puissance d'Ansible pour vérifier les résultats: exécutez curl pour obtenir le contenu Web de chaque nœud, orchestré par une commande Ad-hoc sur la ligne de commande de votre hôte de contrôle Tower:
+Cette fois, nous utilisons la puissance d'Ansible pour vérifier les résultats: exécutez curl pour obtenir le contenu Web de chaque nœud, orchestré par une commande Ad-hoc sur la ligne de commande de votre hôte du contrôleur d'automatisation:
 
 > **Astuce**
 >
@@ -195,7 +195,7 @@ Vous avez déjà effectué toutes les étapes de configuration requises dans le 
 
 # La fin
 
-Félicitations, vous avez terminé tous vos ateliers \! Nous espérons que vous avez apprécié votre première rencontre avec Ansible Tower autant que nous avons nous même apprécié la création des ateliers.
+Félicitations, vous avez terminé tous vos ateliers \! Nous espérons que vous avez apprécié votre première rencontre avec Ansible Automation Controller autant que nous avons nous même apprécié la création des ateliers.
 
 ----
 **Navigation**

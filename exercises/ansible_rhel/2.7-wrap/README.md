@@ -307,4 +307,4 @@ Congratulations, you finished your labs\! We hope you enjoyed your first encount
 <br>
 [Previous Exercise](../2.6-workflows)
 
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-automation-controller-exercises)
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-automation-platform-exercises)

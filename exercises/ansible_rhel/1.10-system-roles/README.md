@@ -1,12 +1,12 @@
-# Bonus - RHEL System Roles
+# Bonus Exercise - RHEL System Roles (optional)
 
 **Read this in other languages**:
-<br>![uk](../../../../images/uk.png) [English](README.md)
+<br>![uk](../../../images/uk.png) [English](README.md)
 <br>
 
 ## Table of Contents
 
-- [Bonus - RHEL System Roles](#bonus---rhel-system-roles)
+- [Exercise 1.10 - RHEL System Roles](#exercise-110---rhel-system-roles)
   - [Objective](#objective)
   - [Guide](#guide)
     - [Step 1 - Overview of RHEL System Roles](#step-1---overview-of-rhel-system-roles)
@@ -17,7 +17,7 @@
 
 Get hands-on with Red Hat Enterprise Linux (RHEL) System Roles to automate common OS configuration tasks using production-ready roles delivered as Ansible collections.
 
-You will apply a simple role to a host and verify the change.
+You will apply a simple role to a host and verify the change. This is an optional exercise that can be skipped if you are short on time.
 
 > Note: RHEL 9.5 includes continued updates to system roles. Explore additional roles (e.g., time synchronization, storage, network, and sudo) based on your use case.
 
@@ -74,6 +74,8 @@ You should see NTP service active and synchronized.
 ---
 **Navigation**
 <br>
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../../README.md)
+[Previous Exercise](../1.9-troubleshoot) - [Next Exercise](../2.1-intro)
+
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)
 
 
