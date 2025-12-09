@@ -37,14 +37,14 @@ This workshop was created to last about 90 minutes and focuses more on targeting
 
 ## Ansible Automation Platform Exercises
 
- - [Exercise 1 - Overview of public cloud provisioning](../ansible_rhel/1.1-setup)
+ - [Exercise 1 - Check the Prerequisites](../ansible_rhel/1.1-setup)
  - [Exercise 2 - The Ansible Basics](../ansible_rhel/1.2-thebasics)
- - [Exercise 3 - Deploying applications to linux hosts](../ansible_rhel/1.3-playbook)
- - [Exercise 4 - Retrieving information from automation hosts](../ansible_rhel/1.4-variables)
+ - [Exercise 3 - Writing Your First Playbook (with inventory basics)](../ansible_rhel/1.3-playbook)
+ - [Exercise 4 - Using Variables](../ansible_rhel/1.4-variables)
  - [Exercise 5 - Projects & Job Templates](../ansible_rhel/2.3-projects)
- - [Navigator + Execution Environments (optional)](../ansible_rhel/1.8-navigator-ee)
- - [Exercise 6 - Self-service IT via surveys](../ansible_rhel/2.4-surveys)
- - [Exercise 7 - System roles](../ansible_rhel/1.10-system-roles)
+ - [Ansible Navigator and Execution Environments (optional)](../ansible_rhel/1.8-navigator-ee)
+ - [Exercise 6 - Surveys](../ansible_rhel/2.4-surveys)
+ - [Exercise 7 - System Roles (optional)](../ansible_rhel/1.10-system-roles)
 
 ---
 ![Red Hat Ansible Automation](../../images/rh-ansible-automation-platform.png)
