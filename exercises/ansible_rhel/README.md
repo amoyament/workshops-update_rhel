@@ -54,7 +54,6 @@ Having said that, the exercises themselves should take roughly 4-5 hours. The fi
 * [Exercise 1.7 - Collections](1.7-collection)
 * [Exercise 1.8 - Ansible Navigator and Execution Environments (basics)](1.8-navigator-ee)
 * [Exercise 1.9 - Debugging and Error Handling](1.9-troubleshoot)
-* [Bonus! Exercise 1.10 - RHEL System Roles (optional)](1.10-system-roles)
 
 ## Section 2 - Ansible Automation Platform Exercises
 
