@@ -44,7 +44,8 @@ This workshop was created to last about 90 minutes and focuses more on targeting
  - [Exercise 5 - Projects & Job Templates](../ansible_rhel/2.3-projects)
  - [Ansible Navigator and Execution Environments (optional)](../ansible_rhel/1.8-navigator-ee)
  - [Exercise 6 - Surveys](../ansible_rhel/2.4-surveys)
- - [Exercise 7 - System Roles (optional)](../ansible_rhel/1.10-system-roles)
+ - [Exercise 7 - System Roles (optional)](7-system-roles)
+ - [Bonus - RHEL Image Mode (optional)](8-image-mode)
 
 ---
 ![Red Hat Ansible Automation](../../images/rh-ansible-automation-platform.png)
