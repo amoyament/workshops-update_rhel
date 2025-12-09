@@ -65,6 +65,7 @@ Having said that, the exercises themselves should take roughly 4-5 hours. The fi
 * [Exercise 2.5 - Role-based Access Control (RBAC)](2.5-rbac)
 * [Exercise 2.6 - Workflows](2.6-workflows)
 * [Exercise 2.7 - Wrap up](2.7-wrap)
+* [Exercise 2.8 - System Roles (Controller-driven)](2.8-system-roles)
 * [Bonus! RHEL Image Mode](supplemental/image-mode)
 
 ---
