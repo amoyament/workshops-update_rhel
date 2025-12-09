@@ -81,12 +81,18 @@ Vamos supor que queremos garantir que o firewall esteja configurado corretamente
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Atualizar todos os pacotes relacionados à segurança
+    - name: Garantir a última versão de pacotes principais
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
+    - name: Garantir a última versão de pacotes principais
+      ansible.builtin.package:
+        name:
+          - bash
+          - sudo
+        state: latest
     - name: Criar um novo usuário
       ansible.builtin.user:
         name: "{{ user_name }}"
@@ -136,7 +142,7 @@ ok: [node2]
 ok: [ansible-1]
 ok: [node3]
 
-TASK [Atualizar todos os pacotes relacionados à segurança] ************************************
+TASK [Garantir a última versão de pacotes principais] *********************************************
 ok: [node2]
 ok: [node1]
 ok: [ansible-1]

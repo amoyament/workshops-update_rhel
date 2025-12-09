@@ -47,9 +47,10 @@ Update the `system_setup.yml` playbook to include and use a variable:
   tasks:
     - name: Update all security-related packages
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -75,7 +76,7 @@ PLAY [Basic System Setup] ******************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ************************************
+TASK [Ensure latest versions of core packages] *********************************
 ok: [node1]
 
 TASK [Create a new user] *******************************************************

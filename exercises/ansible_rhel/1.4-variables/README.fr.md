@@ -41,11 +41,12 @@ Mettez à jour le playbook `system_setup.yml` pour inclure et utiliser une varia
   vars:
     user_name: 'Roger'
   tasks:
-    - name: Update all security-related packages
+    - name: S'assurer que les paquets principaux sont à jour
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -70,7 +71,7 @@ PLAY [Basic System Setup] ******************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ************************************
+TASK [S'assurer que les paquets principaux sont à jour] ************************
 ok: [node1]
 
 TASK [Create a new user] *******************************************************

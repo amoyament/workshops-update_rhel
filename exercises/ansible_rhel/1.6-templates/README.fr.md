@@ -73,12 +73,12 @@ Modifiez le playbook `system_setup.yml` avec le contenu suivant :
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Mettre à jour tous les paquets liés à la sécurité
+    - name: S'assurer que les paquets principaux sont à jour
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
     - name: Créer un nouvel utilisateur
       ansible.builtin.user:
         name: "{{ user_name }}"
