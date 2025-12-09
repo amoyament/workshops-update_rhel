@@ -41,7 +41,7 @@ cd ~/lab_inventory
 ```
 
 次に、基本的なシステム設定を行う`system_setup.yml`という名前のプレイブックを作成します:
-- セキュリティ関連のすべてのパッケージを更新します。
+- コアパッケージを2つほど最新化して短時間で完了させます。
 - `myuser`という新しいユーザーを作成します。
 
 基本的な構造は以下の通りです:
@@ -52,11 +52,12 @@ cd ~/lab_inventory
   hosts: node1
   become: true
   tasks:
-    - name: Update all security-related packages
+    - name: コアパッケージを最新化
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -65,7 +66,7 @@ cd ~/lab_inventory
         create_home: true
 ```
 
-> 注: パッケージの更新はAnsibleのプレイブックが完了する前に数分かかる場合があります。
+> 注: 少数パッケージに限定することで、演習時間を短く保てます。
 
 * `dnf`モジュールについて: このモジュールは、RHELおよびその他のFedoraベースのシステムでDNF（Dandified YUM）を使用したパッケージ管理に使用されます。
 

@@ -69,7 +69,7 @@ cd ~/lab_inventory
 ```
 
 Now create a playbook named `system_setup.yml` to perform basic system setup:
-- Update all security related packages.
+- Update a couple of core packages to the latest version.
 - Create a new user named ‘myuser’.
 
 The basic structure looks as follows:
@@ -80,11 +80,12 @@ The basic structure looks as follows:
   hosts: node1
   become: true
   tasks:
-    - name: Update all security-related packages
+    - name: Ensure latest versions of core packages
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
    
     - name: Create a new user
       ansible.builtin.user:
@@ -93,7 +94,7 @@ The basic structure looks as follows:
         create_home: true
 ```
 
-> NOTE: Updating the packages may take a few minutes prior to the Ansible playbook completing.
+> NOTE: Keeping the update to a small set of packages makes the run fast for class.
 
 * About the `package` module: This modules manages packages on a target without specifying a package manager module
 
@@ -116,7 +117,7 @@ PLAY [Basic System Setup] ******************************************************
 TASK [Gathering Facts] ************************************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ****************************************************
+TASK [Ensure latest versions of core packages] **************************************************
 changed: [node1]
 
 TASK [Create a new user] ************************************************************************

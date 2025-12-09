@@ -42,7 +42,7 @@ cd ~/lab_inventory
 ```
 
 Créez maintenant un playbook nommé `system_setup.yml` pour effectuer la configuration système de base :
-- Mettre à jour tous les paquets liés à la sécurité.
+- Mettre rapidement à jour quelques paquets principaux vers leur dernière version.
 - Créer un nouvel utilisateur nommé ‘myuser’.
 
 La structure de base se présente comme suit :
@@ -53,11 +53,12 @@ La structure de base se présente comme suit :
   hosts: node1
   become: true
   tasks:
-    - name: Update all security-related packages
+    - name: S'assurer que les paquets principaux sont à jour
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -66,7 +67,7 @@ La structure de base se présente comme suit :
         create_home: true
 ```
 
-> NOTE : La mise à jour des paquets peut prendre quelques minutes avant la fin de l'exécution du playbook Ansible.
+> NOTE : Limiter la mise à jour à quelques paquets rend l'exécution rapide pour l'atelier.
 
 * À propos du module `dnf` : Ce module est utilisé pour la gestion des paquets avec DNF (YUM Dandifié) sur RHEL et d'autres systèmes basés sur Fedora.
 
