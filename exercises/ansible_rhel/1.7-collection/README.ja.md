@@ -182,7 +182,7 @@ Apacheのインストールとサービス管理のタスクを含むように `
 デザインされたWebサーバーにApacheを設定するためにプレイブックを起動します：
 
 ```bash
-ansible-navigator run deploy_apache.yml -m stdout
+ansible-playbook -i hosts deploy_apache.yml
 ```
 
 #### 出力：
@@ -257,7 +257,7 @@ node3                      : ok=5    changed=3    unreachable=0    failed=0    s
 ---
 **ナビゲーション**
 <br>
-[前の演習](../1.6-templates/README.ja.md) -[次の演習](../1.8-troubleshoot/README.ja.md)
+[前の演習](../1.6-templates/README.ja.md) -[次の演習](../1.9-troubleshoot/README.ja.md)
 
 [Red Hat Enterprise Linux のための Ansible ワークショップに戻る](../README.md#section-1---ansible-engine-exercises)
 

@@ -48,7 +48,7 @@ Cela dit, les exercices eux-mêmes devraient prendre environ 4-5 heures. La prem
 * [Exercice 1.5 - Conditionnels, gestionnaires etboucles](1.5-handlers/README.fr.md)
 * [Exercice 1.6 - Modèles](1.6-templates/README.fr.md)
 * [Exercice 1.7 - Rôles](1.7-role/README.fr.md)
-* [Exercice 1.8 - Débogage et gestion des erreurs](1.8-troubleshoot/README.fr.md)
+* [Exercice 1.9 - Débogage et gestion des erreurs](1.9-troubleshoot/README.fr.md)
 
 ## Section 2 - Exercices sur la plateforme d'automatisation Ansible
 

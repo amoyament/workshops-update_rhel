@@ -41,11 +41,12 @@ Ansible での変数は、あるデータの名前付き表現です。変数に
   vars:
     user_name: 'Roger'
   tasks:
-    - name: セキュリティ関連のパッケージをすべて更新する
+    - name: コアパッケージを最新化
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: 新しいユーザーを作成する
       ansible.builtin.user:
@@ -54,14 +55,14 @@ Ansible での変数は、あるデータの名前付き表現です。変数に
         create_home: true
 ```
 
-"`ansible-navigator`を使用してこのプレイブックを実行してください。
+このプレイブックは `ansible-playbook` を使って実行します。
 
 ### ステップ 3 - 修正されたプレイブックの実行
 
 更新されたプレイブックを実行します:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 ```yaml
@@ -70,7 +71,7 @@ PLAY [基本システム設定] ************************************************
 TASK [事実の収集] *********************************************************
 ok: [node1]
 
-TASK [すべてのセキュリティ関連のパッケージを更新する] ************************************
+TASK [コアパッケージを最新化] ****************************************************
 ok: [node1]
 
 TASK [新しいユーザーを作成] *******************************************************
@@ -120,7 +121,7 @@ Ansibleのregisterキーワードは、タスクの出力をキャプチャし�
 チェックプレイブックを実行します:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 ```bash

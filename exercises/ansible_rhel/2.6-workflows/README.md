@@ -244,4 +244,4 @@ Verify that the output result shows `Hello World`
 <br>
 [Previous Exercise](../2.5-rbac) - [Next Exercise](../2.7-wrap)
 
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-tower-exercises)
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-automation-platform-exercises)

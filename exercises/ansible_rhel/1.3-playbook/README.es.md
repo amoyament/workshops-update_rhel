@@ -41,7 +41,7 @@ cd ~/lab_inventory
 ```
 
 Ahora crea un playbook llamado `system_setup.yml` para realizar la configuración básica del sistema:
-- Actualizar todos los paquetes relacionados con la seguridad.
+- Actualizar rápidamente un par de paquetes principales a su última versión.
 - Crear un nuevo usuario llamado ‘myuser’.
 
 La estructura básica se ve de la siguiente manera:
@@ -52,11 +52,12 @@ La estructura básica se ve de la siguiente manera:
   hosts: node1
   become: true
   tasks:
-    - name: Update all security-related packages
+    - name: Asegurar la última versión de paquetes principales
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -65,7 +66,7 @@ La estructura básica se ve de la siguiente manera:
         create_home: true
 ```
 
-> NOTA: Actualizar los paquetes puede tardar unos minutos antes de completar el playbook de Ansible.
+> NOTA: Limitar la actualización a unos pocos paquetes mantiene la ejecución rápida para la clase.
 
 * Acerca del módulo `dnf`: Este módulo se utiliza para la gestión de paquetes con DNF (YUM mejorado) en RHEL y otros sistemas basados en Fedora.
 
@@ -73,10 +74,10 @@ La estructura básica se ve de la siguiente manera:
 
 ### Paso 3 - Ejecutando el Playbook
 
-Ejecuta tu playbook utilizando el comando `ansible-navigator`:
+Ejecuta tu playbook utilizando el comando `ansible-playbook`:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 Revisa la salida para asegurarte de que cada tarea se haya completado con éxito.
@@ -104,7 +105,7 @@ Ahora, vamos a crear un segundo playbook para verificaciones posteriores a la co
 Ejecuta el playbook de verificaciones:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Revisa la salida para asegurarte de que la creación del usuario haya sido exitosa.

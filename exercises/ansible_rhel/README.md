@@ -4,7 +4,7 @@
 <br>![uk](../../images/uk.png) [English](README.md),  ![japan](../../images/japan.png)[日本語](README.ja.md), ![brazil](../../images/brazil.png) [Portugues do Brasil](README.pt-br.md), ![france](../../images/fr.png) [Français](README.fr.md), ![Español](../../images/es.png) [Español](README.es.md).
 <br>
 
-**This is documentation for Ansible Automation Platform 2**
+**This is documentation for Ansible Automation Platform 2.6**
 
 
 If you’re new to Ansible Automation, this workshop consists of two parts: 1) starting with the basic foundamentals and 2) applying what you’ve learned to implement Ansible automation controller to your enterprise use cases. You’ll start off by writing your first Ansible playbook, work on Jinja templates, and implement higher-level Ansible roles. Next you’ll get started on automation controller, understand inventory and credential management, projects, job templates, surveys, workflows and more.
@@ -47,12 +47,13 @@ Having said that, the exercises themselves should take roughly 4-5 hours. The fi
 
 * [Exercise 1.1 - Check the Prerequisites](1.1-setup)
 * [Exercise 1.2 - The Ansible Basics](1.2-thebasics)
-* [Exercise 1.3 - Writing Your First Playbook](1.3-playbook)
+* [Exercise 1.3 - Writing Your First Playbook (with inventory basics)](1.3-playbook)
 * [Exercise 1.4 - Using Variables](1.4-variables)
 * [Exercise 1.5 - Conditionals, Handlers and Loops](1.5-handlers)
 * [Exercise 1.6 - Templates](1.6-templates)
 * [Exercise 1.7 - Collections](1.7-collection)
-* [Exercise 1.8 - Debugging and Error Handling](1.8-troubleshoot)
+* [Exercise 1.8 - Ansible Navigator and Execution Environments (basics)](1.8-navigator-ee)
+* [Exercise 1.9 - Debugging and Error Handling](1.9-troubleshoot)
 
 ## Section 2 - Ansible Automation Platform Exercises
 
@@ -63,6 +64,8 @@ Having said that, the exercises themselves should take roughly 4-5 hours. The fi
 * [Exercise 2.5 - Role-based Access Control (RBAC)](2.5-rbac)
 * [Exercise 2.6 - Workflows](2.6-workflows)
 * [Exercise 2.7 - Wrap up](2.7-wrap)
+* [Exercise 2.8 - System Roles (Controller-driven)](2.8-system-roles)
+* [Bonus! RHEL Image Mode](supplemental/image-mode)
 
 ---
 ![Red Hat Ansible Automation](../../images/rh-ansible-automation-platform.png)

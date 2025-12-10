@@ -53,12 +53,12 @@ Let's add to the system_setup.yml playbook the ability to install the Apache HTT
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Update all security-related packages
+    - name: Ensure latest versions of core packages
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -94,12 +94,12 @@ Let's say we want to ensure the firewall is configured correctly on all web serv
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Update all security-related packages
+    - name: Ensure latest versions of core packages
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -159,7 +159,7 @@ ok: [node1]
 ok: [node2]
 ok: [ansible-1]
 
-TASK [Update all security-related packages] ************************************
+TASK [Ensure latest versions of core packages] *********************************
 ok: [node1]
 changed: [ansible-1]
 changed: [node3]
@@ -228,7 +228,7 @@ When you run the updated playbook, this task is executed three times, once for e
 Snippet of the output for creating a new user on all the nodes.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Basic System Setup] ******************************************************
 

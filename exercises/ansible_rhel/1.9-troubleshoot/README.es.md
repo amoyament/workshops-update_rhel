@@ -1,40 +1,37 @@
-# Workshop Exercise - Debugging and Error Handling
+# Ejercicio del Taller - Depuración y Manejo de Errores
 
-**Read this in other languages**:
-<br>![uk](../../../images/uk.png) [English](README.md),  ![japan](../../../images/japan.png)[日本語](README.ja.md), ![brazil](../../../images/brazil.png) [Portugues do Brasil](README.pt-br.md), ![france](../../../images/fr.png) [Française](README.fr.md),![Español](../../../images/col.png) [Español](README.es.md).
+**Leer esto en otros idiomas**:
+<br>![uk](../../../images/uk.png) [Inglés](README.md), ![japan](../../../images/japan.png) [Japonés](README.ja.md), ![brazil](../../../images/brazil.png) [Portugués de Brasil](README.pt-br.md), ![france](../../../images/fr.png) [Francés](README.fr.md), ![Español](../../../images/col.png) [Español](README.es.md).
 
+## Índice de Contenidos
 
-## Table of Contents
+- [Objetivo](#objetivo)
+- [Guía](#guía)
+  - [Paso 1 - Introducción a la Depuración en Ansible](#paso-1---introducción-a-la-depuración-en-ansible)
+  - [Paso 2 - Utilizando el Módulo de Depuración](#paso-2---utilizando-el-módulo-de-depuración)
+  - [Paso 3 - Manejo de Errores con Bloques](#paso-3---manejo-de-errores-con-bloques)
+  - [Paso 4 - Ejecución en Modo Verboso](#paso-4---ejecución-en-modo-verboso)
+  - [Resumen](#resumen)
 
-- [Objective](#objective)
-- [Guide](#guide)
-  - [Step 1 - Introduction to Debugging in Ansible](#step-1---introduction-to-debugging-in-ansible)
-  - [Step 2 - Utilizing the Debug Module](#step-2---utilizing-the-debug-module)
-  - [Step 3 - Error Handling with Blocks](#step-3---error-handling-with-blocks)
-  - [Step 4 - Running with Verbose Mode](#step-4---running-with-verbose-mode)
-  - [Summary](#summary)
+## Objetivo
 
-## Objective
+Basándose en el conocimiento fundamental de los ejercicios anteriores, esta sesión se centra en la depuración y el manejo de errores dentro de Ansible. Aprenderás técnicas para solucionar problemas en los playbooks, gestionar errores de forma elegante y garantizar que tu automatización sea robusta y fiable.
 
-Building on the foundational knowledge from previous exercises, this session focuses on debugging and error handling within Ansible. You'll learn techniques to troubleshoot playbooks, manage errors gracefully, and ensure your automation is robust and reliable.
+## Guía
 
-## Guide
+### Paso 1 - Introducción a la Depuración en Ansible
 
-### Step 1 - Introduction to Debugging in Ansible
+La depuración es una habilidad crítica para identificar y resolver problemas dentro de tus playbooks de Ansible. Ansible proporciona varios mecanismos para ayudarte a depurar tus scripts de automatización, incluyendo el módulo de depuración, niveles de verbosidad aumentados y estrategias de manejo de errores.
 
-Debugging is a critical skill for identifying and resolving issues within your Ansible playbooks. Ansible provides several mechanisms to help you debug your automation scripts, including the debug module, increased verbosity levels, and error handling strategies.
+### Paso 2 - Utilizando el Módulo de Depuración
 
-### Step 2 - Utilizing the Debug Module
+El módulo `debug` es una herramienta simple pero poderosa para imprimir los valores de las variables, lo cual puede ser instrumental para entender el flujo de ejecución del playbook.
 
-The `debug` module is a simple yet powerful tool for printing variable values, which can be instrumental in understanding playbook execution flow.
+En este ejemplo, añade tareas de depuración a tu rol de Apache en el `tasks/main.yml` para mostrar el valor de las variables o mensajes.
 
-In this example, add debug tasks to your Apache role in the `tasks/main.yml` to output the value of variables or messages.
+#### Implementar Tareas de Depuración:
 
-#### Implement Debug Tasks:
-
-Insert debug tasks to display the values of variables or custom messages for troubleshooting:
-
-{% raw %}
+Inserta tareas de depuración para mostrar los valores de las variables o mensajes personalizados para la solución de problemas:
 
 ```yaml
 - name: Display Variable Value
@@ -46,19 +43,15 @@ Insert debug tasks to display the values of variables or custom messages for tro
     msg: "Apache service name is {{ apache_service_name }}"
 ```
 
-{% endraw %}
+### Paso 3 - Manejo de Errores con Bloques
 
-### Step 3 - Error Handling with Blocks
+Ansible permite agrupar tareas usando `block` y manejar errores con secciones `rescue`, similar a try-catch en la programación tradicional.
 
-Ansible allows grouping tasks using `block` and handling errors with `rescue` sections, similar to try-catch in traditional programming.
+En este ejemplo, añade un bloque para manejar errores potenciales durante la configuración de Apache dentro del archivo `tasks/main.yml`.
 
-In this example, add a block to handle potential errors during the Apache configuration within the `tasks/main.yml` file.
+1. Agrupar Tareas y Manejar Errores:
 
-1. Group Tasks and Handle Errors:
-
-Wrap tasks that could potentially fail in a block and define a rescue section to handle errors:
-
-{% raw %}
+Envuelve las tareas que podrían fallar potencialmente en un bloque y define una sección de rescate para manejar los errores:
 
 ```yaml
 - name: Apache Configuration with Potential Failure Point
@@ -73,23 +66,21 @@ Wrap tasks that could potentially fail in a block and define a rescue section to
         msg: "Missing Apache configuration file '{{ apache_conf_src }}'. Using default settings."
 ```
 
-{% endraw %}
-
-2. Add an `apache_conf_src` variable within `vars/main.yml` of the apache role.
+2. Añade una variable `apache_conf_src` dentro de `vars/main.yml` del rol apache.
 
 ```yaml
 apache_conf_src: "files/missing_apache.conf"
 ```
 
-> NOTE: This file explicitly does not exist so that we can trigger the rescue portion from our `tasks/main.yml`
+> NOTA: Este archivo no existe explícitamente para que podamos activar la parte de rescate de nuestro `tasks/main.yml`
 
-### Step 4 - Running with Verbose Mode
+### Paso 4 - Ejecución en Modo Verboso
 
-Ansible's verbose mode (-v, -vv, -vvv, or -vvvv) increases the output detail, providing more insights into playbook execution and potential issues.
+El modo verboso de Ansible (-v, -vv, -vvv o -vvvv) aumenta el detalle de la salida, proporcionando más información sobre la ejecución del playbook y los problemas potenciales.
 
-#### Execute Playbook in Verbose Mode:
+#### Ejecutar el Playbook en Modo Verboso:
 
-Run your playbook with the `-vv` option to get detailed logs:
+Ejecuta tu playbook con la opción `-vv` para obtener registros detallados:
 
 ```bash
 ansible-navigator run deploy_apache.yml -m stdout -vv
@@ -99,7 +90,6 @@ ansible-navigator run deploy_apache.yml -m stdout -vv
 .
 .
 .
-
 
 TASK [apache : Display Variable Value] *****************************************
 task path: /home/rhel/ansible-files/roles/apache/tasks/main.yml:20
@@ -148,23 +138,24 @@ ok: [node3] => {
 }
 
 PLAY RECAP *********************************************************************
-node1                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
-node2                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
-node3                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0 
+node1                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
+node2                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
+node3                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
 
 ```
 
-Notice how the playbook shows there was an error copying the Apache Configuration file but the playbook was able to handle it via the rescue block that was provided. If you notice the final task ‘Handle Missing Configuration’ details that the file was missing and it would use the default settings. 
+Observa cómo el playbook muestra que hubo un error al copiar el archivo de configuración de Apache, pero el playbook pudo manejarlo a través del bloque de rescate proporcionado. Si notas, la tarea final 'Handle Missing Configuration' detalla que faltaba el archivo y se usarían los ajustes predeterminados.
 
-The final Play Recap shows us that there was a rescued block used via the `rescued=1` per node in the web group.
+El Resumen Final del Juego nos muestra que se utilizó un bloque rescatado a través de `rescued=1` por nodo en el grupo web.
 
-## Summary
+## Resumen
 
-In this exercise, you've explored essential debugging techniques and error handling mechanisms in Ansible. By incorporating debugging tasks, using blocks for error handling, and leveraging verbose mode, you can effectively troubleshoot and enhance the reliability of your Ansible playbooks. These practices are fundamental in developing robust Ansible automation that can gracefully handle unexpected issues and ensure consistent, predictable outcomes.
+En este ejercicio, has explorado técnicas esenciales de depuración y mecanismos de manejo de errores en Ansible. Al incorporar tareas de depuración, usar bloques para el manejo de errores y aprovechar el modo verboso, puedes solucionar problemas de manera efectiva y mejorar la fiabilidad de tus playbooks de Ansible. Estas prácticas son fundamentales en el desarrollo de una automatización robusta de Ansible que pueda manejar problemas inesperados de manera elegante y garantizar resultados consistentes y predecibles.
 
 ---
-**Navigation**
+**Navegación**
 <br>
-[Previous Exercise](../1.7-role) - [Next Exercise](../2.1-intro)
+[Ejercicio Anterior](../1.8-navigator-ee/README.md) - [Próximo Ejercicio](../2.1-intro/README.es.md)
 
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-1---ansible-engine-exercises)
+[Haz clic aquí para volver al Taller de Ansible para Red Hat Enterprise Linux](../README.md#section-1---command-line-ansible-exercises)
+

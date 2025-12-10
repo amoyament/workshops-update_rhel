@@ -63,12 +63,12 @@ Modifica el Playbook `system_setup.yml` con el siguiente contenido:
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Actualizar todos los paquetes relacionados con la seguridad
+    - name: Asegurar la última versión de paquetes principales
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
     - name: Crear un nuevo usuario
       ansible.builtin.user:
         name: "{{ user_name }}"
@@ -115,7 +115,7 @@ El módulo `ansible.builtin.template` toma la plantilla `motd.j2` y genera un ar
 Ejecuta el playbook para aplicar tu MOTD personalizado en todos los hosts gestionados:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuración Básica del Sistema] ****************************************
 .

@@ -54,13 +54,13 @@ Atualize o playbook `system_setup.yml` para incluir e usar uma variável:
         create_home: true
 ```
 
-Execute este playbook com ansible-navigator.
+Execute este playbook com `ansible-playbook`.
 
 ### Passo 3 - Executando o Playbook Modificado
 Execute o playbook atualizado:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuração Básica do Sistema] ******************************************************
 
@@ -121,7 +121,7 @@ Esta configuração fornece um exemplo prático de como as variáveis podem ser 
 Execute o playbook de verificações:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 
 PLAY [Verificações de Configuração do Sistema] *********************************************
 

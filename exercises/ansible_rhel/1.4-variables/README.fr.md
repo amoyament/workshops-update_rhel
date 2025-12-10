@@ -41,11 +41,12 @@ Mettez à jour le playbook `system_setup.yml` pour inclure et utiliser une varia
   vars:
     user_name: 'Roger'
   tasks:
-    - name: Update all security-related packages
+    - name: S'assurer que les paquets principaux sont à jour
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -54,14 +55,14 @@ Mettez à jour le playbook `system_setup.yml` pour inclure et utiliser une varia
         create_home: true
 ```
 
-Exécutez ce playbook avec `ansible-navigator`.
+Exécutez ce playbook avec `ansible-playbook`.
 
 ### Étape 3 - Exécution du Playbook Modifié
 
 Exécutez le playbook mis à jour :
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 ```
@@ -70,7 +71,7 @@ PLAY [Basic System Setup] ******************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ************************************
+TASK [S'assurer que les paquets principaux sont à jour] ************************
 ok: [node1]
 
 TASK [Create a new user] *******************************************************
@@ -124,7 +125,7 @@ Cette configuration fournit un exemple pratique de la manière dont les variable
 Exécutez le playbook de vérifications :
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Sortie :

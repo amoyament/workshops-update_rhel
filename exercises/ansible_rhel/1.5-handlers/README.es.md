@@ -80,12 +80,18 @@ Digamos que queremos asegurarnos de que el firewall esté configurado correctame
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Actualizar todos los paquetes relacionados con la seguridad
+    - name: Asegurar la última versión de paquetes principales
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
+    - name: Asegurar la última versión de paquetes principales
+      ansible.builtin.package:
+        name:
+          - bash
+          - sudo
+        state: latest
     - name: Crear un nuevo usuario
       ansible.builtin.user:
         name: "{{ user_name }}"
@@ -134,7 +140,7 @@ ok: [node2]
 ok: [ansible-1]
 ok: [node3]
 
-TASK [Actualizar todos los paquetes relacionados con la seguridad] ************************************
+TASK [Asegurar la última versión de paquetes principales] *******************************************
 ok: [node2]
 ok: [node1]
 ok: [ansible-1]
@@ -223,7 +229,7 @@ Cuando ejecutes el libro de jugadas actualizado, esta tarea se ejecutará tres v
 Fragmento de la salida para crear un nuevo usuario en todos los nodos.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuración Básica del Sistema] ******************************************************
 

@@ -41,7 +41,7 @@ cd ~/lab_inventory
 ```
 
 Agora, crie um playbook chamado `system_setup.yml` para realizar a configuração básica do sistema:
-- Atualize todos os pacotes relacionados à segurança.
+- Atualize rapidamente alguns pacotes principais para a versão mais recente.
 - Crie um novo usuário chamado ‘myuser’.
 
 A estrutura básica é a seguinte:
@@ -52,11 +52,12 @@ A estrutura básica é a seguinte:
   hosts: node1
   become: true
   tasks:
-    - name: Update all security-related packages
+    - name: Garantir a última versão de pacotes principais
       ansible.builtin.dnf:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -65,7 +66,7 @@ A estrutura básica é a seguinte:
         create_home: true
 ```
 
-> NOTA: A atualização dos pacotes pode levar alguns minutos antes de o playbook do Ansible ser concluído.
+> NOTA: Limitar a atualização a poucos pacotes mantém a execução rápida para a turma.
 
 * Sobre o módulo `dnf`: Este módulo é usado para gerenciamento de pacotes com DNF (YUM Dandificado) no RHEL e outros sistemas baseados em Fedora.
 
@@ -73,10 +74,10 @@ A estrutura básica é a seguinte:
 
 ### Etapa 3 - Executando o Playbook
 
-Execute seu playbook usando o comando `ansible-navigator`:
+Execute seu playbook usando o comando `ansible-playbook`:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 Revise a saída para garantir que cada tarefa seja concluída com sucesso.
@@ -104,7 +105,7 @@ Agora, vamos criar um segundo playbook para verificações pós-configuração, 
 Execute o playbook de verificações:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Revise a saída para garantir que a criação do usuário foi bem-sucedida.

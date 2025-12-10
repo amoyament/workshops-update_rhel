@@ -192,6 +192,10 @@ To create a Job Template, go to the **Automation Execution -> Templates** view,c
 
 * Click **Create job template**
 
+> **Tip**
+> - Job templates run inside an Execution Environment to standardize the runtime between developer machines and controller.
+> - With surveys and RBAC, this template can be exposed in a self-service view so approved users can launch it without full edit rights (covered in the Surveys and RBAC exercises).
+
 You can start the job by directly clicking the blue **Launch template** button, or by clicking on the rocket in the Job Templates overview. After launching the Job Template, you are automatically brought to the job overview where you can follow the playbook execution in real time.
 
 Template Details

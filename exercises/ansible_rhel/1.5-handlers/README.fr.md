@@ -90,12 +90,18 @@ Disons que nous voulons nous assurer que le pare-feu est correctement configuré
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Mettre à jour tous les paquets liés à la sécurité
+    - name: S'assurer que les paquets principaux sont à jour
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
-        update_only: true
+    - name: S'assurer que les paquets principaux sont à jour
+      ansible.builtin.package:
+        name:
+          - bash
+          - sudo
+        state: latest
     - name: Créer un nouvel utilisateur
       ansible.builtin.user:
         name: "{{ user_name }}"
@@ -146,7 +152,7 @@ ok: [node2]
 ok: [ansible-1]
 ok: [node3]
 
-TASK [Mettre à jour tous les paquets liés à la sécurité] ************************************
+TASK [S'assurer que les paquets principaux sont à jour] ********************************************
 ok: [node2]
 ok: [node1]
 ok: [ansible-1]
@@ -241,7 +247,7 @@ Lorsque vous exécutez le playbook mis à jour, cette tâche est exécutée troi
 Extrait de la sortie pour la création d'un nouvel utilisateur sur tous les nœuds.
 
 ```bash
-[student@ansible-1 ~lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 
 PLAY [Configuration Système de Base] ******************************************************
 

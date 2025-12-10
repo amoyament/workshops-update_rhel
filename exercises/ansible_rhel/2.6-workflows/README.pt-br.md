@@ -3,16 +3,16 @@
 **Leia em outras linguagens**:
 <br>![uk](../../../images/uk.png) [English](README.md),  ![japan](../../../images/japan.png)[日本語](README.ja.md), ![brazil](../../../images/brazil.png) [Portugues do Brasil](README.pt-br.md), ![france](../../../images/fr.png) [Française](README.fr.md), ![Español](../../../images/col.png) [Español](README.es.md).
 
-* [Ansible Tower Workflows](#ansible-tower-workflows)
+* [Workflows](#workflows)
   * [Cenário de laboratório](#cenário-de-laboratório)
   * [Configurando o projeto](#configurando-o-projeto)
   * [Configurando Job Templates](#configurando-job-templates)
   * [Configurando Workflow](#configurando-workflow)
   * [E ação!](#e-ação)
 
-# Ansible Tower Workflows
+## Workflows
 
-Os workflows foram introduzidos como um novo recurso importante no Ansible Tower 3.1. A ideia básica de um workflow é vincular vários job templates. Eles podem ou não compartilhar inventário, Playbooks ou mesmo permissões. Os links podem ser condicionais:
+Os workflows permitem vincular vários job templates. Eles podem ou não compartilhar inventário, playbooks ou permissões. Os links podem ser condicionais:
 
   - se o job template A for bem-sucedido, o job template B será automaticamente executado posteriormente
 
@@ -20,7 +20,7 @@ Os workflows foram introduzidos como um novo recurso importante no Ansible Tower
 
 E os workflows não se limitam aos job templates, mas também podem incluir atualizações de projeto ou inventário.
 
-Isso permite novas aplicações para o Tower: diferentes job templates podem ser criados entre si. Por exemplo, a equipe de rede cria playbooks com seu próprio conteúdo, em seu próprio repositório Git e até direciona seu próprio inventário, enquanto a equipe de operações também possui seus próprios repositórios, playbooks e inventário.
+Isso permite novas aplicações para o Automation Controller: diferentes job templates podem ser encadeados entre si. Por exemplo, a equipe de rede cria playbooks com seu próprio conteúdo, em seu próprio repositório Git e até direciona seu próprio inventário, enquanto a equipe de operações também possui seus próprios repositórios, playbooks e inventário.
 
 Neste laboratório, você aprenderá como configurar um workflow.
 
@@ -210,4 +210,4 @@ $ curl http://localhost:8080/coolapp/
 
 ----
 
-[Clique aqui para retornar ao Workshop Ansible for Red Hat Enterprise Linux](../README.pt-br.md#seção-2---exercícios-do-ansible-tower)
+[Clique aqui para retornar ao Workshop Ansible for Red Hat Enterprise Linux](../README.pt-br.md#seção-2---exercícios-do-ansible-automation-platform)

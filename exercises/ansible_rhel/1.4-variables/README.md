@@ -47,9 +47,10 @@ Update the `system_setup.yml` playbook to include and use a variable:
   tasks:
     - name: Update all security-related packages
       ansible.builtin.package:
-        name: '*'
+        name:
+          - bash
+          - sudo
         state: latest
-        security: true
 
     - name: Create a new user
       ansible.builtin.user:
@@ -59,14 +60,14 @@ Update the `system_setup.yml` playbook to include and use a variable:
 ```
 {% endraw %}
 
-Run this playbook with `ansible-navigator`.
+Run this playbook with `ansible-playbook`.
 
 ### Step 3 - Running the Modified Playbook
 
 Execute the updated playbook:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_setup.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ```
 
 ```bash
@@ -75,7 +76,7 @@ PLAY [Basic System Setup] ******************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [node1]
 
-TASK [Update all security-related packages] ************************************
+TASK [Ensure latest versions of core packages] *********************************
 ok: [node1]
 
 TASK [Create a new user] *******************************************************
@@ -134,7 +135,7 @@ This setup provides a practical example of how variables can be used to control 
 Run the checks playbook:
 
 ```bash
-[student@ansible-1 lab_inventory]$ ansible-navigator run system_checks.yml -m stdout
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ```
 
 Output:

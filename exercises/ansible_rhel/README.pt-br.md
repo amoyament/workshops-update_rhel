@@ -30,20 +30,21 @@ Dito isto, os exercícios em si devem levar cerca de 4-5 horas. A primeira seç�
 
 Se a sua experiência for diferente na programação desses workshops, informe-nos e preencha um problema.
 
-## Seção 1 - Exercícios do Ansible Engine
+## Seção 1 - Exercícios em linha de comando do Ansible
 
  - [Exercício 1.1 - Verifique os pré-requisitos](1.1-setup/README.pt-br.md)
- - [Exercício 1.2 - Executando comandos ad-hoc](1.2-adhoc/README.pt-br.md)
+ - [Exercício 1.2 - Fundamentos do Ansible](1.2-thebasics/README.pt-br.md)
  - [Exercício 1.3 - Escrevendo seu primeiro Playbook](1.3-playbook/README.pt-br.md)
  - [Exercício 1.4 - Usando Variáveis](1.4-variables/README.pt-br.md)
  - [Exercício 1.5 - Condicionais, Handlers e Loops](1.5-handlers/README.pt-br.md)
  - [Exercício 1.6 - Templates](1.6-templates/README.pt-br.md)
- - [Exercício 1.7 - Roles](1.7-role/README.pt-br.md)
- - [Exercício 1.8 - Labs Bônus](1.8-bonus/README.pt-br.md)
+ - [Exercício 1.7 - Coleções](1.7-collection/README.pt-br.md)
+ - [Exercício 1.8 - Ansible Navigator e Execution Environments (básico)](1.8-navigator-ee/README.md)
+ - [Exercício 1.9 - Depuração e Tratamento de Erros](1.9-troubleshoot/README.pt-br.md)
 
-## Seção 2 - Exercícios do Ansible Tower
+## Seção 2 - Exercícios do Ansible Automation Platform
 
- - [Exercício 2.1 - Introdução ao Tower](2.1-intro/README.pt-br.md)
+ - [Exercício 2.1 - Introdução ao Ansible Automation Platform](2.1-intro/README.pt-br.md)
  - Exercício 2.2 - Inventários, credenciais e comandos ad hoc - not translated
  - [Exercício 2.3 - Projects & Job templates](2.3-projects/README.pt-br.md)
  - [Exercício 2.4 - Surveys](2.4-surveys/README.pt-br.md)

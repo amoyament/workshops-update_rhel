@@ -8,9 +8,7 @@
 * [What is Ansible Automation Platform (AAP)?](#what-is-ansible-automation-platform-aap)
 * [Why Use Ansible Automation Platform?](#why-use-ansible-automation-platform)
 * [Ansible Automation Controller](#ansible-automation-controller)
-* [Event-Driven Ansible](#event-driven-ansible)
 * [Automation Hub](#automation-hub)
-* [What’s New in Ansible Automation Platform?](#whats-new-in-ansible-automation-platform)
 * [Conclusion](#conclusion)
 
 ---
@@ -43,27 +41,16 @@ The **automation controller** is a key component of Ansible Automation Platform.
 - **Visual Workflow Management**: Easily create and modify automation workflows using the visualizer to visualize complex workflow streams.
 - **RESTful API**: The platform includes an extensive REST API, which makes integration with other tools and platforms seamless.
 - **Inventory and Credential Management**: Automation controller manages inventories and credentials securely, ensuring that only authorized users have access to sensitive data while simplifying configuration.
+- **Curated Launch Experiences**: With surveys and RBAC, job templates can be exposed to self-service views so approved users can launch automation consistently.
 
 ### Core Concepts:
 - **Projects**: Logical collections of Ansible assets such as collections, roles and playbooks stored in a version control system.
 - **Inventories**: Collections of hosts against which automation tasks are run. Inventories can be manually defined or dynamically synchronized.
 - **Credentials**: Securely stored credentials for authentication when executing jobs against systems or integrating with third-party tools.
 - **Job Templates**: Defined sets of parameters that allow for the consistent execution of automation jobs from an Ansible playbook.
+- **Execution Environments**: Container images that standardize the runtime for jobs across development and controller.
 
-## Event-Driven Ansible
-
-**Event-Driven Ansible** is designed to bring intelligent automation into IT operations by responding to real-time events. By connecting to various event sources, Event-Driven Ansible can trigger automation workflows based on specific conditions, improving the efficiency of IT operations and ensuring faster response times.
-
-### Key Features of Event-Driven Ansible:
-- **Event-Driven Automation**: Automatically triggers Ansible Rulebooks based on real-time events.
-- **Rulebooks**: Use Ansible Rulebooks to define conditional "if-this-then-that" logic, specifying the actions to take when certain events occur.
-- **Integration with External Tools**: Event-Driven Ansible can be integrated with external monitoring and event sources like Prometheus, OpenShift, and cloud services to respond to system alerts or other events.
-- **Customizable Event Sources**: Event-Driven Ansible supports a wide range of event sources and allows organizations to define custom event plugins.
-
-### Core Concepts:
-- **Event Sources**: The origin of the events that trigger automation, such as alerts, system logs, or user inputs.
-- **Ansible Rulebooks**: Define conditions and actions to determine when and how to respond to specific events.
-- **Actions**: Predefined responses, such as running playbooks or workflows that are executed when event conditions are met.
+ 
 
 ## Automation Hub
 
@@ -82,19 +69,7 @@ distributing Ansible content. It provides access to certified, validated and com
 - **Certified Content**: Verified, secure content from Red Hat and partners, ensuring trust and reliability in automation implementations.
 - **Private Automation Hub**: A self-hosted version of automation hub, where organizations can curate, store, and manage their own collections of automation content.
 
-## What’s New in Ansible Automation Platform?
-
-Ansible Automation Platform continually evolves to include new features and enhancements. Some of the latest advancements include:
-
-1. **Unified User Interface**: A streamlined experience that integrates automation controller, Event-Driven Ansible, and automation hub, allowing users to access all tools through a single interface.
-   
-2. **Containerized Platform Installation**: AAP now supports containerized installation, making deployment easier for environments that require minimal overhead while maintaining the platform's full functionality.
-
-3. **Enhanced Ansible Development Tools**: AAP includes a suite of tools that help developers and operators efficiently create, test, and deploy playbooks, improving productivity and standardization across the organization.
-
-4. **AI-Assisted Automation**: With the integration of Red Hat Ansible Lightspeed, the platform offers generative AI capabilities to help users build automation playbooks more intuitively, even without deep coding expertise.
-
-5. **Ansible Quick Starts**: Interactive, step-by-step guides within the UI help users quickly learn how to navigate and execute key functions within AAP.
+ 
 
 ## Conclusion
 
@@ -105,6 +80,6 @@ For more information on Ansible Automation Platform and its latest features, exp
 ---
 **Navigation**
 <br>
-[Previous Exercise](../1.7-role) - [Next Exercise](../2.2-cred)
+[Previous Exercise](../1.7-collection) - [Next Exercise](../2.2-cred)
 
-[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-tower-exercises)
+[Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-2---ansible-automation-platform-exercises)

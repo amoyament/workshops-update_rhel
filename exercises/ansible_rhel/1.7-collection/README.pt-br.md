@@ -182,7 +182,7 @@ Incorpore o papel `apache` em um playbook chamado `deploy_apache.yml` dentro de 
 Execute seu playbook para configurar o Apache nos servidores web designados:
 
 ```bash
-ansible-navigator run deploy_apache.yml -m stdout
+ansible-playbook -i hosts deploy_apache.yml
 ```
 
 #### Saída:
@@ -257,7 +257,7 @@ Uma vez verificado que o `httpd` está em execução, verifique se o servidor we
 ---
 **Navegação**
 <br>
-[Exercício anterior](../1.6-templates/README.pt-br.md) - [Próximo exercício](../1.8-troubleshoot/README.pt-br.md)
+[Exercício anterior](../1.6-templates/README.pt-br.md) - [Próximo exercício](../1.9-troubleshoot/README.pt-br.md)
 
 [Clique aqui para retornar ao workshop de Ansible para Red Hat Enterprise Linux](../README.md#section-1---ansible-engine-exercises)
 
