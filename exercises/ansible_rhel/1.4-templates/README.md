@@ -177,6 +177,6 @@ Connection to node1 closed.
 
 **Navigation**
 <br>
-[Previous Exercise](../1.5-handlers) - [Next Exercise](../1.7-collection)
+[Previous Exercise](../1.3-handlers) - [Next Exercise](../1.5-collection)
 
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-1---ansible-engine-exercises)

@@ -37,10 +37,8 @@ This workshop was created to last about 90 minutes and focuses more on targeting
 
 ## Ansible Automation Platform Exercises
 
- - [Exercise 1 - Check the Prerequisites](../ansible_rhel/1.1-setup)
- - [Exercise 2 - The Ansible Basics](../ansible_rhel/1.2-thebasics)
- - [Exercise 3 - Writing Your First Playbook (with inventory basics)](../ansible_rhel/1.3-playbook)
- - [Exercise 4 - Using Variables](../ansible_rhel/1.4-variables)
+ - [Exercise 1 - Writing Your First Playbook](../ansible_rhel/1.1-playbook)
+ - [Exercise 2 - Using Variables](../ansible_rhel/1.2-variables)
  - [Exercise 5 - Projects & Job Templates](../ansible_rhel/2.3-projects)
  - [Ansible Navigator and Execution Environments (optional)](../ansible_rhel/1.8-navigator-ee)
  - [Exercise 6 - Surveys](../ansible_rhel/2.4-surveys)

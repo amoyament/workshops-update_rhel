@@ -32,15 +32,13 @@ Se a sua experiência for diferente na programação desses workshops, informe-n
 
 ## Seção 1 - Exercícios em linha de comando do Ansible
 
- - [Exercício 1.1 - Verifique os pré-requisitos](1.1-setup/README.pt-br.md)
- - [Exercício 1.2 - Fundamentos do Ansible](1.2-thebasics/README.pt-br.md)
- - [Exercício 1.3 - Escrevendo seu primeiro Playbook](1.3-playbook/README.pt-br.md)
- - [Exercício 1.4 - Usando Variáveis](1.4-variables/README.pt-br.md)
- - [Exercício 1.5 - Condicionais, Handlers e Loops](1.5-handlers/README.pt-br.md)
- - [Exercício 1.6 - Templates](1.6-templates/README.pt-br.md)
- - [Exercício 1.7 - Coleções](1.7-collection/README.pt-br.md)
- - [Exercício 1.8 - Ansible Navigator e Execution Environments (básico)](1.8-navigator-ee/README.md)
- - [Exercício 1.9 - Depuração e Tratamento de Erros](1.9-troubleshoot/README.pt-br.md)
+ - [Exercício 1.1 - Escrevendo seu primeiro Playbook](1.1-playbook/README.pt-br.md)
+ - [Exercício 1.2 - Usando Variáveis](1.2-variables/README.pt-br.md)
+ - [Exercício 1.3 - Condicionais, Handlers e Loops](1.3-handlers/README.pt-br.md)
+ - [Exercício 1.4 - Templates](1.4-templates/README.pt-br.md)
+ - [Exercício 1.5 - Coleções](1.5-collection/README.pt-br.md)
+ - [Exercício 1.6 - Ansible Navigator e Execution Environments (básico)](1.6-navigator-ee/README.md)
+ - [Exercício 1.7 - Depuração e Tratamento de Erros](1.7-troubleshoot/README.pt-br.md)
 
 ## Seção 2 - Exercícios do Ansible Automation Platform
 

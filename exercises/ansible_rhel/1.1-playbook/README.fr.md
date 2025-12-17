@@ -114,10 +114,5 @@ Revoyez la sortie pour vous assurer que la création de l'utilisateur a été r�
 ---
 **Navigation**
 <br>
-
-{% if page.url contains 'ansible_rhel_90' %}
-[Exercise précédent](../2-thebasics/README.fr.md) - [Exercise suivant](../4-variables/README.fr.md)
-{% else %}
-[Exercise précédent](../1.2-thebasics/README.fr.md) - [Exercise suivant](../1.4-variables/README.fr.md)
-{% endif %}
+[Exercise suivant](../1.2-variables/README.fr.md)
 <br><br>

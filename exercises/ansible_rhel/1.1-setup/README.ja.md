@@ -1,3 +1,4 @@
+<!--
 # ワークショップ演習 - 前提条件の確認
 
 **他の言語で読む**:
@@ -143,3 +144,4 @@ ansible-navigator:
 {% endif %}
 <br><br>
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)
+-->

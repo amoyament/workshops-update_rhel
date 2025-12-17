@@ -40,10 +40,8 @@ Automation](../../decks/ansible_rhel_90.pdf)  [Google Source - Red Hat
 
 ## Ansible Automation Platform の演習
 
- - [演習 1 - パブリッククラウドプロビジョニングの概要](../ansible_rhel/1.1-setup/README.ja.md)
- - [演習 2 - Ansible の基本](../ansible_rhel/1.2-thebasics/README.ja.md)
- - [演習 3 - Linux ホストへのアプリケーションのデプロイ](../ansible_rhel/1.3-playbook/README.ja.md)
- - [演習 4: 自動化ホストからの情報の取得](../ansible_rhel/1.4-variables/README.ja.md)
+ - [演習 1 - はじめての Playbook の作成](../ansible_rhel/1.1-playbook/README.ja.md)
+ - [演習 2 - 変数の使用](../ansible_rhel/1.2-variables/README.ja.md)
  - [演習 5 - サーベイを使用した IT セルフサービス](../ansible_rhel/2.4-surveys/README.ja.md)
  - [演習 6 - RHEL のシステムロールの概要](6-system-roles/README.ja.md)
 

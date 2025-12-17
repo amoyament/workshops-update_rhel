@@ -112,11 +112,8 @@ cd ~/lab_inventory
 
 ---
 **ナビゲーション**
-{% if page.url contains 'ansible_rhel_90' %}
-[前の演習](../2-thebasics) - [次の演習](../4-variables)
-{% else %}
-[前の演習](../1.2-thebasics) - [次の演習](../1.4-variables)
-{% endif %}
+<br>
+[次の演習](../1.2-variables)
 <br><br>
 
 <br>

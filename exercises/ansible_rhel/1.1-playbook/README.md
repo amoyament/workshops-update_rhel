@@ -48,6 +48,14 @@ node3
 ```
 
 In a playbook, the `hosts` key selects which inventory hosts/groups to target.
+Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
+
+```bash
+cd ~/lab_inventory
+ansible -i hosts all -m ping
+```
+
+You can substitute `all` with a specific group (e.g., `web`) or host (e.g., `node1`). This helps confirm the inventory is correct before running playbooks.
 
 ### Step 1 - Playbook Basics
 First, create a text file in YAML format for your playbook. Remember:
@@ -178,9 +186,9 @@ node1                      : ok=3    changed=1    unreachable=0    failed=0    s
 ---
 **Navigation**
 {% if page.url contains 'ansible_rhel_90' %}
-[Previous Exercise](../2-thebasics) - [Next Exercise](../4-variables)
+[Next Exercise](../2-variables)
 {% else %}
-[Previous Exercise](../1.2-thebasics) - [Next Exercise](../1.4-variables)
+[Next Exercise](../1.2-variables)
 {% endif %}
 <br><br>
 
