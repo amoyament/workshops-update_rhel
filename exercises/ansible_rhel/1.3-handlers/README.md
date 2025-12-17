@@ -265,6 +265,6 @@ node3                      : ok=4    changed=1    unreachable=0    failed=0    s
 ---
 **Navigation**
 <br>
-[Previous Exercise](../1.4-variables) - [Next Exercise](../1.6-templates)
+[Previous Exercise](../1.2-variables) - [Next Exercise](../1.4-templates)
 
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-1---ansible-engine-exercises)

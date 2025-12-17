@@ -24,7 +24,7 @@ After finishing this lab you are ready to start using Ansible for your automatio
 
 ## Presentations
 
-The exercises are self explanatory and guide the participants through the entire lab. All concepts are explained when they are introduced.
+The exercises are self explanatory and guide the participants through the entire lab. All concepts are explained when they are introduced. All work is performed in the provided lab environment (no local installs). Early exercises use `ansible-playbook`; Ansible Navigator is introduced in Exercise 1.8 and is already available in the lab.
 
 There is an optional presentation available to support the workshops and explain Automation, the basics of Ansible and the topics of the exercises in more detail:
 [Ansible RHEL Automation](../../decks/ansible_rhel.pdf)
@@ -45,15 +45,15 @@ Having said that, the exercises themselves should take roughly 4-5 hours. The fi
 
 ## Section 1 - Command-line Ansible Exercises
 
-* [Exercise 1.1 - Check the Prerequisites](1.1-setup)
-* [Exercise 1.2 - The Ansible Basics](1.2-thebasics)
-* [Exercise 1.3 - Writing Your First Playbook (with inventory basics)](1.3-playbook)
-* [Exercise 1.4 - Using Variables](1.4-variables)
-* [Exercise 1.5 - Conditionals, Handlers and Loops](1.5-handlers)
-* [Exercise 1.6 - Templates](1.6-templates)
-* [Exercise 1.7 - Collections](1.7-collection)
-* [Exercise 1.8 - Ansible Navigator and Execution Environments (basics)](1.8-navigator-ee)
-* [Exercise 1.9 - Debugging and Error Handling](1.9-troubleshoot)
+> Note: Early exercises (1.1–1.5) use `ansible-playbook` in the provided lab environment. Ansible Navigator is introduced in Exercise 1.6 and is already available in your lab environment (no local installation required).
+
+* [Exercise 1.1 - Writing Your First Playbook (with inventory basics)](1.1-playbook)
+* [Exercise 1.2 - Using Variables](1.2-variables)
+* [Exercise 1.3 - Conditionals, Handlers and Loops](1.3-handlers)
+* [Exercise 1.4 - Templates](1.4-templates)
+* [Exercise 1.5 - Collections](1.5-collection)
+* [Exercise 1.6 - Ansible Navigator and Execution Environments (basics)](1.6-navigator-ee)
+* [Exercise 1.7 - Debugging and Error Handling](1.7-troubleshoot)
 
 ## Section 2 - Ansible Automation Platform Exercises
 

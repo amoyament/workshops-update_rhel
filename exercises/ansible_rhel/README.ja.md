@@ -51,15 +51,13 @@ Automation](../../decks/ansible_rhel.pdf)
 
 ## セクション 1 - Ansible コマンドラインの演習
 
-* [演習 1.1 - 前提条件の確認](1.1-setup/README.ja.md)
-* [演習 1.2 - Ansible の基本](1.2-thebasics/README.ja.md)
-* [演習 1.3 - はじめての Playbook の作成](1.3-playbook/README.ja.md)
-* [演習 1.4 - 変数の使用](1.4-variables/README.ja.md)
-* [演習 1.5 - 条件、ハンドラー、ループ](1.5-handlers/README.ja.md)
-* [演習 1.6 - テンプレート](1.6-templates/README.ja.md)
-* [演習 1.7 - コレクション](1.7-collection/README.ja.md)
-* [演習 1.8 - Ansible Navigator と Execution Environments（基礎）](1.8-navigator-ee/README.md)
-* [演習 1.9 - デバッグとエラーハンドリング](1.9-troubleshoot/README.ja.md)
+* [演習 1.1 - はじめての Playbook の作成](1.1-playbook/README.ja.md)
+* [演習 1.2 - 変数の使用](1.2-variables/README.ja.md)
+* [演習 1.3 - 条件、ハンドラー、ループ](1.3-handlers/README.ja.md)
+* [演習 1.4 - テンプレート](1.4-templates/README.ja.md)
+* [演習 1.5 - コレクション](1.5-collection/README.ja.md)
+* [演習 1.6 - Ansible Navigator と Execution Environments（基礎）](1.6-navigator-ee/README.md)
+* [演習 1.7 - デバッグとエラーハンドリング](1.7-troubleshoot/README.ja.md)
 
 ## セクション 2 - Ansible Automation Platform の演習
 

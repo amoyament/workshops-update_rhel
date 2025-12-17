@@ -1,3 +1,4 @@
+<!--
 # Exercice de l'Atelier - Vérifier les Prérequis
 
 **Lisez ceci dans d'autres langues** :
@@ -141,3 +142,4 @@ Chaque chapitre est accompagné d'un Lab de Défi. Ces tâches testent votre com
 [Exercice suivant](../2-thebasics/README.fr.md)
 {% endif %}
 <br><br>
+-->

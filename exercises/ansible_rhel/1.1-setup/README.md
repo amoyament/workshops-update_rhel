@@ -1,3 +1,4 @@
+<!--
 # Workshop Exercise - Check the Prerequisites
 
 **Read this in other languages**:
@@ -24,15 +25,7 @@
 
 ## Guide
 
-This workshop's initial phase focuses on the command-line utilities of the Ansible Automation Platform, such as:
-
-
-- [ansible-navigator](https://github.com/ansible/ansible-navigator) - a Text-based User Interface (TUI) for running and developing Ansible content.
-- [ansible-core](https://docs.ansible.com/core.html) - the base executable that provides the framework, language and functions that underpin the Ansible Automation Platform, including CLI tools like `ansible`, `ansible-playbook` and `ansible-doc`.
-- [Execution Environments](https://docs.ansible.com/ansible/latest/getting_started_ee/introduction.html) - Pre-built container images with Red Hat supported collections.
-- [ansible-builder](https://github.com/ansible/ansible-builder) - automates the  process of building Execution Environments. Not a primary focus in this workshop.
-
-If you need more information on new Ansible Automation Platform components bookmark this landing page [https://red.ht/AAP-20](https://red.ht/AAP-20)
+This workshop's initial phase focuses on the command-line utilities of the Ansible Automation Platform.
 
 
 ### Your Lab Environment
@@ -81,60 +74,8 @@ NOTE: There is a short YouTube video provided if you need additional clarity:
 * `~`: shortcut for the home directory `/home/student`
 * `cd`: command to change directories
 * `pwd`: prints the current working directory's full path.
-
-### Step 3 - Examining Execution Environments
-
-1. Run `ansible-navigator images` to view configured Execution Environments.
-2. Use the corresponding number to investigate an EE, e.g. pressing 2 to open `ee-supported-rhel8`
-
-```bash
-$ ansible-navigator images
-```
-
-![ansible-navigator images](images/navigator-images.png)
-
-
-> Note: The output  you see might differ from the above output
-
-
-![ee main menu](images/navigator-ee-menu.png)
-
-Selecting `2` for `Ansible version and collections` will show us all Ansible Collections installed on that particular EE, and the version of `ansible-core`:
-
-![ee info](images/navigator-ee-collections.png)
-
-### Step 4 - Examining the ansible-navigator configuration
-
-1. View the contents of `~/.ansible-navigator.yml` using Visual Studio Code or the `cat` command.
-
-```bash
-$ cat ~/.ansible-navigator.yml
----
-ansible-navigator:
-  ansible:
-    inventory:
-      entries:
-      - /home/student/lab_inventory/hosts
-
-  execution-environment:
-    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8 
-    enabled: true
-    container-engine: podman
-    pull:
-      policy: missing
-    volume-mounts:
-    - src: "/etc/ansible/"
-      dest: "/etc/ansible/"
-```
-
-2. Note the following parameters within the `ansible-navigator.yml` file:
-
-* `inventories`: shows the location of the ansible inventory being used
-* `execution-environment`: where the default execution environment is set
-
-For a full listing of every configurable knob checkout the [documentation](https://ansible.readthedocs.io/projects/navigator/settings/)
-
-### Step 5 - Challenge Labs
+ 
+### Step 3 - Challenge Labs
 
 Each chapter comes with a Challenge Lab. These tasks test your understanding and application of the learned concepts. Solutions are provided under a warning sign for reference.
 
@@ -144,9 +85,10 @@ Each chapter comes with a Challenge Lab. These tasks test your understanding and
 <br>
 
 {% if page.url contains 'ansible_rhel_90' %}
-[Next Exercise](../2-thebasics)
+[Next Exercise](../3-playbook)
 {% else %}
-[Next Exercise](../1.2-thebasics)
+[Next Exercise](../1.3-playbook)
 {% endif %}
 <br><br>
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)
+-->

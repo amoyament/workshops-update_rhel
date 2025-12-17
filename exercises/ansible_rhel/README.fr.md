@@ -41,14 +41,13 @@ Cela dit, les exercices eux-mêmes devraient prendre environ 4-5 heures. La prem
 
 ## Section 1 - Exercices en ligne de commande Ansible
 
-* [Exercice 1.1 - Vérifier les prérequis](1.1-setup/README.fr.md)
-* [Exercice 1.2 - Les bases d'Ansible](1.2-thebasics/README.fr.md)
-* [Exercice 1.3 - Écrire votre premier playbook](1.3-playbook/README.fr.md)
-* [Exercice 1.4 - Utilisation des variables](1.4-variables/README.fr.md)
-* [Exercice 1.5 - Conditionnels, gestionnaires etboucles](1.5-handlers/README.fr.md)
-* [Exercice 1.6 - Modèles](1.6-templates/README.fr.md)
-* [Exercice 1.7 - Rôles](1.7-role/README.fr.md)
-* [Exercice 1.9 - Débogage et gestion des erreurs](1.9-troubleshoot/README.fr.md)
+* [Exercice 1.1 - Écrire votre premier playbook](1.1-playbook/README.fr.md)
+* [Exercice 1.2 - Utilisation des variables](1.2-variables/README.fr.md)
+* [Exercice 1.3 - Conditionnels, gestionnaires et boucles](1.3-handlers/README.fr.md)
+* [Exercice 1.4 - Modèles](1.4-templates/README.fr.md)
+* [Exercice 1.5 - Collections](1.5-collection/README.fr.md)
+* [Exercice 1.6 - Ansible Navigator et Execution Environments (bases)](1.6-navigator-ee/README.md)
+* [Exercice 1.7 - Débogage et gestion des erreurs](1.7-troubleshoot/README.fr.md)
 
 ## Section 2 - Exercices sur la plateforme d'automatisation Ansible
 

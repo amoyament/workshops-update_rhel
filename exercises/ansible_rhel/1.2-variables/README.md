@@ -165,9 +165,9 @@ Review the output to confirm the user existence check is correctly using the var
 <br>
 
 {% if page.url contains 'ansible_rhel_90' %}
-[Previous Exercise](../3-playbook) - [Next Exercise](../5-projects)
+[Previous Exercise](../2-playbook) - [Next Exercise](../4-projects)
 {% else %}
-[Previous Exercise](../1.3-playbook) - [Next Exercise](../1.5-handlers)
+[Previous Exercise](../1.1-playbook) - [Next Exercise](../1.3-handlers)
 {% endif %}
 <br><br>
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)

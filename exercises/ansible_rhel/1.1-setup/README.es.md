@@ -1,3 +1,4 @@
+<!--
 # Ejercicio del Taller - Verificar los Prerrequisitos
 
 **Lee esto en otros idiomas**:
@@ -153,3 +154,4 @@ Cada capítulo viene con un Lab de Desafío. Estas tareas prueban tu comprensió
 [Próximo Ejercicio](../1.2-thebasics/README.es.md)
 
 [Haga clic aquí para volver al Taller Ansible for Red Hat Enterprise Linux](../README.es.md#section-1---ansible-engine-exercises)
+-->

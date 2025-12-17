@@ -317,6 +317,6 @@ You should see output confirming Apache is running. Finally, confirm the web pag
 ---
 **Navigation**
 <br>
-[Previous Exercise](../1.6-templates) - [Next Exercise](../1.9-troubleshoot)
+[Previous Exercise](../1.4-templates) - [Next Exercise](../1.6-navigator-ee)
 
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md#section-1---ansible-engine-exercises)

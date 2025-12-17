@@ -113,6 +113,6 @@ Revisa la salida para asegurarte de que la creación del usuario haya sido exito
 ----
 **Navegación**
 <br>
-[Ejercicio anterior](../1.2-thebasics/README.es.md) - [Próximo Ejercicio](../1.4-variables)
+[Próximo Ejercicio](../1.2-variables)
 
 [Haga clic aquí para volver al Taller Ansible for Red Hat Enterprise Linux](../README.md#section-1---ansible-engine-exercises)

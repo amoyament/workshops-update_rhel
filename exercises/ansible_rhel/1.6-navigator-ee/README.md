@@ -83,7 +83,7 @@ Use whichever is appropriate for your team’s workflow. In automation controlle
 ---
 **Navigation**
 <br>
-[Previous Exercise](../1.7-collection) - [Next Exercise](../1.9-troubleshoot)
+[Previous Exercise](../1.5-collection) - [Next Exercise](../1.7-troubleshoot)
 
 [Click here to return to the Ansible for Red Hat Enterprise Linux Workshop](../README.md)
 
