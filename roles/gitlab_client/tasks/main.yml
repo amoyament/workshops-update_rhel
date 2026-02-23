@@ -1,3 +1,0 @@
----
-- name: configure gitea client
-  ansible.builtin.include_tasks: gitea.yml

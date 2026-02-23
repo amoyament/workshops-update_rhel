@@ -1,4 +1,0 @@
----
-- name: Unsupported workshop for webservers role
-  ansible.builtin.debug:
-    msg: "no more setup for webservers role the {{ workshop_type }} does not have any specific setup specified"
