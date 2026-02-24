@@ -1,0 +1,197 @@
+= Workshop Exercise - Writing Your First Playbook
+
+== Table of Contents
+
+* <<objective>>
+* <<guide>>
+** <<step-0-inventory-basics>>
+** <<step-1-playbook-basics>>
+** <<step-2-creating-your-playbook>>
+** <<step-3-running-the-playbook>>
+** <<step-4-checking-the-playbook>>
+
+== Objective
+
+In this exercise, you'll use Ansible to conduct basic system setup tasks on a Red Hat Enterprise Linux server. You will become familiar with fundamental Ansible modules like `package` and `user`, and learn how to create and run playbooks.
+
+== Guide
+
+Playbooks in Ansible are essentially scripts written in YAML format. They are used to define the tasks and configurations that Ansible will apply to your servers.
+
+=== Step 0 - Inventory basics
+
+An inventory tells Ansible what hosts to target and how to group them. In this lab, your working directory `~/lab_inventory` contains the inventory used in prior exercises.
+
+Open the inventory to review hosts and groups:
+
+[source,bash]
+----
+cd ~/lab_inventory
+cat hosts
+----
+
+An example INI-style inventory might look like:
+
+[source,ini]
+----
+[web]
+node1
+node2
+
+[db]
+node3
+----
+
+In a playbook, the `hosts` key selects which inventory hosts/groups to target. Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
+
+[source,bash]
+----
+cd ~/lab_inventory
+ansible -i hosts all -m ping
+----
+
+You can substitute `all` with a specific group (e.g., `web`) or host (e.g., `node1`). This helps confirm the inventory is correct before running playbooks.
+
+=== Step 1 - Playbook Basics
+
+First, create a text file in YAML format for your playbook. Remember:
+
+* Start with three dashes (`---`).
+* Use spaces, not tabs, for indentation.
+
+Key Concepts:
+
+* `hosts`: Specifies the target servers or devices for your playbook to run against.
+* `tasks`: The actions Ansible will perform.
+* `become`: Allows privilege escalation (running tasks with elevated privileges).
+
+[NOTE]
+====
+An Ansible playbook is designed to be idempotent, meaning if you run it multiple times on the same hosts, it ensures the desired state without making redundant changes.
+====
+
+=== Step 2 - Creating Your Playbook
+
+Before creating your first playbook, ensure you are in the correct directory by changing to `~/lab_inventory`:
+
+[source,bash]
+----
+cd ~/lab_inventory
+----
+
+Now create a playbook named `system_setup.yml` to perform basic system setup:
+
+* Update a couple of core packages to the latest version.
+* Create a new user named 'myuser'.
+
+The basic structure looks as follows:
+
+[source,yaml]
+----
+---
+- name: Basic System Setup
+  hosts: node1
+  become: true
+  tasks:
+    - name: Ensure latest versions of core packages
+      ansible.builtin.package:
+        name:
+          - bash
+          - sudo
+        state: latest
+
+    - name: Create a new user
+      ansible.builtin.user:
+        name: myuser
+        state: present
+        create_home: true
+----
+
+[NOTE]
+====
+Keeping the update to a small set of packages makes the run fast for class.
+====
+
+* About the `package` module: This modules manages packages on a target without specifying a package manager module
+
+* About the `user` module: This module is used to manage user accounts.
+
+=== Step 3 - Running the Playbook
+
+Execute your playbook using the `ansible-playbook` command:
+
+[source,bash]
+----
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
+----
+
+Review the output to ensure each task is completed successfully.
+
+[source,bash]
+----
+
+PLAY [Basic System Setup] ****************************************************************
+
+TASK [Gathering Facts] ************************************************************************
+ok: [node1]
+
+TASK [Ensure latest versions of core packages] **************************************************
+changed: [node1]
+
+TASK [Create a new user] ************************************************************************
+changed: [node1]
+
+PLAY RECAP **************************************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+----
+
+=== Step 4 - Checking the Playbook
+
+Now, let's create a second playbook for post-configuration checks, named `system_checks.yml`:
+
+[source,yaml]
+----
+---
+- name: System Configuration Checks
+  hosts: node1
+  become: true
+  tasks:
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id myuser
+      register: user_check
+
+    - name: Report user status
+      ansible.builtin.debug:
+        msg: "User 'myuser' exists."
+      when: user_check.rc == 0
+----
+
+Run the checks playbook:
+
+[source,bash]
+----
+[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
+----
+
+Review the output to ensure the user creation was successful.
+
+[source,bash]
+----
+
+PLAY [System Configuration Checks] **************************************************************
+
+TASK [Gathering Facts] ************************************************************************
+ok: [node1]
+
+TASK [Check user existence] ********************************************************************
+changed: [node1]
+
+TASK [Report user status] **********************************************************************
+ok: [node1] => {
+    "msg": "User 'myuser' exists."
+}
+
+PLAY RECAP **************************************************************************************
+node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+----

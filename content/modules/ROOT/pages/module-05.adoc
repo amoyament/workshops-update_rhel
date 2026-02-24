@@ -1,0 +1,325 @@
+= Workshop Exercise - Collections: Making Your Playbooks Modular and Scalable
+
+== Table of Contents
+
+* <<objective>>
+* <<guide>>
+** <<step-1-understanding-ansible-collections>>
+** <<step-2-cleaning-up-the-environment>>
+** <<step-3-building-an-apache-collection>>
+** <<step-4-using-the-collection-in-a-playbook>>
+** <<step-5-create-a-requirements-yml-file-and-run-it>>
+** <<step-6-collection-execution-and-validation>>
+** <<step-6-verify-apache-is-running>>
+
+== Objective
+
+This exercise builds on your previous experience with Ansible by focusing on *collections*. Collections offer an efficient way to package and distribute automation content, including roles, modules, plugins, and playbooks, all within a single unit. In this exercise, we'll develop a collection that installs and configures Apache (httpd), demonstrating how to structure content for modular and reusable automation.
+
+== Guide
+
+=== Step 1 - Understanding Ansible Collections
+
+*Ansible collections* are the preferred way to *organize, distribute, and reuse automation content*. They group together various components—like roles, modules, and plugins—so developers can manage and share automation resources more efficiently. Collections allow you to store related content in one place and distribute it via *Ansible Galaxy*, *Automation Hub*, or *private Automation Hub* within your organization.
+
+Each *collection* can include the following components:
+
+==== Modules
+
+Small programs that perform specific automation tasks on *local machines, APIs, or remote hosts*. Modules are usually written in *Python* and include metadata defining *how, when, and by whom* the task can be executed. Modules can be used across various use cases like *cloud management, networking, and configuration management*.
+
+*Example modules:*
+
+* *package*: Installs or removes packages with the systems package manager.
+* *service*: Manages system services (start, stop, restart).
+* *command*: Executes commands on a target system.
+
+==== Roles
+
+*Roles* are modular bundles of tasks, variables, templates, and handlers. They simplify automation workflows by breaking them into *reusable components*. Roles can be imported into *playbooks* and used across multiple automation scenarios, reducing duplication and improving manageability.
+
+==== Plugins
+
+*Plugins* extend Ansible's core functionality by adding *custom connection types, callbacks, or lookup functions*. Unlike modules, which execute actions on managed nodes, plugins *typically run on the control node* to enhance how Ansible operates during execution.
+
+==== Playbooks
+
+*Playbooks* are *YAML files* that describe *automation workflows*. They contain a series of *plays*—which map tasks to managed hosts—and serve as the blueprint for configuring and managing systems.
+
+=== Step 2 - Cleaning up the Environment
+
+Before we build the collection, let's clean up any previous Apache installations.
+
+[source,yaml]
+----
+---
+- name: Cleanup Environment
+  hosts: all
+  become: true
+  vars:
+    package_name: httpd
+  tasks:
+    - name: Remove Apache from web servers
+      ansible.builtin.package:
+        name: "{{ package_name }}"
+        state: absent
+      when: inventory_hostname in groups['web']
+
+    - name: Remove firewalld
+      ansible.builtin.package:
+        name: firewalld
+        state: absent
+
+    - name: Delete created users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: absent
+        remove: true
+      loop:
+        - alice
+        - bob
+        - carol
+        - Roger
+
+    - name: Reset MOTD to an empty message
+      ansible.builtin.copy:
+        dest: /etc/motd
+        content: ''
+----
+
+Now run the playbook to clean the environment
+
+[source,bash]
+----
+ansible-playbook -i hosts cleanup.yml
+----
+
+=== Step 3 - Building an Apache Collection
+
+. Create the Collection Structure
+
+Use `ansible-galaxy` to initialize the collection structure:
+
+[source,bash]
+----
+[student@ansible-1 lab_inventory]$ ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
+----
+
+This creates the following structure:
+
+[source,bash]
+----
+.
+└── collections
+    └── ansible_collections
+        └── webops
+            └── apache
+                ├── docs
+                ├── galaxy.yml
+                ├── meta
+                │   └── runtime.yml
+                ├── plugins
+                │   └── README.md
+                ├── README.md
+                └── roles
+----
+
+. Create the `apache` role within your `webops.apache` collection:
+
+[source,bash]
+----
+[student@ansible-1 lab_inventory]$ cd collections/ansible_collections/webops/apache/roles
+[student@ansible-1 roles]$ ansible-galaxy role init apache
+----
+
+. Define Role Variables:
+
+Add Apache-specific variables in roles/apache/vars/main.yml:
+
+[source,yaml]
+----
+---
+apache_package_name: httpd
+apache_service_name: httpd
+----
+
+. Create Role Tasks:
+
+Add the following tasks to roles/apache/tasks/main.yml to install and configure Apache:
+
+[source,yaml]
+----
+---
+- name: Install Apache web server
+  ansible.builtin.package:
+    name: "{{ apache_package_name }}"
+    state: present
+
+- name: Ensure Apache is running and enabled
+  ansible.builtin.service:
+    name: "{{ apache_service_name }}"
+    state: started
+    enabled: true
+
+- name: Install firewalld
+  ansible.builtin.package:
+    name: firewalld
+    state: present
+
+- name: Allow HTTP traffic on web servers
+  ansible.posix.firewalld:
+    service: http
+    permanent: true
+    state: enabled
+  when: inventory_hostname in groups['web']
+  notify: Reload Firewall
+----
+
+. Add Handlers:
+
+Create a handler to reload the firewall in roles/apache/handlers/main.yml:
+
+[source,yaml]
+----
+---
+- name: Reload Firewall
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded
+----
+
+. Create a Custom Webpage Template:
+
+Add a Jinja2 template for the web page in roles/apache/templates/index.html.j2:
+
+[source,html]
+----
+<html>
+<head>
+  <title>Welcome to {{ ansible_hostname }}</title>
+</head>
+<body>
+  <h1>Hello from {{ ansible_hostname }}</h1>
+</body>
+</html>
+----
+
+. Deploy the Template:
+
+Add the template deployment task to roles/apache/tasks/main.yml:
+
+[source,yaml]
+----
+- name: Deploy custom index.html
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+----
+
+=== Step 4 - Using the Collection in a Playbook
+
+Create a playbook named `deploy_apache.yml` within `~/lab_inventory` directory to apply the collection to the `web` group:
+
+[source,yaml]
+----
+---
+- name: Deploy Apache using Collection
+  hosts: web
+  become: true
+  collections:
+    - webops.apache
+  roles:
+    - apache
+----
+
+=== Step 5 - Create a `requirements.yml` file and run it
+
+The Ansible playbook requires the `ansible.posix` collection. Create and add this requirement to your `requirements.yml` file that shall reside under `~/lab_inventory`
+
+[source,bash]
+----
+collections:
+  - name: ansible.posix
+----
+
+[source,bash]
+----
+ansible-galaxy collection install -r requirements.yml
+----
+
+=== Step 6 - Collection Execution and Validation
+
+Run the playbook using `ansible-playbook`:
+
+[source,bash]
+----
+ansible-playbook -i hosts deploy_apache.yml
+----
+
+[source,text]
+----
+PLAY [Deploy Apache using Collection] ******************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node3]
+ok: [node1]
+ok: [node2]
+
+TASK [webops.apache.apache : Install Apache web server] ************************
+changed: [node3]
+changed: [node1]
+changed: [node2]
+
+TASK [webops.apache.apache : Ensure Apache is running and enabled] *************
+changed: [node3]
+changed: [node1]
+changed: [node2]
+
+TASK [webops.apache.apache : Install firewalld] ********************************
+changed: [node3]
+changed: [node1]
+changed: [node2]
+
+TASK [webops.apache.apache : Allow HTTP traffic on web servers] ****************
+ok: [node3]
+ok: [node1]
+ok: [node2]
+
+TASK [webops.apache.apache : Deploy custom index.html] *************************
+ok: [node3]
+ok: [node2]
+ok: [node1]
+
+PLAY RECAP *********************************************************************
+node1                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node2                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node3                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+----
+
+=== Step 6 - Verify Apache is Running
+
+After the playbook runs, verify Apache is active on the web servers:
+
+[source,bash]
+----
+[rhel@control ~]$ ssh node1 "systemctl status httpd"
+----
+
+You should see output confirming Apache is running. Finally, confirm the web page is served:
+
+[source,bash]
+----
+[student@ansible-1 lab_inventory]$ curl http://node1
+----
+
+[source,html]
+----
+<html>
+<head>
+  <title>Welcome to node1</title>
+</head>
+<body>
+  <h1>Hello from node1</h1>
+</body>
+</html>
+----

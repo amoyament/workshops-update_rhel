@@ -1,0 +1,141 @@
+= Bonus - RHEL MCP + AAP (Remediations)
+
+== Table of Contents
+
+* <<objective>>
+* <<prerequisites>>
+* <<guide>>
+** <<step-1-connect-aap-to-rhel-management-consoleredhatcom>>
+** <<step-2-create-a-remediation-from-a-findingpolicy>>
+** <<step-3-run-the-remediation-via-aap>>
+** <<step-4-verify-and-review-job-details>>
+** <<step-5-optional-parameterize-with-a-survey>>
+* <<notes-and-next-steps>>
+* <<alternate-lab-path-if-consoleredhatcom-integration-is-not-available>>
+
+== Objective
+
+Use RHEL Management (console.redhat.com) to create a remediation and execute it using Ansible Automation Platform. This shows how RHEL MCP integrates with AAP to operationalize remediations at scale.
+
+== Prerequisites
+
+* Managed hosts are registered with Red Hat and visible in console.redhat.com RHEL Management.
+* Insights client is installed and reporting on the managed hosts.
+* Ansible Automation Platform (Controller) reachable from console.redhat.com, or the integration connector configured per your environment.
+
+== Guide
+
+=== Step 1 - Connect AAP to RHEL Management (console.redhat.com)
+
+In console.redhat.com:
+
+* Navigate to the RHEL Management or Remediations settings area (Integrations).
+* Add a new Ansible Automation Platform integration:
+** Provide Controller URL and an authentication token (or credentials) as required by your environment.
+** Verify the connection succeeds.
+
+[NOTE]
+====
+Exact labels may vary. Your instructor/backend provides the specific integration steps and credentials.
+====
+
+=== Step 2 - Create a remediation from a finding/policy (prescriptive)
+
+. Go to RHEL → Advisor → Recommendations (Rules)
+. Search for "time sync" (or similar) and open the rule related to time synchronization not being configured
+. Click Remediate
+. In the Remediation wizard:
+* Name: Enable time synchronization
+* Systems: select node1 (and optionally node2)
+* Execution method: Run with Ansible Automation Platform
+* Integration: choose your "Workshop Controller" (configured in Step 1)
+. Click Create remediation, then Launch
+
+=== Step 3 - Run the remediation via AAP (verify in Controller)
+
+In Ansible Automation Platform:
+
+. Go to Jobs and open the remediation job that just started
+. Confirm details:
+* Inventory: Workshop Inventory
+* Credentials: Workshop Credential
+* Playbook: remediation content generated for the selected rule
+. Watch the run to completion (Status: Successful)
+
+=== Step 4 - Verify and review job details
+
+In Ansible Automation Platform:
+
+* Go to Jobs and locate the remediation job triggered from console.redhat.com.
+* Open the job to review:
+** Inventory and credential used
+** Playbook details (Remediation content)
+** Output logs, changes, and status
+
+On a managed host, verify the specific change (e.g., service status, config present):
+
+[source,bash]
+----
+ssh node1
+# Example verification depending on the remediation performed
+sudo systemctl status chronyd || true
+rpm -q bash || true
+----
+
+=== Step 5 - (Optional) Parameterize with a Survey
+
+You can parameterize remediation jobs by:
+
+* Creating a Controller Job Template wrapper that references the remediation content and adds a Survey for user inputs (e.g., limit, boolean toggles).
+* Mapping the integration to that template, so console.redhat.com launches the parameterized job.
+
+== Notes and next steps
+
+* For recurring or conditional remediation, combine this with Controller workflows and RBAC.
+* Consider pairing with System Roles (2.8) for standard configuration baselines and Image Mode for base images.
+* Explore APIs: both console.redhat.com Remediations APIs and Controller APIs allow automation of the full flow.
+
+== Alternate lab path (if console.redhat.com integration is not available)
+
+If you cannot access Remediations in RHEL Management, simulate the same outcome using a dedicated remediation playbook.
+
+. Create `~/lab_inventory/remediate_timesync.yml`:
+
+[source,yaml]
+----
+---
+- name: Remediation - Ensure time sync configured
+  hosts: web
+  become: true
+  tasks:
+    - name: Apply RHEL System Role - timesync
+      ansible.builtin.include_role:
+        name: redhat.rhel_system_roles.timesync
+      vars:
+        timesync_ntp_servers:
+          - hostname: pool.ntp.org
+            iburst: yes
+----
+
+. Run from CLI:
+
+[source,bash]
+----
+cd ~/lab_inventory
+ansible-playbook -i hosts remediate_timesync.yml
+----
+
+. Or run from Controller:
+* Project: Workshop Project
+* Inventory: Workshop Inventory
+* Playbook: remediate_timesync.yml (add it to the repo or a new project as needed)
+* Credential: Workshop Credential
+* (Optional) Survey: boolean "Enable timesync?" and NTP server list
+
+. Verify:
+
+[source,bash]
+----
+ssh node1
+timedatectl
+----
