@@ -5,6 +5,11 @@ rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm
 
 subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}
 
+# Create student user for workshop exercises
+useradd -m student 2>/dev/null || true
+echo "student:ansible123!" | chpasswd
+echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
+
 dnf install httpd nano -y
 
 cat <<EOF | tee /var/www/html/index.html

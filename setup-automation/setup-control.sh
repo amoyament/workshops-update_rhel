@@ -32,6 +32,12 @@ retry "dnf install -y python3-pip python3-libsemanage"
 systemctl stop systemd-tmpfiles-setup.service 2>/dev/null || true
 systemctl disable systemd-tmpfiles-setup.service 2>/dev/null || true
 
+# Create student user for workshop exercises
+echo "Creating student user..."
+useradd -m student 2>/dev/null || true
+echo "student:ansible123!" | chpasswd
+echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
+
 # Install required Ansible collections
 echo "Installing Ansible collections..."
 ansible-galaxy collection install ansible.posix --force

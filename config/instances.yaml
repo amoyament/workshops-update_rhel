@@ -110,21 +110,17 @@ virtualmachines:
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
-        value: "bastions"
+        value: "isolated"
     networks:
       - default
     userdata: |-
       #cloud-config
-      user: student
+      user: rhel
       password: ansible123!
       chpasswd: { expire: False }
       runcmd:
         - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
         - systemctl reload sshd
-        - mkdir -p /home/student/rhel-workshop
-        - chown student:student /home/student/rhel-workshop
-        - mkdir -p /home/student/lab_inventory
-        - chown student:student /home/student/lab_inventory
     services:
       - name: control-https
         ports:
@@ -183,12 +179,12 @@ virtualmachines:
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
-        value: "web"
+        value: "isolated"
     networks:
       - default
     userdata: |-
       #cloud-config
-      user: student
+      user: rhel
       password: ansible123!
       chpasswd: { expire: False }
       runcmd:
@@ -202,7 +198,7 @@ virtualmachines:
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
-        value: "web"
+        value: "isolated"
     networks:
       - default
     services:
@@ -221,7 +217,7 @@ virtualmachines:
         tls_termination: Edge
     userdata: |-
       #cloud-config
-      user: student
+      user: rhel
       password: ansible123!
       chpasswd: { expire: False }
       runcmd:
@@ -235,7 +231,7 @@ virtualmachines:
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
-        value: "web"
+        value: "isolated"
     networks:
       - default
     services:
@@ -254,7 +250,7 @@ virtualmachines:
         tls_termination: Edge
     userdata: |-
       #cloud-config
-      user: student
+      user: rhel
       password: ansible123!
       chpasswd: { expire: False }
       runcmd:
