@@ -104,7 +104,7 @@ containers:
 virtualmachines:
   # Ansible Automation Platform Control Node
   - name: "control"
-    image: "base-zero-aap-2.6-container-ce"
+    image: "aap-2.6-1.1-ceh-20251018"
     memory: "16G"
     cores: 4
     image_size: "30Gi"
