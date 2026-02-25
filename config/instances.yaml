@@ -106,7 +106,7 @@ virtualmachines:
   - name: "control"
     image: "aap-2.6-1.1-ceh-20251018"
     memory: "20G"
-    cores: 4
+    cores: 8
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
