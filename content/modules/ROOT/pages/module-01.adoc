@@ -122,7 +122,7 @@ Execute your playbook using the `ansible-playbook` command:
 
 [source,bash]
 ----
-[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_setup.yml
+[student@control lab_inventory]$ ansible-playbook -i hosts system_setup.yml
 ----
 
 Review the output to ensure each task is completed successfully.
@@ -171,7 +171,7 @@ Run the checks playbook:
 
 [source,bash]
 ----
-[student@ansible-1 lab_inventory]$ ansible-playbook -i hosts system_checks.yml
+[student@control lab_inventory]$ ansible-playbook -i hosts system_checks.yml
 ----
 
 Review the output to ensure the user creation was successful.

@@ -102,7 +102,7 @@ Use `ansible-galaxy` to initialize the collection structure:
 
 [source,bash]
 ----
-[student@ansible-1 lab_inventory]$ ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
+[student@control lab_inventory]$ ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
 ----
 
 This creates the following structure:
@@ -128,8 +128,8 @@ This creates the following structure:
 
 [source,bash]
 ----
-[student@ansible-1 lab_inventory]$ cd collections/ansible_collections/webops/apache/roles
-[student@ansible-1 roles]$ ansible-galaxy role init apache
+[student@control lab_inventory]$ cd collections/ansible_collections/webops/apache/roles
+[student@control roles]$ ansible-galaxy role init apache
 ----
 
 . Define Role Variables:
@@ -309,7 +309,7 @@ You should see output confirming Apache is running. Finally, confirm the web pag
 
 [source,bash]
 ----
-[student@ansible-1 lab_inventory]$ curl http://node1
+[student@control lab_inventory]$ curl http://node1
 ----
 
 [source,html]

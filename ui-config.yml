@@ -67,7 +67,7 @@ antora:
 
 tabs:
   - name: "Automation Controller"
-    url: https://ansible-1-${guid}.${domain}/
+    url: https://control-${guid}.${domain}/
     external: false
     modules:
       - module-01

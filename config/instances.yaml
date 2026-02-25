@@ -28,34 +28,6 @@ containers:
       - name: vscode-config
         mountPath: /opt/app-root/src/.local
     command: ["/bin/bash", "-c", "tail -f /dev/null"]
-    commands:
-      - "dnf install -y git openssh-clients vim nano"
-      - "curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/usr/local"
-      - "ln -sf /usr/local/bin/code-server /usr/bin/code-server"
-      - "useradd -u 1001 -g 0 -m coder || true"
-      - "mkdir -p /opt/app-root/src/workspace/rhel-workshop"
-      - "mkdir -p /opt/app-root/src/.local/share/code-server"
-      - "chown -R coder:root /opt/app-root/src"
-      - "mkdir -p /home/coder/.config/code-server"
-      - "printf 'bind-addr: 0.0.0.0:8080\\nauth: password\\npassword: {{ common_password }}\\ncert: false\\n' > /home/coder/.config/code-server/config.yaml"
-      - "chown -R coder:root /home/coder/.config"
-      - "mkdir -p /home/coder/.ssh"
-      - "if [ -n \"$SSH_PRIVATE_KEY\" ]; then echo \"$SSH_PRIVATE_KEY\" > /home/coder/.ssh/id_rsa; fi"
-      - "if [ -n \"$SSH_PUBLIC_KEY\" ]; then echo \"$SSH_PUBLIC_KEY\" > /home/coder/.ssh/id_rsa.pub; fi"
-      - "chown -R coder:root /home/coder/.ssh"
-      - "chmod 700 /home/coder/.ssh"
-      - "chmod 600 /home/coder/.ssh/id_rsa 2>/dev/null || true"
-      - "chmod 644 /home/coder/.ssh/id_rsa.pub 2>/dev/null || true"
-      - "printf 'Host ansible-1\\n    HostName ansible-1\\n    User student\\n    Port 22\\n    IdentityFile ~/.ssh/id_rsa\\n    StrictHostKeyChecking no\\n    UserKnownHostsFile /dev/null\\n\\nHost node1\\n    HostName node1\\n    User student\\n    Port 22\\n    IdentityFile ~/.ssh/id_rsa\\n    StrictHostKeyChecking no\\n    UserKnownHostsFile /dev/null\\n\\nHost node2\\n    HostName node2\\n    User student\\n    Port 22\\n    IdentityFile ~/.ssh/id_rsa\\n    StrictHostKeyChecking no\\n    UserKnownHostsFile /dev/null\\n\\nHost node3\\n    HostName node3\\n    User student\\n    Port 22\\n    IdentityFile ~/.ssh/id_rsa\\n    StrictHostKeyChecking no\\n    UserKnownHostsFile /dev/null\\n' > /home/coder/.ssh/config"
-      - "chown coder:root /home/coder/.ssh/config"
-      - "chmod 600 /home/coder/.ssh/config"
-      - "mkdir -p /opt/app-root/src/workspace/rhel-workshop/.vscode"
-      - "printf '{\\n    \"terminal.integrated.profiles.linux\": {\\n        \"SSH to ansible-1\": {\\n            \"path\": \"ssh\",\\n            \"args\": [\"ansible-1\"]\\n        }\\n    },\\n    \"terminal.integrated.defaultProfile.linux\": \"SSH to ansible-1\"\\n}\\n' > /opt/app-root/src/workspace/rhel-workshop/.vscode/settings.json"
-      - "chown -R coder:root /opt/app-root/src/workspace/rhel-workshop/.vscode"
-      - "printf '#!/bin/bash\\necho \"VS Code Supervisor starting...\"\\nwhile true; do\\n  echo \"$(date): Starting code-server\"\\n  cd /opt/app-root/src/workspace/rhel-workshop\\n  su - coder -c '\"'\"'code-server --config /home/coder/.config/code-server/config.yaml --user-data-dir /opt/app-root/src/.local/share/code-server .'\"'\"'\\n  echo \"$(date): code-server exited, restarting in 5 seconds...\"\\n  sleep 5\\ndone\\n' > /tmp/vscode-supervisor.sh"
-      - "chmod +x /tmp/vscode-supervisor.sh"
-      - "nohup /tmp/vscode-supervisor.sh > /tmp/code-server.log 2>&1 &"
-      - "sleep 5"
     services:
       - name: vscode
         ports:
@@ -131,7 +103,7 @@ containers:
 
 virtualmachines:
   # Ansible Automation Platform Control Node
-  - name: "ansible-1"
+  - name: "control"
     image: "base-zero-aap-2.6-container-ce"
     memory: "16G"
     cores: 4
@@ -154,16 +126,16 @@ virtualmachines:
         - mkdir -p /home/student/lab_inventory
         - chown student:student /home/student/lab_inventory
     services:
-      - name: ansible-1-https
+      - name: control-https
         ports:
           - port: 443
             protocol: TCP
             targetPort: 443
-            name: ansible-1-https
+            name: control-https
     routes:
-      - name: ansible-1-https
-        host: ansible-1
-        service: ansible-1-https
+      - name: control-https
+        host: control
+        service: control-https
         targetPort: 443
         tls: true
         tls_termination: reencrypt

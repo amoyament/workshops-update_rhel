@@ -1,11 +1,32 @@
 #!/bin/bash
 
 # Ansible for RHEL Workshop - Control Node Setup Script
-# This script configures the ansible-1 control node for the workshop
+# This script configures the control node for the workshop
 
-set -e
+retry() {
+    for i in {1..3}; do
+        echo "Attempt $i: $2"
+        if $1; then
+            return 0
+        fi
+        [ $i -lt 3 ] && sleep 5
+    done
+    echo "Failed after 3 attempts: $2"
+    exit 1
+}
 
-echo "Starting ansible-1 control node setup..."
+retry "subscription-manager clean"
+retry "curl -k -L https://${SATELLITE_URL}/pub/katello-server-ca.crt -o /etc/pki/ca-trust/source/anchors/${SATELLITE_URL}.ca.crt"
+retry "update-ca-trust"
+KATELLO_INSTALLED=$(rpm -qa | grep -c katello)
+if [ $KATELLO_INSTALLED -eq 0 ]; then
+  retry "rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm"
+fi
+subscription-manager status
+if [ $? -ne 0 ]; then
+    retry "subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}"
+fi
+retry "dnf install -y python3-pip python3-libsemanage"
 
 # Disable systemd-tmpfiles-setup to avoid conflicts
 systemctl stop systemd-tmpfiles-setup.service 2>/dev/null || true
@@ -207,4 +228,4 @@ ansible-playbook /tmp/aap-setup.yml
 # Set proper ownership
 chown -R student:student /home/student
 
-echo "ansible-1 control node setup completed successfully!"
+echo "Control node setup completed successfully!"

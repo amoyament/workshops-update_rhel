@@ -30,7 +30,7 @@ You'll work in a pre-configured environment with the following hosts:
 |Inventory Name
 
 |Ansible Control Host
-|ansible-1
+|control
 
 |Managed Host 1
 |node1

@@ -1,25 +1,21 @@
 #!/bin/bash
+curl -k -L https://${SATELLITE_URL}/pub/katello-server-ca.crt -o /etc/pki/ca-trust/source/anchors/${SATELLITE_URL}.ca.crt
+update-ca-trust
+rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm
 
-# Ansible for RHEL Workshop - Node1 Setup Script
-# This script configures node1 for the workshop exercises
+subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}
 
-set -e
+dnf install httpd nano -y
 
-echo "Starting node1 setup..."
+cat <<EOF | tee /var/www/html/index.html
 
-# Install httpd (Apache) for web server exercises
-echo "Installing httpd..."
-dnf install -y httpd
 
-# Create a default index.html page
-echo "Creating default web page..."
-cat > /var/www/html/index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node1 - Ansible Workshop</title>
+    <title>Nothing to See Here</title>
     <style>
         body {
             display: flex;
@@ -38,22 +34,13 @@ cat > /var/www/html/index.html << 'EOF'
     </style>
 </head>
 <body>
-    <h1>Welcome to Node1 - Ansible for RHEL Workshop</h1>
+    <h1>Nothing to See Here - Not Yet Anyway - Node1</h1>
 </body>
 </html>
+
 EOF
 
-# Configure firewall to allow HTTP traffic
-echo "Configuring firewall..."
-firewall-cmd --permanent --add-service=http 2>/dev/null || true
-firewall-cmd --reload 2>/dev/null || true
-
-# Enable and start httpd service
-echo "Enabling and starting httpd..."
-systemctl enable httpd
 systemctl start httpd
 
-# Set proper SELinux context
-restorecon -Rv /var/www/html/ 2>/dev/null || true
-
-echo "node1 setup completed successfully!"
+mkdir /backup
+chmod -R 777 /backup

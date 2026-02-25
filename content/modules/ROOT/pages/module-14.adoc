@@ -172,7 +172,7 @@ We are using the `ansible_host` variable in the URL to access every node in the 
 
 [source,bash]
 ----
-[student@ansible-1 ~]$ ansible-navigator run check_url.yml -m stdout
+[student@control ~]$ ansible-navigator run check_url.yml -m stdout
 ----
 
 Snippet of output:
@@ -247,7 +247,7 @@ Check the results again from your automation controller host. We will use the de
 
 [source,bash]
 ----
-[student@ansible-1 ~]$ ansible-navigator run check_url.yml -m stdout
+[student@control ~]$ ansible-navigator run check_url.yml -m stdout
 ----
 
 === Solution
