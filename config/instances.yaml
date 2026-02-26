@@ -66,8 +66,8 @@ virtualmachines:
   # Ansible Automation Platform Control Node
   - name: "control"
     image: "aap-2.6-1.1-ceh-20251018"
-    memory: "32G"
-    cores: 8
+    memory: "24G"
+    cores: 4
     image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
