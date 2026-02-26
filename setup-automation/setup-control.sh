@@ -26,6 +26,17 @@ subscription-manager status
 if [ $? -ne 0 ]; then
     retry "subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}"
 fi
+
+# Disable AWS RHUI repos - the AAP 2.6 image was built on AWS and has RHUI repos
+# that cannot resolve in OpenShift CNV (rhui.REGION.aws.ce.redhat.com)
+echo "Disabling AWS RHUI repos..."
+dnf config-manager --set-disabled '*rhui*' 2>/dev/null || true
+
+# Disable Amazon ID dnf plugin that errors in non-AWS environments
+if [ -f /etc/dnf/plugins/amazon-id.conf ]; then
+    sed -i 's/enabled.*=.*1/enabled=0/' /etc/dnf/plugins/amazon-id.conf
+fi
+
 retry "dnf install -y python3-pip python3-libsemanage"
 
 # Disable systemd-tmpfiles-setup to avoid conflicts
