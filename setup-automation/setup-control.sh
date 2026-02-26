@@ -15,6 +15,11 @@ retry() {
     exit 1
 }
 
+# AWS images set manage_repos=0 since they use RHUI instead of RHSM for repos.
+# Re-enable it so satellite registration creates proper repo files.
+echo "Enabling RHSM repo management..."
+sed -i 's/^manage_repos.*=.*0/manage_repos = 1/' /etc/rhsm/rhsm.conf
+
 retry "subscription-manager clean"
 retry "curl -k -L https://${SATELLITE_URL}/pub/katello-server-ca.crt -o /etc/pki/ca-trust/source/anchors/${SATELLITE_URL}.ca.crt"
 retry "update-ca-trust"
