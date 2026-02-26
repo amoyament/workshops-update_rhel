@@ -3,11 +3,6 @@ antora:
   name: modules
   dir: www
   modules:
-    # Main Landing Page
-    - name: index
-      label: "Workshop Overview"
-      solveButton: false
-
     # Section 1: Command-line Ansible Exercises
     - name: module-01
       label: "1.1 Writing Your First Playbook"
@@ -61,7 +56,7 @@ antora:
       solveButton: false
 
 tabs:
-  - name: "Automation Controller"
+  - name: AAP
     url: https://control-${guid}.${domain}/
     external: false
     modules:
@@ -81,68 +76,20 @@ tabs:
       - module-14
       - module-15
       - module-16
-  - name: "Node 2 Web"
-    url: https://node2-${guid}.${domain}/
-    external: false
-    modules:
-      - module-01
-      - module-02
-      - module-03
-      - module-04
-      - module-05
-      - module-06
-      - module-07
-      - module-08
-      - module-09
-      - module-10
-      - module-11
-      - module-12
-      - module-13
-      - module-14
-      - module-15
-      - module-16
-  - name: "Node 3 Web"
-    url: https://node3-${guid}.${domain}/
-    external: false
-    modules:
-      - module-01
-      - module-02
-      - module-03
-      - module-04
-      - module-05
-      - module-06
-      - module-07
-      - module-08
-      - module-09
-      - module-10
-      - module-11
-      - module-12
-      - module-13
-      - module-14
-      - module-15
-      - module-16
-  - name: "VS Code"
+  - name: VS Code
     url: https://vscode-${guid}.${domain}/
     external: true
+  - name: Node 02 Web
+    url: https://node02-${guid}.${domain}/
+    external: true
     modules:
-      - module-01
-      - module-02
-      - module-03
       - module-04
-      - module-05
-      - module-06
-      - module-07
-      - module-08
-      - module-09
-      - module-10
-      - module-11
-      - module-12
-      - module-13
-      - module-14
-      - module-15
-      - module-16
-  - name: "Gitea"
+  - name: Node 03 Web
+    url: https://node03-${guid}.${domain}/
+    external: true
+    modules:
+      - module-04
+  - name: Gitea
     url: https://gitea-${guid}.${domain}/
-    external: false
     modules:
       - module-10

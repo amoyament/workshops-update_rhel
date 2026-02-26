@@ -20,5 +20,5 @@
 * xref:module-15.adoc[2.8 System Roles]
 * xref:module-16.adoc[2.9 RHEL MCP + AAP]
 
-.Supplemental
-* xref:supplemental-image-mode.adoc[Bonus: RHEL Image Mode]
+//.Supplemental
+//* xref:supplemental-image-mode.adoc[Bonus: RHEL Image Mode]
