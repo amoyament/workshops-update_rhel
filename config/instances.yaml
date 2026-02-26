@@ -3,45 +3,6 @@
 # Based on workshops/exercises/ansible_rhel requirements
 
 containers:
-  # VS Code Server for student lab access
-  - name: "vscode"
-    image: "registry.redhat.io/ubi9/ubi:latest"
-    memory: "4G"
-    cpu: "1"
-    ports:
-      - name: vscode
-        containerPort: 8080
-        protocol: TCP
-    environment:
-      PASSWORD: "{{ common_password }}"
-      STUDENT_USER: "student"
-      SSH_PRIVATE_KEY: "{{ lookup('file', hostvars.localhost.ssh_provision_key_path | default('')) | default('') }}"
-      SSH_PUBLIC_KEY: "{{ hostvars.localhost.ssh_provision_pubkey_content | default('') }}"
-    volumes:
-      - name: workspace-data
-        emptyDir: {}
-      - name: vscode-config
-        emptyDir: {}
-    volumeMounts:
-      - name: workspace-data
-        mountPath: /opt/app-root/src/workspace
-      - name: vscode-config
-        mountPath: /opt/app-root/src/.local
-    command: ["/bin/bash", "-c", "tail -f /dev/null"]
-    services:
-      - name: vscode
-        ports:
-          - port: 8080
-            protocol: TCP
-            targetPort: 8080
-            name: vscode
-    routes:
-      - name: vscode
-        host: vscode
-        service: vscode
-        targetPort: 8080
-        tls: true
-
   # Gitea for source control
   - name: gitea
     image: gitea/gitea:1.16.8-rootless
@@ -246,6 +207,42 @@ virtualmachines:
         host: node3
         service: node3-http
         targetPort: 80
+        tls: true
+        tls_termination: Edge
+    userdata: |-
+      #cloud-config
+      user: rhel
+      password: ansible123!
+      chpasswd: { expire: False }
+      runcmd:
+        - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
+        - systemctl reload sshd
+
+  # VS Code Server for student lab access
+  - name: "vscode"
+    image: "devtools-ansible"
+    memory: "8G"
+    cores: 2
+    image_size: "20Gi"
+    disk_type: "scsi"
+    bootloader: "efi"
+    tags:
+      - key: "AnsibleGroup"
+        value: "isolated"
+    networks:
+      - default
+    services:
+      - name: vscode-8080
+        ports:
+          - port: 8080
+            protocol: TCP
+            targetPort: 8080
+            name: vscode
+    routes:
+      - name: vscode-8080
+        host: vscode
+        service: vscode-8080
+        targetPort: 8080
         tls: true
         tls_termination: Edge
     userdata: |-
