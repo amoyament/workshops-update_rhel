@@ -1,124 +1,87 @@
 #!/bin/bash
 
 # Ansible for RHEL Workshop - VS Code Server Setup Script
-# This script configures the VS Code container for student lab access
+# Configures devtools-ansible VM for student lab access
 
-set -e
+retry() {
+    for i in {1..3}; do
+        echo "Attempt $i: $2"
+        if $1; then
+            return 0
+        fi
+        [ $i -lt 3 ] && sleep 5
+    done
+    echo "Failed after 3 attempts: $2"
+    exit 1
+}
 
-echo "Starting VS Code setup..."
+# Satellite registration
+retry "curl -k -L https://${SATELLITE_URL}/pub/katello-server-ca.crt -o /etc/pki/ca-trust/source/anchors/${SATELLITE_URL}.ca.crt" "Downloading Satellite CA cert"
+retry "update-ca-trust" "Updating CA trust"
+retry "rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm" "Installing katello consumer RPM"
+retry "subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}" "Registering with Satellite"
 
-# Install required packages
-echo "Installing dependencies..."
-dnf install -y git openssh-clients vim nano
+# Disable firewalld and set SELinux permissive
+setenforce 0
+systemctl stop firewalld
 
-# Install code-server
-echo "Installing code-server..."
-curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/usr/local
-ln -sf /usr/local/bin/code-server /usr/bin/code-server
+# Reconfigure code-server for workshop access
+systemctl stop code-server
+mv /home/rhel/.config/code-server/config.yaml /home/rhel/.config/code-server/config.bk.yaml
 
-# Create coder user
-echo "Creating coder user..."
-useradd -u 1001 -g 0 -m coder || true
-
-# Create workspace and config directories
-echo "Setting up workspace directories..."
-mkdir -p /opt/app-root/src/workspace/rhel-workshop
-mkdir -p /opt/app-root/src/.local/share/code-server
-chown -R coder:root /opt/app-root/src
-
-# Configure code-server
-echo "Configuring code-server..."
-mkdir -p /home/coder/.config/code-server
-cat > /home/coder/.config/code-server/config.yaml << 'EOF'
+tee /home/rhel/.config/code-server/config.yaml << EOF
 bind-addr: 0.0.0.0:8080
-auth: password
-password: ansible123!
+auth: none
 cert: false
 EOF
-chown -R coder:root /home/coder/.config
 
-# Set up SSH keys
-echo "Setting up SSH..."
-mkdir -p /home/coder/.ssh
-if [ -n "$SSH_PRIVATE_KEY" ]; then echo "$SSH_PRIVATE_KEY" > /home/coder/.ssh/id_rsa; fi
-if [ -n "$SSH_PUBLIC_KEY" ]; then echo "$SSH_PUBLIC_KEY" > /home/coder/.ssh/id_rsa.pub; fi
-chown -R coder:root /home/coder/.ssh
-chmod 700 /home/coder/.ssh
-chmod 600 /home/coder/.ssh/id_rsa 2>/dev/null || true
-chmod 644 /home/coder/.ssh/id_rsa.pub 2>/dev/null || true
+systemctl start code-server
 
-# Create SSH config for lab hosts
-echo "Creating SSH config..."
-cat > /home/coder/.ssh/config << 'EOF'
-Host control
-    HostName control
-    User student
-    Port 22
-    IdentityFile ~/.ssh/id_rsa
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
+# Install additional packages
+dnf install -y unzip nano git podman jq httpd
 
-Host node1
-    HostName node1
-    User student
-    Port 22
-    IdentityFile ~/.ssh/id_rsa
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
+# Configure sudoers for rhel user
+echo "%rhel ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/rhel_sudoers
+chmod 440 /etc/sudoers.d/rhel_sudoers
 
-Host node2
-    HostName node2
-    User student
-    Port 22
-    IdentityFile ~/.ssh/id_rsa
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
+# Create student user for workshop exercises
+useradd -m student 2>/dev/null || true
+echo "student:ansible123!" | chpasswd
+echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
 
-Host node3
-    HostName node3
-    User student
-    Port 22
-    IdentityFile ~/.ssh/id_rsa
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-EOF
-chown coder:root /home/coder/.ssh/config
-chmod 600 /home/coder/.ssh/config
+# Set up SSH keys for rhel user
+echo "Checking SSH keys for rhel user..."
+RHEL_SSH_DIR="/home/rhel/.ssh"
+RHEL_PRIVATE_KEY="$RHEL_SSH_DIR/id_rsa"
 
-# Create VS Code workspace settings
-echo "Creating VS Code workspace settings..."
-mkdir -p /opt/app-root/src/workspace/rhel-workshop/.vscode
-cat > /opt/app-root/src/workspace/rhel-workshop/.vscode/settings.json << 'EOF'
-{
-    "terminal.integrated.profiles.linux": {
-        "SSH to control": {
-            "path": "ssh",
-            "args": ["control"]
-        }
-    },
-    "terminal.integrated.defaultProfile.linux": "SSH to control"
-}
-EOF
-chown -R coder:root /opt/app-root/src/workspace/rhel-workshop/.vscode
+if [ -f "$RHEL_PRIVATE_KEY" ]; then
+    echo "SSH key already exists for rhel user: $RHEL_PRIVATE_KEY"
+else
+    echo "Creating SSH key for rhel user..."
+    sudo -u rhel mkdir -p /home/rhel/.ssh
+    sudo -u rhel chmod 700 /home/rhel/.ssh
+    sudo -u rhel ssh-keygen -t rsa -b 4096 -C "rhel@$(hostname)" -f /home/rhel/.ssh/id_rsa -N "" -q
+    sudo -u rhel chmod 600 /home/rhel/.ssh/id_rsa*
 
-# Create supervisor script to keep code-server running
-echo "Creating code-server supervisor..."
-cat > /tmp/vscode-supervisor.sh << 'EOFSCRIPT'
-#!/bin/bash
-echo "VS Code Supervisor starting..."
-while true; do
-  echo "$(date): Starting code-server"
-  cd /opt/app-root/src/workspace/rhel-workshop
-  su - coder -c 'code-server --config /home/coder/.config/code-server/config.yaml --user-data-dir /opt/app-root/src/.local/share/code-server .'
-  echo "$(date): code-server exited, restarting in 5 seconds..."
-  sleep 5
-done
-EOFSCRIPT
-chmod +x /tmp/vscode-supervisor.sh
+    if [ -f "$RHEL_PRIVATE_KEY" ]; then
+        echo "SSH key created successfully for rhel user"
+    else
+        echo "Error: Failed to create SSH key for rhel user"
+    fi
+fi
 
-# Start code-server via supervisor
-echo "Starting code-server..."
-nohup /tmp/vscode-supervisor.sh > /tmp/code-server.log 2>&1 &
-sleep 5
+# Environment variables for rhel user
+echo 'export PATH=$HOME/.local/bin:$PATH' >> /home/rhel/.profile
+chown rhel:rhel /home/rhel/.profile
+
+# Enable linger for the rhel user
+loginctl enable-linger rhel
+
+# Upgrade ansible-dev-tools
+pip3 install --upgrade --force-reinstall ansible-dev-tools
+
+# Restart code-server to pick up any changes
+systemctl start code-server
+sleep 15
 
 echo "VS Code setup completed successfully!"
