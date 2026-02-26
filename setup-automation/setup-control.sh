@@ -37,6 +37,10 @@ if [ -f /etc/dnf/plugins/amazon-id.conf ]; then
     sed -i 's/enabled.*=.*1/enabled=0/' /etc/dnf/plugins/amazon-id.conf
 fi
 
+# Enable RHEL 9 repos from satellite (activation key may not auto-enable them)
+echo "Enabling RHEL 9 satellite repos..."
+subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms --enable=rhel-9-for-x86_64-appstream-rpms
+
 retry "dnf install -y python3-pip python3-libsemanage"
 
 # Disable systemd-tmpfiles-setup to avoid conflicts
