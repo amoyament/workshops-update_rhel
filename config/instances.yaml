@@ -1,9 +1,5 @@
 ---
-# Ansible for Red Hat Enterprise Linux Workshop Infrastructure
-# Based on workshops/exercises/ansible_rhel requirements
-
 containers:
-  # Gitea for source control
   - name: gitea
     image: gitea/gitea:1.16.8-rootless
     ports:
@@ -39,13 +35,18 @@ containers:
         emptyDir: {}
       - name: gitea-varlib
         emptyDir: {}
-    commands:
+    commands: 
         - gitea admin user create --admin --username gitea --password gitea --email dummy@dummy.com --must-change-password=false
         - >
           curl -X POST -H "accept: application/json" -H "Content-Type: application/json"
-          -u 'gitea:gitea'
+          -u 'gitea:gitea' 
           -d '{"username": "student", "full_name": "student", "description": "student"}'
           http://localhost:3000/api/v1/orgs
+        - >
+          curl -X POST -H "accept: application/json" -H "Content-Type: application/json"
+          -u 'gitea:gitea'
+          -d '{"clone_addr": "https://github.com/ansible-tmm/aap25-roadshow", "repo_name": "aap25-roadshow-content", "owner": "student", "uid": 2, "private": false}'
+          http://localhost:3000/api/v1/repos/migrate
     memory: 2Gi
     services:
       - name: gitea
@@ -65,7 +66,7 @@ containers:
 virtualmachines:
   # Ansible Automation Platform Control Node
   - name: "control"
-    image: "aap-2.6-1.1-ceh-20251018"
+    image: "aap-2.6-2-ceh-20251103"
     memory: "24G"
     cores: 4
     image_size: "30Gi"
@@ -74,25 +75,30 @@ virtualmachines:
         value: "isolated"
     networks:
       - default
+      - secondary
     userdata: |-
       #cloud-config
       user: rhel
       password: ansible123!
       chpasswd: { expire: False }
       runcmd:
-        - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
+        - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
         - systemctl reload sshd
     services:
-      - name: control-https
+      - name: control
         ports:
           - port: 443
             protocol: TCP
             targetPort: 443
             name: control-https
+          - port: 22
+            protocol: TCP
+            targetPort: 22
+            name: control-ssh
     routes:
       - name: control-https
         host: control
-        service: control-https
+        service: control
         targetPort: 443
         tls: true
         tls_termination: reencrypt
@@ -132,8 +138,7 @@ virtualmachines:
           uEOWpQhGYHMC0A==
           -----END CERTIFICATE-----
 
-  # Managed RHEL Nodes
-  - name: "node1"
+  - name: "node01"
     image: "rhel-9.5"
     memory: "2G"
     cores: 2
@@ -147,12 +152,45 @@ virtualmachines:
       #cloud-config
       user: rhel
       password: ansible123!
-      chpasswd: { expire: False }
+      chpasswd: { expire: False }  
       runcmd:
         - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
         - systemctl reload sshd
 
-  - name: "node2"
+  - name: "node02"
+    image: "rhel-8.7"
+    memory: "2G"
+    cores: 2
+    image_size: "30Gi"
+    tags:
+      - key: "AnsibleGroup"
+        value: "isolated"
+    networks:
+      - default
+    services:
+      - name: node02-http
+        ports:
+          - port: 80
+            protocol: TCP
+            targetPort: 80
+            name: node02
+    routes:
+      - name: node02-web
+        host: node02
+        service: node02-http
+        targetPort: 80
+        tls: true  ## To resolve https/http Framing
+        tls_termination: Edge ## To resolve https/http Framing
+    userdata: |-
+      #cloud-config
+      user: rhel
+      password: ansible123!
+      chpasswd: { expire: False }
+      runcmd:
+        - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
+        - systemctl reload sshd
+        
+  - name: "node03"
     image: "rhel-9.5"
     memory: "2G"
     cores: 2
@@ -163,16 +201,16 @@ virtualmachines:
     networks:
       - default
     services:
-      - name: node2-http
+      - name: node03-http
         ports:
           - port: 80
             protocol: TCP
             targetPort: 80
-            name: node2
+            name: node03
     routes:
-      - name: node2-web
-        host: node2
-        service: node2-http
+      - name: node03-web
+        host: node03
+        service: node03-http
         targetPort: 80
         tls: true
         tls_termination: Edge
@@ -185,40 +223,7 @@ virtualmachines:
         - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
         - systemctl reload sshd
 
-  - name: "node3"
-    image: "rhel-9.5"
-    memory: "2G"
-    cores: 2
-    image_size: "30Gi"
-    tags:
-      - key: "AnsibleGroup"
-        value: "isolated"
-    networks:
-      - default
-    services:
-      - name: node3-http
-        ports:
-          - port: 80
-            protocol: TCP
-            targetPort: 80
-            name: node3
-    routes:
-      - name: node3-web
-        host: node3
-        service: node3-http
-        targetPort: 80
-        tls: true
-        tls_termination: Edge
-    userdata: |-
-      #cloud-config
-      user: rhel
-      password: ansible123!
-      chpasswd: { expire: False }
-      runcmd:
-        - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
-        - systemctl reload sshd
 
-  # VS Code Server for student lab access
   - name: "vscode"
     image: "devtools-ansible"
     memory: "8G"
@@ -253,3 +258,4 @@ virtualmachines:
       runcmd:
         - echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/50-cloud-init.conf
         - systemctl reload sshd
+        tls_termination: Edge

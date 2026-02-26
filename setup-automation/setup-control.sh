@@ -55,11 +55,11 @@ chown -R student:student /home/student/rhel-workshop
 echo "Creating inventory file..."
 cat > /home/student/lab_inventory/hosts << 'EOF'
 [web]
-node1
-node2
+node01
+node02
 
 [db]
-node3
+node03
 
 [all:vars]
 ansible_user=student
@@ -160,9 +160,9 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node1 to inventory
+    - name: Add node01 to inventory
       ansible.controller.host:
-        name: node1
+        name: node01
         inventory: "Workshop Inventory"
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
@@ -170,21 +170,21 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node1 to web group
+    - name: Add node01 to web group
       ansible.controller.group:
         name: web
         inventory: "Workshop Inventory"
         hosts:
-          - node1
+          - node01
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node2 to inventory
+    - name: Add node02 to inventory
       ansible.controller.host:
-        name: node2
+        name: node02
         inventory: "Workshop Inventory"
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
@@ -192,21 +192,21 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node2 to web group
+    - name: Add node02 to web group
       ansible.controller.group:
         name: web
         inventory: "Workshop Inventory"
         hosts:
-          - node2
+          - node02
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node3 to inventory
+    - name: Add node03 to inventory
       ansible.controller.host:
-        name: node3
+        name: node03
         inventory: "Workshop Inventory"
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
@@ -214,12 +214,12 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node3 to db group
+    - name: Add node03 to db group
       ansible.controller.group:
         name: db
         inventory: "Workshop Inventory"
         hosts:
-          - node3
+          - node03
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"

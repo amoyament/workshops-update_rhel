@@ -60,11 +60,6 @@ antora:
       label: "2.9 RHEL MCP + AAP"
       solveButton: false
 
-    # Supplemental Exercises
-    - name: supplemental-image-mode
-      label: "Bonus: RHEL Image Mode"
-      solveButton: false
-
 tabs:
   - name: "Automation Controller"
     url: https://control-${guid}.${domain}/
@@ -148,9 +143,6 @@ tabs:
       - module-16
   - name: "Gitea"
     url: https://gitea-${guid}.${domain}/
-    external: true
+    external: false
     modules:
       - module-10
-  - name: "Workshop Guide"
-    type: "docs"
-    url: /
