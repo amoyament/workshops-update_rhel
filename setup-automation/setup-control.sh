@@ -109,8 +109,7 @@ chown student:student /home/student/lab_inventory/ansible.cfg
 chmod 644 /home/student/lab_inventory/ansible.cfg
 
 # Configure Automation Controller using ansible.controller collection
-# Run AAP wait + setup in the background so it doesn't block the showroom deployment
-echo "Launching AAP configuration in background..."
+echo "Configuring AAP controller..."
 cat > /tmp/aap-setup.yml << 'EOFAAP'
 ---
 - name: Configure Ansible Automation Platform for RHEL Workshop
@@ -247,20 +246,7 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
 
 EOFAAP
 
-# Wait for controller and run setup in background so we don't block the showroom deployment
-(
-    echo "Background: waiting for AAP controller..."
-    for i in $(seq 1 40); do
-        HTTP_CODE=$(curl -skL -o /dev/null -w '%{http_code}' --max-time 5 https://localhost/ 2>/dev/null)
-        if [ "$HTTP_CODE" -ge 200 ] 2>/dev/null && [ "$HTTP_CODE" -lt 400 ] 2>/dev/null; then
-            echo "Background: Controller ready (HTTP $HTTP_CODE) after ~$((i * 15)) seconds"
-            break
-        fi
-        sleep 15
-    done
-    ANSIBLE_COLLECTIONS_PATH="/root/ansible-automation-platform-containerized-setup/collections/:/root/.ansible/collections/" ansible-playbook /tmp/aap-setup.yml
-    echo "Background: AAP configuration complete"
-) > /tmp/aap-background-setup.log 2>&1 &
+ANSIBLE_COLLECTIONS_PATH="/root/ansible-automation-platform-containerized-setup/collections/:/root/.ansible/collections/" ansible-playbook /tmp/aap-setup.yml
 
 # Set proper ownership
 chown -R student:student /home/student
