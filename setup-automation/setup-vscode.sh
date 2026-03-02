@@ -6,12 +6,32 @@ rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm || t
 subscription-manager status >/dev/null 2>&1 || \
   subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY} --force
 setenforce 0
+
+# Create student user for workshop exercises
+useradd -m student 2>/dev/null || true
+echo "student:ansible123!" | chpasswd
+echo "student ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/student
+chmod 440 /etc/sudoers.d/student
+
+# Setup SSH keys for student
+sudo -u student mkdir -p /home/student/.ssh
+sudo -u student chmod 700 /home/student/.ssh
+if [ ! -f /home/student/.ssh/id_rsa ]; then
+  sudo -u student ssh-keygen -q -t rsa -b 4096 -C "student@$(hostname)" -f /home/student/.ssh/id_rsa -N ""
+fi
+sudo -u student chmod 600 /home/student/.ssh/id_rsa*
+
+# Create workshop directories for student
+sudo -u student mkdir -p /home/student/rhel-workshop
+sudo -u student mkdir -p /home/student/lab_inventory
+
+# Also setup rhel user with sudo
 echo "%rhel ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/rhel_sudoers
 chmod 440 /etc/sudoers.d/rhel_sudoers
 sudo -u rhel mkdir -p /home/rhel/.ssh
 sudo -u rhel chmod 700 /home/rhel/.ssh
 if [ ! -f /home/rhel/.ssh/id_rsa ]; then
-sudo -u rhel ssh-keygen -q -t rsa -b 4096 -C "rhel@$(hostname)" -f /home/rhel/.ssh/id_rsa -N ""
+  sudo -u rhel ssh-keygen -q -t rsa -b 4096 -C "rhel@$(hostname)" -f /home/rhel/.ssh/id_rsa -N ""
 fi
 sudo -u rhel chmod 600 /home/rhel/.ssh/id_rsa*
 
