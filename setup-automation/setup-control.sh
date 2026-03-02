@@ -58,11 +58,11 @@ useradd -m student 2>/dev/null || true
 echo "student:ansible123!" | chpasswd
 echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
 
-# Install required Ansible collections
+# Install Ansible collections available from Galaxy
 echo "Installing Ansible collections..."
 ansible-galaxy collection install ansible.posix --force
 ansible-galaxy collection install community.general --force
-ansible-galaxy collection install ansible.controller --force
+# ansible.controller is bundled with the AAP image, not available on Galaxy
 
 # Create lab directories for student user
 echo "Creating lab directories..."
@@ -107,6 +107,19 @@ EOF
 
 chown student:student /home/student/lab_inventory/ansible.cfg
 chmod 644 /home/student/lab_inventory/ansible.cfg
+
+# Wait for AAP controller to be ready (containerized AAP 2.6 takes time to initialize)
+echo "Waiting for Automation Controller to be ready..."
+for i in $(seq 1 60); do
+    if curl -sk -o /dev/null -w '%{http_code}' https://localhost/api/v2/ping/ | grep -q '200'; then
+        echo "Controller is ready after ~$((i * 15)) seconds"
+        break
+    fi
+    if [ $i -eq 60 ]; then
+        echo "WARNING: Controller not ready after 15 minutes, attempting setup anyway..."
+    fi
+    sleep 15
+done
 
 # Configure Automation Controller using ansible.controller collection
 echo "Configuring Ansible Automation Platform..."
@@ -248,8 +261,10 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
 
 EOFAAP
 
-# Execute AAP setup playbook
-ansible-playbook /tmp/aap-setup.yml
+# Execute AAP setup playbook using bundled collections from the AAP image
+# The ansible.controller collection ships with the AAP installer bundle
+AAP_BUNDLE=$(ls -d /tmp/ansible-automation-platform-*-setup-bundle-*/collections/ 2>/dev/null | head -1)
+ANSIBLE_COLLECTIONS_PATH="${AAP_BUNDLE}:/root/.ansible/collections/ansible_collections/" ansible-playbook /tmp/aap-setup.yml
 
 # Set proper ownership
 chown -R student:student /home/student
