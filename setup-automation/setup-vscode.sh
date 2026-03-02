@@ -46,6 +46,14 @@ auth: none
 cert: false
 EOF
 
+# Override code-server to open in /home/student by default
+mkdir -p /etc/systemd/system/code-server.service.d/
+tee /etc/systemd/system/code-server.service.d/override.conf << 'EOF'
+[Service]
+WorkingDirectory=/home/student
+EOF
+systemctl daemon-reload
+
 systemctl start code-server || true
 dnf install -y unzip nano git podman ansible-core python3-pip || true
 
