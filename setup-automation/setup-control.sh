@@ -108,6 +108,20 @@ EOF
 chown student:student /home/student/lab_inventory/ansible.cfg
 chmod 644 /home/student/lab_inventory/ansible.cfg
 
+# Diagnostics: check what AAP services exist and their state
+echo "=== AAP Diagnostics ==="
+echo "Checking podman containers..."
+podman ps -a 2>/dev/null || echo "podman not available or no containers"
+echo "Checking AAP-related systemd services..."
+systemctl list-units --type=service | grep -iE 'auto|controller|aap|tower' || echo "No AAP services found"
+echo "Checking for AAP collections..."
+find / -path "*/ansible_collections/ansible/controller" -type d 2>/dev/null || echo "ansible.controller collection not found"
+find / -path "*/ansible_collections/ansible/platform" -type d 2>/dev/null || echo "ansible.platform collection not found"
+echo "Checking for AAP bundle..."
+ls -d /tmp/ansible-automation-platform-* 2>/dev/null || echo "No AAP bundle in /tmp"
+ls -d /opt/ansible-automation-platform* 2>/dev/null || echo "No AAP bundle in /opt"
+echo "=== End Diagnostics ==="
+
 # Wait for AAP controller to be ready (containerized AAP 2.6 takes time to initialize)
 echo "Waiting for Automation Controller to be ready..."
 for i in $(seq 1 60); do
@@ -261,10 +275,19 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
 
 EOFAAP
 
-# Execute AAP setup playbook using bundled collections from the AAP image
-# The ansible.controller collection ships with the AAP installer bundle
-AAP_BUNDLE=$(ls -d /tmp/ansible-automation-platform-*-setup-bundle-*/collections/ 2>/dev/null | head -1)
-ANSIBLE_COLLECTIONS_PATH="${AAP_BUNDLE}:/root/.ansible/collections/ansible_collections/" ansible-playbook /tmp/aap-setup.yml
+# Find the ansible.controller collection wherever it lives on this image
+echo "Locating ansible.controller collection..."
+CONTROLLER_COL=$(find / -path "*/ansible_collections/ansible/controller" -type d 2>/dev/null | head -1)
+if [ -n "$CONTROLLER_COL" ]; then
+    # Strip down to the collections root (remove /ansible/controller suffix)
+    COL_ROOT=$(echo "$CONTROLLER_COL" | sed 's|/ansible_collections/ansible/controller$||')
+    echo "Found collections at: $COL_ROOT"
+    ANSIBLE_COLLECTIONS_PATH="${COL_ROOT}:/root/.ansible/collections/" ansible-playbook /tmp/aap-setup.yml
+else
+    echo "ERROR: ansible.controller collection not found on this image"
+    echo "Attempting playbook with default collection paths..."
+    ansible-playbook /tmp/aap-setup.yml
+fi
 
 # Set proper ownership
 chown -R student:student /home/student
