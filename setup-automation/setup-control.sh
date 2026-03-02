@@ -251,4 +251,9 @@ ANSIBLE_COLLECTIONS_PATH="/root/ansible-automation-platform-containerized-setup/
 # Set proper ownership
 chown -R student:student /home/student
 
+# TEMP: Dump AAP gateway certificate for tls_destinationCACertificate
+echo "=== AAP GATEWAY CERTIFICATE ==="
+echo | openssl s_client -connect localhost:443 -showcerts 2>/dev/null | sed -n '/BEGIN CERTIFICATE/,/END CERTIFICATE/p'
+echo "=== END CERTIFICATE ==="
+
 echo "Control node setup completed successfully!"
