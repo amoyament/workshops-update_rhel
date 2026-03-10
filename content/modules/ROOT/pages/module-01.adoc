@@ -1,24 +1,10 @@
-= Workshop Exercise - Writing Your First Playbook
+= Writing Your First Playbook
+:toc:
+:toc-placement: auto
 
-== Table of Contents
+In this exercise, you'll use Ansible to conduct basic system setup tasks on a Red Hat Enterprise Linux server. You will become familiar with fundamental Ansible modules like `package` and `user`, and learn how to create and run playbooks. Playbooks in Ansible are essentially scripts written in YAML format, used to define the tasks and configurations that Ansible will apply to your servers.
 
-* <<objective>>
-* <<guide>>
-** <<step-0-inventory-basics>>
-** <<step-1-playbook-basics>>
-** <<step-2-creating-your-playbook>>
-** <<step-3-running-the-playbook>>
-** <<step-4-checking-the-playbook>>
-
-== Objective
-
-In this exercise, you'll use Ansible to conduct basic system setup tasks on a Red Hat Enterprise Linux server. You will become familiar with fundamental Ansible modules like `package` and `user`, and learn how to create and run playbooks.
-
-== Guide
-
-Playbooks in Ansible are essentially scripts written in YAML format. They are used to define the tasks and configurations that Ansible will apply to your servers.
-
-=== Step 0 - Inventory basics
+== Inventory Basics
 
 An inventory tells Ansible what hosts to target and how to group them. In this lab, your working directory `~/lab_inventory` contains the inventory used in prior exercises.
 
@@ -52,7 +38,7 @@ ansible -i hosts all -m ping
 
 You can substitute `all` with a specific group (e.g., `web`) or host (e.g., `node1`). This helps confirm the inventory is correct before running playbooks.
 
-=== Step 1 - Playbook Basics
+== Playbook Basics
 
 First, create a text file in YAML format for your playbook. Remember:
 
@@ -70,7 +56,7 @@ Key Concepts:
 An Ansible playbook is designed to be idempotent, meaning if you run it multiple times on the same hosts, it ensures the desired state without making redundant changes.
 ====
 
-=== Step 2 - Creating Your Playbook
+== Creating Your Playbook
 
 Before creating your first playbook, ensure you are in the correct directory by changing to `~/lab_inventory`:
 
@@ -116,13 +102,13 @@ Keeping the update to a small set of packages makes the run fast for class.
 
 * About the `user` module: This module is used to manage user accounts.
 
-=== Step 3 - Running the Playbook
+== Running the Playbook
 
 Execute your playbook using the `ansible-playbook` command:
 
 [source,bash]
 ----
-[student@control lab_inventory]$ ansible-playbook -i hosts system_setup.yml
+ansible-playbook -i hosts system_setup.yml
 ----
 
 Review the output to ensure each task is completed successfully.
@@ -145,7 +131,7 @@ PLAY RECAP *********************************************************************
 node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
-=== Step 4 - Checking the Playbook
+== Checking the Playbook
 
 Now, let's create a second playbook for post-configuration checks, named `system_checks.yml`:
 
@@ -171,7 +157,7 @@ Run the checks playbook:
 
 [source,bash]
 ----
-[student@control lab_inventory]$ ansible-playbook -i hosts system_checks.yml
+ansible-playbook -i hosts system_checks.yml
 ----
 
 Review the output to ensure the user creation was successful.
@@ -195,3 +181,12 @@ ok: [node1] => {
 PLAY RECAP **************************************************************************************
 node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
+
+== Summary
+
+You've successfully completed the first playbook exercises! You now have:
+
+* Reviewed inventory basics and verified host connectivity
+* Learned the key concepts of Ansible playbooks
+* Created and ran a `system_setup.yml` playbook to install packages and create a user
+* Built a `system_checks.yml` playbook to verify the configuration

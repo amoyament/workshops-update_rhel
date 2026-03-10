@@ -1,33 +1,15 @@
-= Exercise - Ansible Navigator and Execution Environments (basics)
+= Ansible Navigator and Execution Environments (basics)
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<objective>>
-* <<guide>>
-** <<step-1-what-is-an-execution-environment>>
-** <<step-2-running-a-playbook-with-ansible-navigator>>
-** <<step-3-explore-docs-and-collections>>
-** <<step-4-compare-to-ansible-playbook>>
-
-== Objective
-
-In this exercise you'll learn the basics of Ansible Navigator and Execution Environments (EEs). You will:
-
-* Understand how EEs package python dependencies, ansible-core, and collections
-* Run an existing playbook using `ansible-navigator`
-* Browse module docs from the CLI
-* Contrast with the `ansible-playbook` command used earlier
+In this exercise you will learn the basics of Ansible Navigator and Execution Environments (EEs). You will understand how EEs package Python dependencies, ansible-core, and collections, run an existing playbook using `ansible-navigator`, browse module docs from the CLI, and contrast with the `ansible-playbook` command used earlier. This exercise builds on the playbooks you created earlier in the workshop.
 
 [NOTE]
 ====
 We intentionally introduce Navigator after the command-line basics to reduce onboarding friction for new users.
 ====
 
-== Guide
-
-This exercise builds on the playbooks you created earlier in the workshop.
-
-=== Step 1 - What is an Execution Environment?
+== Step 1 - What is an Execution Environment?
 
 An Execution Environment is a container image that includes:
 
@@ -42,7 +24,7 @@ Using an EE helps ensure consistent results across developer desktops and automa
 Your lab environment provides a default EE. Backend image pull and updates are handled for you.
 ====
 
-=== Step 2 - Running a playbook with ansible-navigator
+== Step 2 - Running a playbook with ansible-navigator
 
 Change to your working directory:
 
@@ -60,7 +42,7 @@ ansible-navigator run system_setup.yml -m stdout
 
 Observe that execution uses the default EE configured for your environment.
 
-=== Step 3 - Explore docs and collections
+== Step 3 - Explore docs and collections
 
 Use Navigator to view documentation for commonly used modules:
 
@@ -77,7 +59,7 @@ List available collections inside the EE:
 ansible-navigator collections -m stdout
 ----
 
-=== Step 4 - Compare to ansible-playbook
+== Step 4 - Compare to ansible-playbook
 
 Earlier, you ran the same playbooks using `ansible-playbook`. Navigator complements that workflow by:
 
@@ -86,3 +68,12 @@ Earlier, you ran the same playbooks using `ansible-playbook`. Navigator compleme
 * Providing built-in docs exploration
 
 Use whichever is appropriate for your team's workflow. In automation controller, jobs run with EEs by default.
+
+== Summary
+
+In this exercise you:
+
+* Learned what Execution Environments are and why they provide consistent automation runtimes
+* Ran an existing playbook using `ansible-navigator` in stdout mode
+* Explored module documentation and available collections from the CLI
+* Compared the `ansible-navigator` and `ansible-playbook` workflows

@@ -1,28 +1,8 @@
-= Workshop Exercise - System Roles (Controller-driven)
+= System Roles (Controller-driven)
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<objective>>
-* <<guide>>
-** <<step-1-examine-the-project>>
-** <<step-2-review-the-playbook>>
-** <<step-3-about-linux-and-rhel-system-roles>>
-** <<step-4-create-and-launch-the-job-template-with-a-survey>>
-** <<step-5-verify-configuration>>
-* <<complete>>
-
-== Objective
-
-Use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller, leveraging Linux System Roles and RHEL System Roles with a simple Survey-driven job.
-
-You will:
-
-* Use firewall and timesync system roles
-* Create a Job Template in Controller
-* Add a Survey to toggle role behavior
-* Launch and verify
-
-== Guide
+In this exercise, you will use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller. You will leverage Linux System Roles and RHEL System Roles with a simple Survey-driven job to manage firewall and timesync configuration.
 
 === Step 1 - Examine the project
 
@@ -164,6 +144,11 @@ chronyc sourcestats
 chronyc activity
 ----
 
-== Complete
+== Summary
 
-You have completed System Roles using Controller with a Survey-driven job.
+In this exercise you:
+
+* [x] Examined a pre-loaded project with Linux and RHEL System Roles
+* [x] Reviewed how firewall and timesync roles are conditionally included
+* [x] Created a Job Template with a Survey to toggle role behavior
+* [x] Launched the job and verified time synchronization configuration on managed hosts

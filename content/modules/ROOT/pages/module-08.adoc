@@ -1,18 +1,8 @@
-= Workshop Exercise - Introduction to Ansible Automation Platform
+= Introduction to Ansible Automation Platform
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<what-is-ansible-automation-platform-aap>>
-* <<why-use-ansible-automation-platform>>
-* <<ansible-automation-controller>>
-* <<automation-hub>>
-* <<conclusion>>
-
-== What is Ansible Automation Platform (AAP)?
-
-Ansible Automation Platform (AAP) is a comprehensive automation solution that provides a scalable framework for automating tasks across IT environments. It integrates various components, including automation controller, Event-Driven Ansible and automation hub offering users a unified platform for managing, executing, and orchestrating automation workflows.
-
-AAP simplifies the complexity of IT automation by providing the tools necessary to accelerate the automation process, whether you're just getting started or scaling automation across teams and environments.
+Ansible Automation Platform (AAP) is a comprehensive automation solution that provides a scalable framework for automating tasks across IT environments. It integrates various components, including automation controller, Event-Driven Ansible and automation hub, offering users a unified platform for managing, executing, and orchestrating automation workflows. AAP simplifies the complexity of IT automation by providing the tools necessary to accelerate the automation process, whether you are just getting started or scaling automation across teams and environments.
 
 == Why Use Ansible Automation Platform?
 
@@ -65,8 +55,14 @@ image::aap25-dashboard.png[Ansible Automation Platform dashboard]
 * *Certified Content*: Verified, secure content from Red Hat and partners, ensuring trust and reliability in automation implementations.
 * *Private Automation Hub*: A self-hosted version of automation hub, where organizations can curate, store, and manage their own collections of automation content.
 
-== Conclusion
+== Summary
 
-Ansible Automation Platform is designed to provide enterprises with the flexibility, security, and power they need to automate their IT infrastructure. Whether you are an automation beginner or looking to scale automation across complex environments, AAP offers a unified and robust solution to meet those needs.
+In this exercise you:
+
+* Learned what Ansible Automation Platform (AAP) is and how it unifies automation tooling
+* Explored the benefits of AAP including scalability, security, and increased productivity
+* Reviewed automation controller features such as the dashboard, workflow visualizer, and REST API
+* Understood core controller concepts: projects, inventories, credentials, job templates, and execution environments
+* Explored Automation Hub for managing certified, validated, and community-contributed collections
 
 For more information on Ansible Automation Platform and its latest features, explore the official link:https://www.redhat.com/ansible[Red Hat Ansible Automation Platform website].

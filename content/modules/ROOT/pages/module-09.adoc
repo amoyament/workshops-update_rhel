@@ -1,16 +1,8 @@
-= Workshop Exercise: Managing Inventories and Credentials in Ansible Automation Controller
+= Managing Inventories and Credentials
+:toc:
+:toc-placement: auto
 
-== Objective
-
-This workshop provides practical experience with managing inventories and credentials in automation controller. You'll learn how to navigate a preloaded inventory, understand its structure, and set up machine credentials for accessing managed hosts.
-
-== Table of Contents
-
-. <<introduction-to-inventories>>
-. <<exploring-the-workshop-inventory>>
-. <<understanding-machine-credentials>>
-. <<additional-credential-types>>
-. <<conclusion>>
+This exercise provides practical experience with managing inventories and credentials in automation controller. You'll learn how to navigate a preloaded inventory, understand its structure, and set up machine credentials for accessing managed hosts.
 
 === 1. Introduction to Inventories
 
@@ -45,6 +37,10 @@ Automation controller supports over 30 different credential types for various au
 
 These credential types enhance the flexibility and security of your automation efforts.
 
-=== 5. Conclusion
+== Summary
 
-This workshop introduces the essential concepts of inventories and credentials within Ansible Automation Controller. Mastering these components is critical for effectively managing your automation environments and ensuring secure access to your infrastructure.
+In this exercise you:
+
+* [x] Explored the preloaded Workshop Inventory and its host list
+* [x] Reviewed Machine Credentials for secure SSH access
+* [x] Learned about additional credential types supported by automation controller

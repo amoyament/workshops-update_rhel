@@ -1,27 +1,8 @@
-= Workshop Exercise - Workflows
+= Workflows
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<objective>>
-* <<guide>>
-** <<lab-scenario>>
-** <<set-up-projects>>
-** <<set-up-job-templates>>
-** <<set-up-the-workflow>>
-** <<launch-workflow>>
-
-== Objective
-
-The purpose of a workflow is to link multiple job templates together. These templates may or may not share inventory, playbooks, or permissions. The links can be conditional:
-
-* If Job Template A succeeds, Job Template B is executed next.
-* If it fails, Job Template C runs instead.
-
-Workflows can include not only job templates but also project or inventory updates.
-
-This flexibility allows different teams to collaborate efficiently. For example, a networking team can manage its own repositories and inventories, while an operations team handles other aspects. In this lab, you'll learn how to set up a workflow.
-
-== Guide
+In this exercise, you will link multiple job templates into a workflow. Workflows connect templates that may or may not share inventory, playbooks, or permissions, with conditional logic: if one job succeeds, the next runs; if it fails, an alternate job runs instead. Workflows can also include project or inventory updates, enabling different teams to collaborate efficiently.
 
 === Lab scenario
 
@@ -203,3 +184,12 @@ Within the Credential window, select Workshop Credentials and click Next.
 Review your inputs and click Finish.
 
 Verify that the output result shows `Hello World`
+
+== Summary
+
+In this exercise you:
+
+* [x] Created two Git-backed projects for separate teams (webops and webdev)
+* [x] Built job templates for web infrastructure deployment and Node.js application deployment
+* [x] Linked the templates into a conditional workflow using the Workflow Visualizer
+* [x] Launched the workflow and verified the deployed application

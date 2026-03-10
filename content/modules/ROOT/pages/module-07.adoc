@@ -1,32 +1,20 @@
-= Workshop Exercise - Debugging and Error Handling
+= Debugging and Error Handling
+:toc:
+:toc-placement: auto
 
-== Table of Contents
+This exercise focuses on debugging and error handling within Ansible. Building on the foundational knowledge from previous exercises, you will learn techniques to troubleshoot playbooks, manage errors gracefully, and ensure your automation is robust and reliable.
 
-* <<objective>>
-* <<guide>>
-** <<step-1-introduction-to-debugging-in-ansible>>
-** <<step-2-utilizing-the-debug-module>>
-** <<step-3-error-handling-with-blocks>>
-** <<step-4-running-with-verbose-mode>>
-** <<summary>>
-
-== Objective
-
-Building on the foundational knowledge from previous exercises, this session focuses on debugging and error handling within Ansible. You'll learn techniques to troubleshoot playbooks, manage errors gracefully, and ensure your automation is robust and reliable.
-
-== Guide
-
-=== Step 1 - Introduction to Debugging in Ansible
+== Step 1 - Introduction to Debugging in Ansible
 
 Debugging is a critical skill for identifying and resolving issues within your Ansible playbooks. Ansible provides several mechanisms to help you debug your automation scripts, including the debug module, increased verbosity levels, and error handling strategies.
 
-=== Step 2 - Utilizing the Debug Module
+== Step 2 - Utilizing the Debug Module
 
 The `debug` module is a simple yet powerful tool for printing variable values, which can be instrumental in understanding playbook execution flow.
 
 In this example, add debug tasks to your Apache role in the `tasks/main.yml` to output the value of variables or messages.
 
-==== Implement Debug Tasks:
+=== Implement Debug Tasks:
 
 Insert debug tasks to display the values of variables or custom messages for troubleshooting:
 
@@ -41,7 +29,7 @@ Insert debug tasks to display the values of variables or custom messages for tro
     msg: "Apache service name is {{ apache_service_name }}"
 ----
 
-=== Step 3 - Error Handling with Blocks
+== Step 3 - Error Handling with Blocks
 
 Ansible allows grouping tasks using `block` and handling errors with `rescue` sections, similar to try-catch in traditional programming.
 
@@ -77,11 +65,11 @@ apache_conf_src: "files/missing_apache.conf"
 This file explicitly does not exist so that we can trigger the rescue portion from our `tasks/main.yml`
 ====
 
-=== Step 4 - Running with Verbose Mode
+== Step 4 - Running with Verbose Mode
 
 Ansible's verbose mode (-v, -vv, -vvv, or -vvvv) increases the output detail, providing more insights into playbook execution and potential issues.
 
-==== Execute Playbook in Verbose Mode:
+=== Execute Playbook in Verbose Mode:
 
 Run your playbook with the `-vv` option to get detailed logs:
 
@@ -155,4 +143,10 @@ The final Play Recap shows us that there was a rescued block used via the `rescu
 
 == Summary
 
-In this exercise, you've explored essential debugging techniques and error handling mechanisms in Ansible. By incorporating debugging tasks, using blocks for error handling, and leveraging verbose mode, you can effectively troubleshoot and enhance the reliability of your Ansible playbooks. These practices are fundamental in developing robust Ansible automation that can gracefully handle unexpected issues and ensure consistent, predictable outcomes.
+In this exercise you:
+
+* Learned about Ansible's built-in debugging mechanisms for troubleshooting playbooks
+* Used the `debug` module to print variable values and custom messages during execution
+* Implemented `block` and `rescue` sections for graceful error handling
+* Ran playbooks in verbose mode (`-vv`) to gain deeper insight into task execution
+* Observed how the Play Recap reflects rescued errors via the `rescued` counter

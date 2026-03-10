@@ -1,29 +1,16 @@
-= Workshop Exercises - Using Conditionals, Handlers, and Loops
+= Using Conditionals, Handlers, and Loops
+:toc:
+:toc-placement: auto
 
-== Table of Contents
+Building on previous exercises, this exercise introduces the application of conditionals, handlers, and loops in Ansible playbooks. You'll learn to control task execution with conditionals, manage service responses with handlers, and efficiently handle repetitive tasks using loops. These are advanced features in Ansible that enhance control, efficiency, and flexibility in your automation playbooks.
 
-* <<objective>>
-* <<guide>>
-** <<step-1-understanding-conditionals-handlers-and-loops>>
-** <<step-2-conditionals>>
-** <<step-3-handlers>>
-** <<step-4-loops>>
-
-== Objective
-
-Expanding on Exercise 1.4, this exercise introduces the application of conditionals, handlers, and loops in Ansible playbooks. You'll learn to control task execution with conditionals, manage service responses with handlers, and efficiently handle repetitive tasks using loops.
-
-== Guide
-
-Conditionals, handlers, and loops are advanced features in Ansible that enhance control, efficiency, and flexibility in your automation playbooks.
-
-=== Step 1 - Understanding Conditionals, Handlers, and Loops
+== Understanding Conditionals, Handlers, and Loops
 
 * *Conditionals*: Enable tasks to be executed based on specific conditions.
 * *Handlers*: Special tasks triggered by a `notify` directive, typically used for restarting services after changes.
 * *Loops*: Used to repeat a task multiple times, particularly useful when the task is similar but needs to be applied to different items.
 
-=== Step 2 - Conditionals
+== Conditionals
 
 Conditionals in Ansible control whether a task should run based on certain conditions. Let's add to the system_setup.yml playbook the ability to install the Apache HTTP Server (`httpd`) only on hosts that belong to the `web` group in our inventory.
 
@@ -64,7 +51,7 @@ Previous examples had hosts set to node1 but now it is set to all. This means wh
 
 In this example, `inventory_hostname in groups['web']` is the conditional statement. `inventory_hostname` refers to the name of the current host that Ansible is working on in the playbook. The condition checks if this host is part of the `web` group defined in your inventory file. If true, the task will execute and install Apache on that host.
 
-=== Step 3 - Handlers
+== Handlers
 
 Handlers are used for tasks that should only run when notified by another task. Typically, they are used to restart services after a configuration change.
 
@@ -166,9 +153,9 @@ node2                      : ok=4    changed=2    unreachable=0    failed=0    s
 node3                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
-=== Step 4 - Loops
+== Loops
 
-Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example. In the original system_setup.yml playbook from Exercise 1.4, we had a task for creating a single user:
+Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example. In the original system_setup.yml playbook from the previous exercise, we had a task for creating a single user:
 
 [source,yaml]
 ----
@@ -206,7 +193,7 @@ Snippet of the output for creating a new user on all the nodes.
 
 [source,bash]
 ----
-[student@control ~lab_inventory]$ ansible-playbook -i hosts system_setup.yml
+ansible-playbook -i hosts system_setup.yml
 
 PLAY [Basic System Setup] ******************************************************
 
@@ -239,3 +226,12 @@ node1                      : ok=4    changed=1    unreachable=0    failed=0    s
 node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 node3                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
+
+== Summary
+
+You've successfully completed the conditionals, handlers, and loops exercises! You now have:
+
+* Used conditionals with `when` to selectively install packages based on inventory group membership
+* Implemented handlers with `notify` to reload services only when configuration changes occur
+* Applied loops to efficiently create multiple user accounts in a single task
+* Combined all three features into a comprehensive system setup playbook

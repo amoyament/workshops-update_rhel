@@ -1,19 +1,8 @@
-= Workshop Exercise - Role-based Access Control (RBAC)
+= Role-based Access Control (RBAC)
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<objective>>
-* <<guide>>
-** <<ansible-automation-controller-users>>
-** <<ansible-automation-controller-teams>>
-** <<granting-permissions>>
-** <<testing-permissions>>
-
-== Objective
-
-In this exercise, you'll explore how Ansible Automation Controller handles user and group management through Role-Based Access Control (RBAC). This ensures proper delegation of rights while keeping automation secure.
-
-== Guide
+In this exercise you will explore how Ansible Automation Controller handles user and group management through Role-Based Access Control (RBAC). You will create a user, organize them into a team, grant scoped permissions on a job template, and verify that the restricted user can only see and run what they have been granted access to.
 
 === Ansible Automation Controller Users
 
@@ -125,3 +114,12 @@ Just recall what you have just done: You enabled a restricted user to run an Ans
 Effectively you provided the power to execute automation to another user without handing out your credentials or giving the user the ability to change the automation code. And yet, at the same time the user can still modify things based on the surveys you created.
 
 This capability is one of the main strengths of Ansible automation controller!
+
+== Summary
+
+In this exercise you:
+
+* [x] Created a new user (wweb) in automation controller
+* [x] Organized the user into a Team for RBAC management
+* [x] Granted scoped permissions on a specific job template
+* [x] Verified that the restricted user can only see and execute permitted templates

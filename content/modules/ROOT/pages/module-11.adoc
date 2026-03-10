@@ -1,29 +1,8 @@
-= Exercise - Surveys
+= Surveys
+:toc:
+:toc-placement: auto
 
-== Table of Contents
-
-* <<objective>>
-* <<guide>>
-** <<the-apache-configuration-role>>
-** <<create-a-template-with-a-survey>>
-*** <<create-template>>
-*** <<add-the-survey>>
-** <<launch-the-template>>
-** <<optional-make-this-template-available-in-a-self-service-view>>
-
-== Objective
-
-Demonstrate the use of the Ansible Automation Controller link:https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/latest/html/using_automation_execution/controller-job-templates#controller-surveys-in-job-templates[survey feature]. Surveys allow for setting extra variables for the playbook, similar to 'Prompt for Extra Variables,' but in a user-friendly Q&A format. They also allow for validation of user input.
-
-== Guide
-
-You've installed Apache on all hosts in the job you just ran. Now, let's build on this:
-
-* Use a proper role that includes a Jinja2 template to deploy an `index.html` file.
-* Create a job *Template* with a survey to collect values for the `index.html` template.
-* Launch the job *Template*.
-
-Additionally, the role will ensure that the Apache configuration is set up correctly for this exercise.
+Surveys in Ansible Automation Controller let you collect extra variables for a playbook through a user-friendly Q&A form, with built-in input validation. In this exercise you will create a job template that uses a Jinja2 role to deploy a custom `index.html`, attach a survey to collect the template values, and launch the job.
 
 [TIP]
 ====
@@ -167,3 +146,12 @@ Verify that the output result is as expected.
 * Organize or tag templates per your organization's portal conventions so users can easily find and launch approved automation
 
 image::run_command.png[Run Command]
+
+== Summary
+
+In this exercise you:
+
+* [x] Explored the Apache-configuration role and its Jinja2 template
+* [x] Created a job template for deploying a custom index.html
+* [x] Attached a survey to collect user input for template variables
+* [x] Launched the job and verified the deployed web page

@@ -1,25 +1,8 @@
-= Workshop Exercise - Projects & Job Templates
+= Projects & Job Templates
+:toc:
+:toc-placement: auto
 
-== Table Contents
-
-* <<objective>>
-* <<guide>>
-* <<setup-git-repository>>
-* <<create-the-project>>
-* <<create-a-job-template-and-run-a-job>>
-* <<challenge-lab-check-the-result>>
-
-== Objective
-
-An Ansible automation controller *Project* is a logical collection of Ansible playbooks. You can manage your playbooks by placing them into a source code management (SCM) system supported by automation controller such as Git or Subversion.
-
-This exercise covers:
-
-* Understanding and using an Ansible automation controller Project
-* Using Ansible playbooks stored in a Git repository.
-* Creating and using an Ansible Job Template
-
-== Guide
+An Ansible automation controller *Project* is a logical collection of Ansible playbooks. You can manage your playbooks by placing them into a source code management (SCM) system supported by automation controller such as Git or Subversion. In this exercise you will set up a Git-backed project, create a job template, and run your first automation job.
 
 === Setup Git Repository
 
@@ -127,7 +110,7 @@ A job template allows you to run an automation job. In order to run any type of 
 
 * *Playbook*: What playbook to use?
 
-To create a Job Template, go to the *Automation Execution -> Templates* view,click the *Create template* button and choose *Create job template*.
+To create a Job Template, go to the *Automation Execution -> Templates* view, click the *Create template* button and choose *Create job template*.
 
 [TIP]
 ====
@@ -229,3 +212,12 @@ Verify that the output result is as expected.
 ====
 The output of the results is displayed once the command has completed.
 ====
+
+== Summary
+
+In this exercise you:
+
+* [x] Configured a Git-backed Project in automation controller
+* [x] Created a Job Template to install Apache on managed hosts
+* [x] Launched the job and reviewed real-time execution output
+* [x] Verified Apache installation using an ad hoc command
