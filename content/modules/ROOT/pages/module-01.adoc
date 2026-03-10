@@ -4,6 +4,11 @@
 
 In this exercise, you'll use Ansible to conduct basic system setup tasks on a Red Hat Enterprise Linux server. You will become familiar with fundamental Ansible modules like `package` and `user`, and learn how to create and run playbooks. Playbooks in Ansible are essentially scripts written in YAML format, used to define the tasks and configurations that Ansible will apply to your servers.
 
+[NOTE]
+====
+All command-line exercises in this workshop are performed in the *VS Code* tab. Click the *VS Code* tab to open a terminal where you can run the commands below.
+====
+
 == Inventory Basics
 
 An inventory tells Ansible what hosts to target and how to group them. In this lab, your working directory `~/lab_inventory` contains the inventory used in prior exercises.
