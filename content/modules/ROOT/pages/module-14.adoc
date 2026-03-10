@@ -77,7 +77,7 @@ Within the *Details* tab of the `Webserver` group, click the *Hosts* tab, click 
 
 Within *Automation Execution -> Infrastructure -> Inventories*, select the `Workshop` Inventory. Click on the *Hosts* tab and click on `node2`. Click on *Edit host* and add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
 
-image::edit_host.png[edit host]
+image::exercise-2-7-wrap/edit_host.png[edit host]
 
 Within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
 
@@ -125,7 +125,7 @@ prod_content: "default prod content"
 
 Click *Create job template*.
 
-image::web_content_job_template.png[web_content_job_template]
+image::exercise-2-7-wrap/web_content_job_template.png[web_content_job_template]
 
 Run the template by clicking the *Launch template* button.
 

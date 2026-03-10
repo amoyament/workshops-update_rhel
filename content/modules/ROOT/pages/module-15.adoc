@@ -8,7 +8,7 @@ In this exercise, you will use pre-existing content (roles and collections) from
 
 In the Ansible Automation Controller UI navigate to Projects and open the preloaded repository:
 
-image::demo-project.png[demo project]
+image::exercise-2-8-system-roles/demo-project.png[demo project]
 
 Repository (preloaded):
 
@@ -103,7 +103,7 @@ Template fields:
 |Workshop Credential
 |===
 
-image::job.png[job template]
+image::exercise-2-8-system-roles/job.png[job template]
 
 . Add a Survey to toggle roles:
 
@@ -111,15 +111,15 @@ image::job.png[job template]
 ** CONFIGURE FIREWALL? (boolean) → sets harden_firewall
 ** CONFIGURE TIME? (boolean) → sets harden_time
 
-image::survey.png[survey]
+image::exercise-2-8-system-roles/survey.png[survey]
 
 Click Launch:
 
-image::launch.png[launch]
+image::exercise-2-8-system-roles/launch.png[launch]
 
 If a confirmation step is shown:
 
-image::next.png[next button]
+image::exercise-2-8-system-roles/next.png[next button]
 
 Review the EXTRA VARIABLES to see how the survey sets the role switches and proceed.
 

@@ -94,7 +94,7 @@ Enter the URL into the Project configuration:
 
 The new project will be synced automatically after creation. But you can also do this manually: Sync the Project again by selecting the 'Sync project' blue button.
 
-image::project_sync.png[Project Sync]
+image::exercise-2-3-projects/project_sync.png[Project Sync]
 
 After starting the sync job, go to the *Jobs* view, and you'll find the job doing the project update.
 
@@ -161,11 +161,11 @@ You can start the job by directly clicking the blue *Launch template* button, or
 
 Template Details
 
-image::template_detail.png[template details]
+image::exercise-2-3-projects/template_detail.png[template details]
 
 Job Run
 
-image::job_run.png[job_run]
+image::exercise-2-3-projects/job_run.png[job_run]
 
 Since this might take some time, have a closer look at all the details provided:
 

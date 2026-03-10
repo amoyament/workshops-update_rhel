@@ -68,7 +68,7 @@ a|
 
 Click *Create project*.
 
-image::create_project.png[create_project]
+image::exercise-2-6-workflows/create_project.png[create_project]
 
 Repeat the process to set up the *Webdev Git Repo*, using the branch `webdev`.
 
@@ -131,7 +131,7 @@ Within *Automation Execution* -> *Templates* -> *Create template* -> *Create job
 |tasks need to run as root so check *Privilege Escalation*
 |===
 
-image::create_template_webops.png[create_template_webops]
+image::exercise-2-6-workflows/create_template_webops.png[create_template_webops]
 
 Click *Create job template*, and then repeat the process for the *Node.js Deploy* template, changing the project to *Webdev Git Repo* and the playbook to `rhel/webdev/install_node_app.yml`.
 
@@ -149,25 +149,25 @@ Within *Automation Execution* -> *Templates* -> *Create template* -> *Create wor
 
 Click *Create workflow job template* to open the *Workflow Visualizer*.
 
-image::visualizer_add_step.png[add_step]
+image::exercise-2-6-workflows/visualizer_add_step.png[add_step]
 
 Click the *Add Step* button and assign the *Web App Deploy* job template to the first node. Add a second node by clicking the 3 dot sign, selecting the "Add step and link" and assign the *Node.js Deploy* template with the *Run on success* status type. Select *Next* and *Finish* to complete the workflow.
 
-image::visualizer_add_step_app_deploy.png[app_deploy]
+image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy]
 
-image::visualizer_add_step_add_link.png[add_link]
+image::exercise-2-6-workflows/visualizer_add_step_add_link.png[add_link]
 
-image::visualizer_add_step_nodejs.png[add_nodejs]
+image::exercise-2-6-workflows/visualizer_add_step_nodejs.png[add_nodejs]
 
 Click *Save* to finalize the workflow.
 
-image::visualizer_overview.png[overview]
+image::exercise-2-6-workflows/visualizer_overview.png[overview]
 
 === Launch workflow
 
 Within the *Deploy Webapp Server* template, click *Launch template*.
 
-image::launch_template.png[launch_template]
+image::exercise-2-6-workflows/launch_template.png[launch_template]
 
 Once the workflow completes, verify the result.
 

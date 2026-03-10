@@ -46,7 +46,7 @@ Let's create a user:
 
 . Click *Create user*.
 
-image::create_user.png[create user]
+image::exercise-2-5-rbac/create_user.png[create user]
 
 === Ansible Automation Controller Teams
 
@@ -64,7 +64,7 @@ Teams are subdivisions of an organization that include users, projects, credenti
 . Go to the *Users* tab and click *Add users*.
 . In the *Add users* window, choose *wweb*, then click *Add users*.
 
-image::add_user.png[add user]
+image::exercise-2-5-rbac/add_user.png[add user]
 
 === Granting Permissions
 

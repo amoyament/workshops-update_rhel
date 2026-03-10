@@ -4,10 +4,18 @@
 
 In this exercise, you'll use Ansible to conduct basic system setup tasks on a Red Hat Enterprise Linux server. You will become familiar with fundamental Ansible modules like `package` and `user`, and learn how to create and run playbooks. Playbooks in Ansible are essentially scripts written in YAML format, used to define the tasks and configurations that Ansible will apply to your servers.
 
-[NOTE]
-====
-All command-line exercises in this workshop are performed in the *VS Code* tab. Click the *VS Code* tab to open a terminal where you can run the commands below.
-====
+=== Getting Started with VS Code
+
+All command-line exercises in this workshop are performed in the *VS Code* tab. Click the *VS Code* tab on the right to open the editor.
+
+To open a terminal in VS Code:
+
+. Click on the *Terminal* menu at the top
+. Select *New Terminal*
+
+image::exercise-1-1-setup/vscode-new-terminal.png[Opening a new terminal in VS Code]
+
+You will use this terminal to run all commands in the exercises that follow.
 
 == Inventory Basics
 
