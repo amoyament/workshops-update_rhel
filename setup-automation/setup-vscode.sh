@@ -44,9 +44,12 @@ chmod 755 /home/student
 
 # Override code-server to open /home/student by default
 mkdir -p /etc/systemd/system/code-server.service.d
+CODE_SERVER_BIN=$(grep -oP 'ExecStart=\K\S+' /usr/lib/systemd/system/code-server*.service 2>/dev/null | head -1)
+CODE_SERVER_BIN=${CODE_SERVER_BIN:-/usr/bin/code-server}
 cat > /etc/systemd/system/code-server.service.d/override.conf << EOF
 [Service]
-WorkingDirectory=/home/student
+ExecStart=
+ExecStart=${CODE_SERVER_BIN} /home/student
 EOF
 systemctl daemon-reload
 
