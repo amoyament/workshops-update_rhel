@@ -101,7 +101,7 @@ ansible-navigator:
       - /home/rhel/lab_inventory/hosts
 
   execution-environment:
-    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel9:latest
+    image: registry.redhat.io/ansible-automation-platform-26/ee-supported-rhel9:latest
     enabled: true
     container-engine: podman
     pull:
@@ -125,11 +125,9 @@ loginctl enable-linger rhel
 
 # Pre-pull the Execution Environment image
 echo "Pulling Execution Environment image..."
-RUNAS="sudo -u rhel"
-$RUNAS bash<<EOF
-podman login --username ${REG_USER} --password ${REG_PASS} registry.redhat.io
-podman pull registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel9:latest
-EOF
+echo "REG_USER=${REG_USER:-UNSET} REG_PASS length=${#REG_PASS}"
+sudo -u rhel podman login --username "${REG_USER}" --password "${REG_PASS}" registry.redhat.io
+sudo -u rhel podman pull registry.redhat.io/ansible-automation-platform-26/ee-supported-rhel9:latest
 
 # Install ansible-lint for rhel user
 sudo -u rhel bash -lc 'python3 -m pip install --user ansible-lint >/dev/null 2>&1' || true
