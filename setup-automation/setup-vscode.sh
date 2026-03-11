@@ -28,24 +28,19 @@ chmod 600 /home/student/.ssh/id_rsa* 2>/dev/null || true
 # ─── Firewall ───
 systemctl stop firewalld
 
-# ─── Code-server setup (run as student, opens in /home/student) ───
+# ─── Code-server setup (runs as rhel, opens student's lab folder) ───
 systemctl stop code-server || true
+[ -f /home/rhel/.config/code-server/config.yaml ] && \
+  mv /home/rhel/.config/code-server/config.yaml /home/rhel/.config/code-server/config.bk.yaml || true
 
-mkdir -p /etc/systemd/system/code-server.service.d
-cat > /etc/systemd/system/code-server.service.d/override.conf << EOF
-[Service]
-User=student
-Environment=HOME=/home/student
-EOF
-systemctl daemon-reload
-
-mkdir -p /home/student/.config/code-server
-cat > /home/student/.config/code-server/config.yaml << EOF
+tee /home/rhel/.config/code-server/config.yaml << EOF
 bind-addr: 0.0.0.0:8080
 auth: none
 cert: false
 EOF
-chown -R student:student /home/student/.config
+
+# Make student's home accessible to code-server (rhel user)
+chmod 755 /home/student
 
 systemctl start code-server || true
 
