@@ -1,4 +1,6 @@
 #!/bin/bash
+cd /tmp
+
 curl -k  -L https://${SATELLITE_URL}/pub/katello-server-ca.crt -o /etc/pki/ca-trust/source/anchors/${SATELLITE_URL}.ca.crt
 update-ca-trust
 rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm || true
@@ -14,11 +16,11 @@ echo "%student ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/student_sudoers
 chmod 440 /etc/sudoers.d/student_sudoers
 
 # ─── SSH key setup for student ───
-sudo -u student mkdir -p /home/student/.ssh
-sudo -u student chmod 700 /home/student/.ssh
+sudo -H -u student mkdir -p /home/student/.ssh
+sudo -H -u student chmod 700 /home/student/.ssh
 cp -a /root/.ssh/* /home/student/.ssh/ 2>/dev/null || true
 if [ ! -f /home/student/.ssh/id_rsa ]; then
-  sudo -u student ssh-keygen -q -t rsa -b 4096 -C "student@$(hostname)" -f /home/student/.ssh/id_rsa -N ""
+  sudo -H -u student ssh-keygen -q -t rsa -b 4096 -C "student@$(hostname)" -f /home/student/.ssh/id_rsa -N ""
 fi
 chown -R student:student /home/student/.ssh
 chmod 600 /home/student/.ssh/id_rsa* 2>/dev/null || true
@@ -66,12 +68,12 @@ fi
 echo "Installing Ansible collections..."
 ansible-galaxy collection install ansible.posix --force
 ansible-galaxy collection install community.general --force
-sudo -u student ansible-galaxy collection install ansible.posix --force 2>/dev/null || true
-sudo -u student ansible-galaxy collection install community.general --force 2>/dev/null || true
+sudo -H -u student ansible-galaxy collection install ansible.posix --force 2>/dev/null || true
+sudo -H -u student ansible-galaxy collection install community.general --force 2>/dev/null || true
 
 # ─── Lab Inventory Setup ───
 echo "Creating lab_inventory for student user..."
-sudo -u student mkdir -p /home/student/lab_inventory
+sudo -H -u student mkdir -p /home/student/lab_inventory
 
 cat > /home/student/lab_inventory/hosts << 'EOF'
 [web]
@@ -142,7 +144,7 @@ loginctl enable-linger student
 
 # Pre-pull the Execution Environment image (public, no auth needed)
 echo "Pulling Execution Environment image..."
-sudo -u student podman pull quay.io/acme_corp/rhel_90_ee:latest
+sudo -H -u student podman pull quay.io/acme_corp/rhel_90_ee:latest
 
 # Install ansible-lint for student user
-sudo -u student bash -lc 'python3 -m pip install --user ansible-lint >/dev/null 2>&1' || true
+sudo -H -u student bash -lc 'python3 -m pip install --user ansible-lint >/dev/null 2>&1' || true
