@@ -6,27 +6,48 @@ rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm || t
 subscription-manager status >/dev/null 2>&1 || \
   subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY} --force
 setenforce 0
-echo "%rhel ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/rhel_sudoers
-chmod 440 /etc/sudoers.d/rhel_sudoers
-sudo -u rhel mkdir -p /home/rhel/.ssh
-sudo -u rhel chmod 700 /home/rhel/.ssh
-if [ ! -f /home/rhel/.ssh/id_rsa ]; then
-sudo -u rhel ssh-keygen -q -t rsa -b 4096 -C "rhel@$(hostname)" -f /home/rhel/.ssh/id_rsa -N ""
+
+# ─── Create student user ───
+useradd -m student 2>/dev/null || true
+echo "student:ansible123!" | chpasswd
+echo "%student ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/student_sudoers
+chmod 440 /etc/sudoers.d/student_sudoers
+
+# ─── SSH key setup for student ───
+sudo -u student mkdir -p /home/student/.ssh
+sudo -u student chmod 700 /home/student/.ssh
+cp -a /root/.ssh/* /home/student/.ssh/ 2>/dev/null || true
+if [ ! -f /home/student/.ssh/id_rsa ]; then
+  sudo -u student ssh-keygen -q -t rsa -b 4096 -C "student@$(hostname)" -f /home/student/.ssh/id_rsa -N ""
 fi
-sudo -u rhel chmod 600 /home/rhel/.ssh/id_rsa*
+chown -R student:student /home/student/.ssh
+chmod 600 /home/student/.ssh/id_rsa* 2>/dev/null || true
 
+# ─── Firewall ───
 systemctl stop firewalld
-systemctl stop code-server || true
-[ -f /home/rhel/.config/code-server/config.yaml ] && \
-  mv /home/rhel/.config/code-server/config.yaml /home/rhel/.config/code-server/config.bk.yaml || true
 
-tee /home/rhel/.config/code-server/config.yaml << EOF
+# ─── Code-server setup (run as student, opens in /home/student) ───
+systemctl stop code-server || true
+
+mkdir -p /etc/systemd/system/code-server.service.d
+cat > /etc/systemd/system/code-server.service.d/override.conf << EOF
+[Service]
+User=student
+Environment=HOME=/home/student
+EOF
+systemctl daemon-reload
+
+mkdir -p /home/student/.config/code-server
+cat > /home/student/.config/code-server/config.yaml << EOF
 bind-addr: 0.0.0.0:8080
 auth: none
 cert: false
 EOF
+chown -R student:student /home/student/.config
 
 systemctl start code-server || true
+
+# ─── Install packages ───
 dnf install -y unzip nano git podman python3-pip || true
 
 # Install ansible-core and ansible-navigator via pip (not available via dnf on this image)
@@ -37,25 +58,22 @@ python3 -m pip install ansible-core ansible-navigator 2>/dev/null || true
 # Verify ansible-galaxy is available
 if ! command -v ansible-galaxy >/dev/null 2>&1; then
   echo "ERROR: ansible-galaxy not found after pip install"
-  # Try to find it
   find / -name ansible-galaxy -type f 2>/dev/null | head -5
   exit 1
 fi
 
-# Install required Ansible collections (used across modules 3-7)
-# Install system-wide (for root/pip ansible-galaxy) and for rhel user
+# ─── Ansible collections (used across modules 3-7) ───
 echo "Installing Ansible collections..."
 ansible-galaxy collection install ansible.posix --force
 ansible-galaxy collection install community.general --force
-sudo -u rhel ansible-galaxy collection install ansible.posix --force 2>/dev/null || true
-sudo -u rhel ansible-galaxy collection install community.general --force 2>/dev/null || true
+sudo -u student ansible-galaxy collection install ansible.posix --force 2>/dev/null || true
+sudo -u student ansible-galaxy collection install community.general --force 2>/dev/null || true
 
 # ─── Lab Inventory Setup ───
-# Create lab_inventory directory and inventory file for workshop exercises
-echo "Creating lab_inventory for rhel user..."
-sudo -u rhel mkdir -p /home/rhel/lab_inventory
+echo "Creating lab_inventory for student user..."
+sudo -u student mkdir -p /home/student/lab_inventory
 
-cat > /home/rhel/lab_inventory/hosts << 'EOF'
+cat > /home/student/lab_inventory/hosts << 'EOF'
 [web]
 node1 ansible_host=node01
 node2 ansible_host=node02
@@ -69,7 +87,7 @@ ansible_password=ansible123!
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 EOF
 
-cat > /home/rhel/lab_inventory/ansible.cfg << 'EOF'
+cat > /home/student/lab_inventory/ansible.cfg << 'EOF'
 [defaults]
 inventory = hosts
 remote_user = rhel
@@ -85,20 +103,19 @@ EOF
 
 # Install ansible.cfg system-wide so EEs can access it via volume mount
 mkdir -p /etc/ansible
-cp /home/rhel/lab_inventory/ansible.cfg /etc/ansible/ansible.cfg
+cp /home/student/lab_inventory/ansible.cfg /etc/ansible/ansible.cfg
 
-chown -R rhel:rhel /home/rhel/lab_inventory
-chmod 644 /home/rhel/lab_inventory/hosts /home/rhel/lab_inventory/ansible.cfg
+chown -R student:student /home/student/lab_inventory
+chmod 644 /home/student/lab_inventory/hosts /home/student/lab_inventory/ansible.cfg
 
 # ─── Ansible Navigator Setup (Modules 6+) ───
-# Place navigator config in home directory (standard location)
-cat > /home/rhel/.ansible-navigator.yml << 'EOF'
+cat > /home/student/.ansible-navigator.yml << 'EOF'
 ---
 ansible-navigator:
   ansible:
     inventory:
       entries:
-      - /home/rhel/lab_inventory/hosts
+      - /home/student/lab_inventory/hosts
 
   execution-environment:
     image: quay.io/acme_corp/rhel_90_ee:latest
@@ -111,21 +128,21 @@ ansible-navigator:
       dest: "/etc/ansible/"
     - src: "/usr/share/ansible/collections/"
       dest: "/usr/share/ansible/collections/"
-    - src: "/home/rhel/.ansible/collections/"
-      dest: "/home/rhel/.ansible/collections/"
+    - src: "/home/student/.ansible/collections/"
+      dest: "/home/student/.ansible/collections/"
 
   mode: stdout
 EOF
 
-chown rhel:rhel /home/rhel/.ansible-navigator.yml
-chmod 644 /home/rhel/.ansible-navigator.yml
+chown student:student /home/student/.ansible-navigator.yml
+chmod 644 /home/student/.ansible-navigator.yml
 
-# Enable linger for rhel user (required for rootless podman)
-loginctl enable-linger rhel
+# Enable linger for student user (required for rootless podman)
+loginctl enable-linger student
 
 # Pre-pull the Execution Environment image (public, no auth needed)
 echo "Pulling Execution Environment image..."
-sudo -u rhel podman pull quay.io/acme_corp/rhel_90_ee:latest
+sudo -u student podman pull quay.io/acme_corp/rhel_90_ee:latest
 
-# Install ansible-lint for rhel user
-sudo -u rhel bash -lc 'python3 -m pip install --user ansible-lint >/dev/null 2>&1' || true
+# Install ansible-lint for student user
+sudo -u student bash -lc 'python3 -m pip install --user ansible-lint >/dev/null 2>&1' || true

@@ -86,7 +86,7 @@ ansible-navigator run deploy_apache.yml -m stdout -vv
 
 
 TASK [apache : Display Variable Value] *****************************************
-task path: /home/rhel/ansible-files/roles/apache/tasks/main.yml:20
+task path: /home/student/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:20
 ok: [node1] => {
     "apache_service_name": "httpd"
 }
@@ -98,7 +98,7 @@ ok: [node3] => {
 }
 
 TASK [apache : Display Custom Message] *****************************************
-task path: /home/rhel/ansible-files/roles/apache/tasks/main.yml:24
+task path: /home/student/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:24
 ok: [node1] => {
     "msg": "Apache service name is httpd"
 }
@@ -110,7 +110,7 @@ ok: [node3] => {
 }
 
 TASK [apache : Copy Apache configuration] **************************************
-task path: /home/rhel/ansible-files/roles/apache/tasks/main.yml:30
+task path: /home/student/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:30
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
 fatal: [node3]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/student/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/student/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/student/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/student/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/student/lab_inventory/files/files/missing_apache.conf\n\t/home/student/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
@@ -120,7 +120,7 @@ fatal: [node2]: FAILED! => {"changed": false, "msg": "Could not find or access '
 
 
 TASK [apache : Handle Missing Configuration] ***********************************
-task path: /home/rhel/ansible-files/roles/apache/tasks/main.yml:39
+task path: /home/student/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:39
 ok: [node1] => {
     "msg": "Missing Apache configuration file 'files/missing_apache.conf'. Using default settings."
 }
