@@ -126,8 +126,8 @@ loginctl enable-linger rhel
 # Pre-pull the Execution Environment image
 echo "Pulling Execution Environment image..."
 RUNAS="sudo -u rhel"
-$RUNAS bash<<'EOF'
-podman login --username $REG_USER --password $REG_PASS registry.redhat.io
+$RUNAS bash<<EOF
+podman login --username ${REG_USER} --password ${REG_PASS} registry.redhat.io
 podman pull registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel9:latest
 EOF
 
