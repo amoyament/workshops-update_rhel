@@ -12,7 +12,7 @@ setenforce 0
 # ─── Create student user ───
 useradd -m student 2>/dev/null || true
 echo "student:ansible123!" | chpasswd
-echo "%student ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/student_sudoers
+echo "student ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/student_sudoers
 chmod 440 /etc/sudoers.d/student_sudoers
 
 # ─── SSH key setup for student ───
@@ -28,30 +28,49 @@ chmod 600 /home/student/.ssh/id_rsa* 2>/dev/null || true
 # ─── Firewall ───
 systemctl stop firewalld
 
-# ─── Code-server setup (runs as rhel, opens in /home/student) ───
+# ─── Code-server setup (switch to run as student user) ───
 systemctl stop code-server || true
-[ -f /home/rhel/.config/code-server/config.yaml ] && \
-  mv /home/rhel/.config/code-server/config.yaml /home/rhel/.config/code-server/config.bk.yaml || true
 
-tee /home/rhel/.config/code-server/config.yaml << EOF
+# Create code-server config for student user
+sudo -H -u student mkdir -p /home/student/.config/code-server
+cat > /home/student/.config/code-server/config.yaml << 'EOF'
 bind-addr: 0.0.0.0:8080
 auth: none
 cert: false
 EOF
+chown -R student:student /home/student/.config/code-server
 
-# Make student's home accessible to code-server (rhel user)
-chmod 755 /home/student
-
-# Override code-server to open /home/student by default
+# Override code-server systemd service to run as student
 mkdir -p /etc/systemd/system/code-server.service.d
 CODE_SERVER_BIN=$(grep -oP 'ExecStart=\K\S+' /usr/lib/systemd/system/code-server*.service 2>/dev/null | head -1)
 CODE_SERVER_BIN=${CODE_SERVER_BIN:-/usr/bin/code-server}
 cat > /etc/systemd/system/code-server.service.d/override.conf << EOF
 [Service]
+User=student
+Group=student
 ExecStart=
 ExecStart=${CODE_SERVER_BIN} /home/student
 EOF
 systemctl daemon-reload
+
+# Hide dotfiles and clutter from VS Code explorer
+sudo -H -u student mkdir -p /home/student/.local/share/code-server/User
+cat > /home/student/.local/share/code-server/User/settings.json << 'SETTINGS'
+{
+  "files.exclude": {
+    "**/.ssh": true,
+    "**/.config": true,
+    "**/.cache": true,
+    "**/.local": true,
+    "**/.ansible": true,
+    "**/.bash_logout": true,
+    "**/.bash_profile": true,
+    "**/.bashrc": true,
+    "**/.ansible-navigator.yml": true
+  }
+}
+SETTINGS
+chown -R student:student /home/student/.local
 
 systemctl start code-server || true
 
@@ -81,7 +100,7 @@ sudo -H -u student ansible-galaxy collection install community.general --force 2
 echo "Creating lab_inventory for student user..."
 sudo -H -u student mkdir -p /home/student/lab_inventory
 
-cat > /home/student/lab_inventory/hosts << 'EOF'
+cat > /home/student/lab_inventory/hosts << 'INVENTORY'
 [web]
 node1 ansible_host=node01
 node2 ansible_host=node02
@@ -90,15 +109,15 @@ node2 ansible_host=node02
 node3 ansible_host=node03
 
 [all:vars]
-ansible_user=rhel
+ansible_user=student
 ansible_password=ansible123!
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-EOF
+INVENTORY
 
-cat > /home/student/lab_inventory/ansible.cfg << 'EOF'
+cat > /home/student/lab_inventory/ansible.cfg << 'ANSIBLECFG'
 [defaults]
 inventory = hosts
-remote_user = rhel
+remote_user = student
 host_key_checking = False
 deprecation_warnings = False
 
@@ -107,7 +126,7 @@ become = True
 become_method = sudo
 become_user = root
 become_ask_pass = False
-EOF
+ANSIBLECFG
 
 # Install ansible.cfg system-wide so EEs can access it via volume mount
 mkdir -p /etc/ansible
