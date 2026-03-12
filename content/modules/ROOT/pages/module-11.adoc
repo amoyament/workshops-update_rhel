@@ -28,7 +28,7 @@ Now, let's create a new Template that includes a survey.
 
 ==== Create Template
 
-. Go to *Automation Execution → Templates*, click the *Create template* button, and choose *Create job template*.
+. Go to *Automation Execution → Templates*, click the *Create template* dropdown, and choose *Create job template*.
 
 . Fill out the following details:
 
@@ -72,7 +72,7 @@ WARNING: *Do not run the template yet!*
 
 ==== Add the Survey
 
-. In the Template, click the *Survey* tab, then click *Create survey question*.
+. In the Template, click the *Survey* tab, then click the kebab menu (⋮) and select *Create survey question*.
 . Fill out the following for the first survey question:
 
 [cols="1,1"]
@@ -111,13 +111,13 @@ image::exercise-2-4-surveys/survey_q1.png[Survey Q1]
 image::exercise-2-4-surveys/survey_q2.png[Survey Q2]
 
 . Click *Create survey question*.
-. Enable the survey by toggling the *Survey disabled* button to the on positon.
+. Enable the survey by toggling the *Survey enabled* switch to the on position.
 
 === Launch the Template
 
-Now, launch the *Create index.html* job template by clicking the *Launch template* button.
+Now, launch the *Create index.html* job template by selecting *Launch template* from the template's kebab menu (⋮) on the Templates list page.
 
-Before the job starts, the survey will prompt for *First Line* and *Second Line*. Enter your text and click *Next*. The *Preview* window shows the values—if all looks good, click *Finish* to start the job.
+Before the job starts, the survey will prompt for *First Line* and *Second Line*. Enter your text and click *Next*. The *Review* page shows the values—if all looks good, click *Finish* to start the job.
 
 image::exercise-2-4-surveys/survey_launch.png[Survey Launch]
 

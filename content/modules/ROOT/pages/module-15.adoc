@@ -4,15 +4,35 @@
 
 In this exercise, you will use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller. You will leverage Linux System Roles and RHEL System Roles with a simple Survey-driven job to manage firewall and timesync configuration.
 
-=== Step 1 - Examine the project
+=== Step 1 - Create the project
 
-In the Ansible Automation Controller UI navigate to Projects and open the preloaded repository:
+In the Ansible Automation Controller UI navigate to *Automation Execution → Projects* and click *Create project*.
 
-image::exercise-2-8-system-roles/demo-project.png[demo project]
+Project fields:
 
-Repository (preloaded):
+[cols="1,1"]
+|===
+|Parameter |Value
 
-* link:https://github.com/ansible/product-demos[]
+|Name
+|System Roles Project
+
+|Organization
+|Default
+
+|Execution Environment
+|Default execution environment
+
+|Source Control Type
+|Git
+
+|Source Control URL
+|`https://github.com/ansible/product-demos`
+|===
+
+Click *Create project* and wait for the sync to complete.
+
+image::exercise-2-8-system-roles/demo-project.png[system roles project]
 
 === Step 2 - Review the playbook
 
@@ -23,7 +43,7 @@ Open the repository in your browser and navigate to:
 
 Relevant tasks (roles are conditionally included):
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Configure Firewall
   when: harden_firewall | bool
@@ -51,7 +71,7 @@ Examples:
 ** Controls services such as http/https and more
 ** Example var:
 +
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 vars:
   firewall:
@@ -63,7 +83,7 @@ vars:
 ** Manages chrony or ntp as appropriate
 ** Example var:
 +
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 vars:
   timesync_ntp_servers:
@@ -73,7 +93,7 @@ vars:
 
 === Step 4 - Create and launch the Job Template with a Survey
 
-. In Controller, go to Automation Execution → Templates and click Create template → Create job template.
+. In Controller, go to *Automation Execution → Templates*, click the *Create template* dropdown and select *Create job template*.
 
 Template fields:
 
@@ -91,7 +111,7 @@ Template fields:
 |Workshop Inventory
 
 |Project
-|Ansible official demo project
+|System Roles Project
 
 |Playbook
 |`linux/hardening.yml`
@@ -127,7 +147,7 @@ Review the EXTRA VARIABLES to see how the survey sets the role switches and proc
 
 From the control node, verify time configuration:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ssh node1
 sudo systemctl status chronyd.service
@@ -136,7 +156,7 @@ timedatectl
 
 Example commands:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 chronyc tracking
 chronyc sources
@@ -148,7 +168,7 @@ chronyc activity
 
 In this exercise you:
 
-* [x] Examined a pre-loaded project with Linux and RHEL System Roles
+* [x] Created a project pointing to the Product Demos repository with Linux and RHEL System Roles
 * [x] Reviewed how firewall and timesync roles are conditionally included
 * [x] Created a Job Template with a Survey to toggle role behavior
 * [x] Launched the job and verified time synchronization configuration on managed hosts

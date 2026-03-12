@@ -19,7 +19,7 @@ Conditionals in Ansible control whether a task should run based on certain condi
 Previous examples had hosts set to node1 but now it is set to all. This means when you run this updated Ansible playbook you will notice updates for the new systems being automated against, the user Roger created on all new systems and the Apache web server package httpd installed on all the hosts within the web group.
 ====
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Basic System Setup
@@ -57,7 +57,7 @@ Handlers are used for tasks that should only run when notified by another task. 
 
 Let's say we want to ensure the firewall is configured correctly on all web servers and then reload the firewall service to apply any new settings. We'll define a handler that reloads the firewall service and is notified by a task that ensures the desired firewall rules are in place. Add the following tasks to the existing playbook to install firewalld and enable firewalld and reload the service with the help of handlers.
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Basic System Setup
@@ -118,7 +118,7 @@ The handler "Reload Firewall" is triggered only if the task "Allow HTTP traffic 
 
 NOTE: Notice how the name of the handler is used within the notify section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 PLAY [Basic System Setup] ******************************************************
 
@@ -157,7 +157,7 @@ node3                      : ok=4    changed=2    unreachable=0    failed=0    s
 
 Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example. In the original system_setup.yml playbook from the previous exercise, we had a task for creating a single user:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Create a new user
   ansible.builtin.user:
@@ -168,7 +168,7 @@ Loops in Ansible allow you to perform a task multiple times with different value
 
 Now, let's modify this task to create multiple users using a loop:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Create a new user
   ansible.builtin.user:
@@ -191,7 +191,7 @@ When you run the updated playbook, this task is executed three times, once for e
 
 Snippet of the output for creating a new user on all the nodes.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts system_setup.yml
 

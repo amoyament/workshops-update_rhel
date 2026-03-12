@@ -18,7 +18,7 @@ In the following example, let's create a template for the Message of the Day (MO
 
 Ensure a templates directory exists within your lab_inventory directory to organize your templates.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 mkdir -p ~/lab_inventory/templates
 ----
@@ -27,7 +27,7 @@ mkdir -p ~/lab_inventory/templates
 
 Create a file named `motd.j2` in the templates directory with the following content:
 
-[source,jinja]
+[source,jinja,role=copypaste]
 ----
 Welcome to {{ ansible_hostname }}.
 OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
@@ -42,7 +42,7 @@ Utilize the `ansible.builtin.template` module in a playbook to distribute and re
 
 Modify the `system_setup.yml` Playbook with the following content:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 ---
@@ -111,12 +111,12 @@ The `ansible.builtin.template` module takes the `motd.j2` template and generates
 
 Run the playbook to apply your custom MOTD across all managed hosts:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts system_setup.yml
 ----
 
-[source,plaintext]
+[source,plaintext,role=copypaste]
 ----
 PLAY [Basic System Setup] ******************************************************
 .
@@ -138,12 +138,12 @@ node3                      : ok=8    changed=1    unreachable=0    failed=0    s
 
 Verify the changes by SSHing into the node, and you should see the message of the day:
 
-[source,plaintext]
+[source,plaintext,role=copypaste]
 ----
 ssh node1
 ----
 
-[source,plaintext]
+[source,plaintext,role=copypaste]
 ----
 Welcome to node1.
 OS: RedHat 8.7
@@ -155,7 +155,7 @@ Last login: Mon Jan 29 16:30:31 2024 from 10.5.1.29
 
 Exit the SSH session to return to your control node before continuing to the next exercise:
 
-[source,plaintext]
+[source,plaintext,role=copypaste]
 ----
 exit
 logout

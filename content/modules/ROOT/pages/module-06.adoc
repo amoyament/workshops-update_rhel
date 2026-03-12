@@ -28,14 +28,14 @@ Your lab environment provides a default EE. Backend image pull and updates are h
 
 Change to your working directory:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
 ----
 
 Run the playbook you created earlier using Navigator in stdout mode:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-navigator run system_setup.yml -m stdout
 ----
@@ -46,7 +46,7 @@ Observe that execution uses the default EE configured for your environment.
 
 Use Navigator to view documentation for commonly used modules:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-navigator doc ansible.builtin.package -m stdout
 ansible-navigator doc ansible.builtin.user -m stdout
@@ -54,7 +54,7 @@ ansible-navigator doc ansible.builtin.user -m stdout
 
 List available collections inside the EE:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-navigator collections -m stdout
 ----

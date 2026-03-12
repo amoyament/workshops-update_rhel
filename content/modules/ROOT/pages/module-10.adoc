@@ -12,7 +12,7 @@ link:https://github.com/ansible/workshop-examples[]
 
 A playbook to install the Apache web server has already been committed to the directory *rhel/apache*, `apache_install.yml`:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Apache server installed
@@ -58,7 +58,7 @@ To configure and use this repository as a *Source Control Management (SCM)* syst
 
 === Create the Project
 
-* Go to *Automation Execution → Projects* click the *Create Project* button. Fill in the form:
+* Go to *Automation Execution → Projects* and click the *Create project* button. Fill in the form:
 
 [cols="1,1"]
 |===
@@ -92,7 +92,7 @@ Enter the URL into the Project configuration:
 
 * Click *Create project*
 
-The new project will be synced automatically after creation. But you can also do this manually: Sync the Project again by selecting the 'Sync project' blue button.
+The new project will be synced automatically after creation. But you can also do this manually: Sync the project again by clicking the sync icon on the Projects list page.
 
 image::exercise-2-3-projects/project_sync.png[Project Sync]
 
@@ -110,7 +110,7 @@ A job template allows you to run an automation job. In order to run any type of 
 
 * *Playbook*: What playbook to use?
 
-To create a Job Template, go to the *Automation Execution -> Templates* view, click the *Create template* button and choose *Create job template*.
+To create a Job Template, go to the *Automation Execution → Templates* view, click the *Create template* dropdown and choose *Create job template*.
 
 [TIP]
 ====
@@ -157,7 +157,7 @@ Remember that you can often click on the question mark with a circle to get more
 * With surveys and RBAC, this template can be exposed in a self-service view so approved users can launch it without full edit rights (covered in the Surveys and RBAC exercises).
 ====
 
-You can start the job by directly clicking the blue *Launch template* button, or by clicking on the rocket in the Job Templates overview. After launching the Job Template, you are automatically brought to the job overview where you can follow the playbook execution in real time.
+You can start the job by clicking the *Launch template* option from the template's kebab menu (⋮) on the Templates list, or from the template detail page. After launching the Job Template, you are automatically brought to the job output where you can follow the playbook execution in real time.
 
 Template Details
 
@@ -175,7 +175,7 @@ Since this might take some time, have a closer look at all the details provided:
 
 * Also the time of execution with start and end time is recorded, giving you an idea of how long a job execution actually was.
 
-* Selecting *Output* shows the output of the running playbook. Click on a node underneath a task and see that detailed information are provided for each task of each node.
+* The *Output* tab shows the output of the running playbook. Click on a node underneath a task and see that detailed information are provided for each task of each node.
 
 After the Job has finished go to the main *Jobs* view: All jobs are listed here, you should see directly before the Playbook run an Source Control Update was started. This is the Git update we configured for the *Project* on launch!
 

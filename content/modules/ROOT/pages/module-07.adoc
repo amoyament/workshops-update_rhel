@@ -18,7 +18,7 @@ In this example, add debug tasks to your Apache role in the `tasks/main.yml` to 
 
 Insert debug tasks to display the values of variables or custom messages for troubleshooting:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Display Variable Value
   ansible.builtin.debug:
@@ -39,7 +39,7 @@ In this example, add a block to handle potential errors during the Apache config
 
 Wrap tasks that could potentially fail in a block and define a rescue section to handle errors:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Apache Configuration with Potential Failure Point
   block:
@@ -55,7 +55,7 @@ Wrap tasks that could potentially fail in a block and define a rescue section to
 
 . Add an `apache_conf_src` variable within `vars/main.yml` of the apache role.
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 apache_conf_src: "files/missing_apache.conf"
 ----
@@ -73,12 +73,12 @@ Ansible's verbose mode (-v, -vv, -vvv, or -vvvv) increases the output detail, pr
 
 Run your playbook with the `-vv` option to get detailed logs:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-navigator run deploy_apache.yml -m stdout -vv
 ----
 
-[source,text]
+[source,text,role=copypaste]
 ----
 .
 .

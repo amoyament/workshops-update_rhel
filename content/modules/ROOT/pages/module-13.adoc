@@ -35,7 +35,7 @@ First, set up the Git repositories as projects.
 
 WARNING: If logged in as *wweb*, log out and log in as *admin*.
 
-Within *Automation Execution* -> *Projects*, click *Create Project* to set up the web operations team's project:
+Within *Automation Execution → Projects*, click *Create project* to set up the web operations team's project:
 
 [cols="1,1"]
 |===
@@ -103,7 +103,7 @@ a|
 
 === Set up job templates
 
-Within *Automation Execution* -> *Templates* -> *Create template* -> *Create job template*, fill out the form with the following values:
+Within *Automation Execution → Templates*, click the *Create template* dropdown and select *Create job template*. Fill out the form with the following values:
 
 [cols="1,1"]
 |===
@@ -137,7 +137,7 @@ Click *Create job template*, and then repeat the process for the *Node.js Deploy
 
 === Set up the workflow
 
-Within *Automation Execution* -> *Templates* -> *Create template* -> *Create workflow job template*, fill in the details:
+Within *Automation Execution → Templates*, click the *Create template* dropdown and select *Create workflow job template*. Fill in the details:
 
 [cols="1,1"]
 |===
@@ -151,7 +151,7 @@ Click *Create workflow job template* to open the *Workflow Visualizer*.
 
 image::exercise-2-6-workflows/visualizer_add_step.png[add_step]
 
-Click the *Add Step* button and assign the *Web App Deploy* job template to the first node. Add a second node by clicking the 3 dot sign, selecting the "Add step and link" and assign the *Node.js Deploy* template with the *Run on success* status type. Select *Next* and *Finish* to complete the workflow.
+Click the *Add step* button and assign the *Web App Deploy* job template to the first node. Add a second node by clicking the kebab menu (⋮) on the first node, selecting *Add step and link*, and assign the *Node.js Deploy* template with the *On Success* run type. Select *Next* and *Finish* to complete the workflow.
 
 image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy]
 
@@ -165,7 +165,7 @@ image::exercise-2-6-workflows/visualizer_overview.png[overview]
 
 === Launch workflow
 
-Within the *Deploy Webapp Server* template, click *Launch template*.
+From the *Deploy Webapp Server* template, select *Launch template* from the kebab menu (⋮) or from the template detail page.
 
 image::exercise-2-6-workflows/launch_template.png[launch_template]
 

@@ -23,7 +23,7 @@ An inventory tells Ansible what hosts to target and how to group them. In this l
 
 Open the inventory to review hosts and groups:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
 cat hosts
@@ -31,7 +31,7 @@ cat hosts
 
 An example INI-style inventory might look like:
 
-[source,ini]
+[source,ini,role=copypaste]
 ----
 [web]
 node1
@@ -43,7 +43,7 @@ node3
 
 In a playbook, the `hosts` key selects which inventory hosts/groups to target. Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
 ansible -i hosts all -m ping
@@ -73,7 +73,7 @@ An Ansible playbook is designed to be idempotent, meaning if you run it multiple
 
 Before creating your first playbook, ensure you are in the correct directory by changing to `~/lab_inventory`:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
 ----
@@ -85,7 +85,7 @@ Now create a playbook named `system_setup.yml` to perform basic system setup:
 
 The basic structure looks as follows:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Basic System Setup
@@ -119,14 +119,14 @@ Keeping the update to a small set of packages makes the run fast for class.
 
 Execute your playbook using the `ansible-playbook` command:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts system_setup.yml
 ----
 
 Review the output to ensure each task is completed successfully.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 
 PLAY [Basic System Setup] ****************************************************************
@@ -148,7 +148,7 @@ node1                      : ok=3    changed=2    unreachable=0    failed=0    s
 
 Now, let's create a second playbook for post-configuration checks, named `system_checks.yml`:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: System Configuration Checks
@@ -168,14 +168,14 @@ Now, let's create a second playbook for post-configuration checks, named `system
 
 Run the checks playbook:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts system_checks.yml
 ----
 
 Review the output to ensure the user creation was successful.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 
 PLAY [System Configuration Checks] **************************************************************

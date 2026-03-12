@@ -14,7 +14,7 @@ There are three types of users in Ansible Automation Controller:
 
 Let's create a user:
 
-. Navigate to *Access Management -> Users*.
+. Navigate to *Access Management → Users*.
 . Click the *Create user* button.
 . Fill in the following values:
 
@@ -28,19 +28,22 @@ Let's create a user:
 |Password
 |ansible
 
-|Confirm Password
+|Confirm password
 |ansible
 
-|First Name
+|First name
 |Werner
 
-|Last Name
+|Last name
 |Web
 
 |Email
 |wweb@example.com
 
-|Organization
+|User type
+|Normal user
+
+|Organizations
 |Default
 |===
 
@@ -54,17 +57,17 @@ Teams are subdivisions of an organization that include users, projects, credenti
 
 *Create a Team:*
 
-. Navigate to *Access Management -> Teams*.
+. Navigate to *Access Management → Teams*.
 . Click the *Create team* button and create a team named `Web Content` within the `Default` organization.
 . Click *Create team*.
 
 *Add a User to the Team:*
 
-. Select the `Web Content` team.
-. Go to the *Users* tab and click *Add users*.
-. In the *Add users* window, choose *wweb*, then click *Add users*.
+. Navigate to *Access Management → Users* and select the `wweb` user.
+. Click the *Teams* tab.
+. User-team associations are managed through the role assignments covered in the next section.
 
-image::exercise-2-5-rbac/add_user.png[add user]
+image::exercise-2-5-rbac/add_user.png[users list]
 
 === Granting Permissions
 
@@ -72,20 +75,20 @@ To grant users the ability to execute tasks, permissions need to be set.
 
 *Grant Permission to Use a Template:*
 
-. Navigate to *Automation Execution -> Templates*.
+. Navigate to *Automation Execution → Templates*.
 . Select the template `Create index.html`.
 . Click the *User Access* tab.
-. Click *Add roles*.
-. Select the `wweb` user and click *Next*.
-. Choose the roles *JobTemplate Admin* and/or *JobTemplate Execute*, depending on the required level of access, click *Next*.
+. Click the kebab menu (⋮) and select *Add roles*, or navigate directly to the *Assign users* page.
+. In *Select user(s)*, check the box for `wweb` and click *Next*.
+. In *Select roles to apply*, choose *JobTemplate Admin* and/or *JobTemplate Execute*, depending on the required level of access, then click *Next*.
 . Review the selections and click *Finish*.
 
 === Testing Permissions
 
 Now, log out and log in again as the `wweb` user.
 
-. Navigate to *Templates*. You should only see the `Create index.html` template listed.
-. Run the job by clicking the rocket icon. Enter the required values for the survey questions and launch the job.
+. Navigate to *Automation Execution → Templates*. You should only see the `Create index.html` template listed.
+. Run the job by selecting *Launch template* from the template's kebab menu (⋮). Enter the required values for the survey questions and launch the job.
 
 Once the job completes, verify the result by relogging back in as an admin user to the Ansible Automation Platform dashboard.
 

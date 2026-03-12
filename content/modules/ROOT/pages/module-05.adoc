@@ -36,7 +36,7 @@ Small programs that perform specific automation tasks on *local machines, APIs, 
 
 Before we build the collection, let's clean up any previous Apache installations.
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Cleanup Environment
@@ -75,7 +75,7 @@ Before we build the collection, let's clean up any previous Apache installations
 
 Now run the playbook to clean the environment
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts cleanup.yml
 ----
@@ -86,14 +86,14 @@ ansible-playbook -i hosts cleanup.yml
 
 Use `ansible-galaxy` to initialize the collection structure:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
 ----
 
 This creates the following structure:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 .
 └── collections
@@ -112,7 +112,7 @@ This creates the following structure:
 
 . Create the `apache` role within your `webops.apache` collection:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 cd collections/ansible_collections/webops/apache/roles
 ansible-galaxy role init apache
@@ -122,7 +122,7 @@ ansible-galaxy role init apache
 
 Add Apache-specific variables in roles/apache/vars/main.yml:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 apache_package_name: httpd
@@ -133,7 +133,7 @@ apache_service_name: httpd
 
 Add the following tasks to roles/apache/tasks/main.yml to install and configure Apache:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Install Apache web server
@@ -165,7 +165,7 @@ Add the following tasks to roles/apache/tasks/main.yml to install and configure 
 
 Create a handler to reload the firewall in roles/apache/handlers/main.yml:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Reload Firewall
@@ -178,7 +178,7 @@ Create a handler to reload the firewall in roles/apache/handlers/main.yml:
 
 Add a Jinja2 template for the web page in roles/apache/templates/index.html.j2:
 
-[source,html]
+[source,html,role=copypaste]
 ----
 <html>
 <head>
@@ -194,7 +194,7 @@ Add a Jinja2 template for the web page in roles/apache/templates/index.html.j2:
 
 Add the template deployment task to roles/apache/tasks/main.yml:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 - name: Deploy custom index.html
   ansible.builtin.template:
@@ -206,7 +206,7 @@ Add the template deployment task to roles/apache/tasks/main.yml:
 
 Create a playbook named `deploy_apache.yml` within `~/lab_inventory` directory to apply the collection to the `web` group:
 
-[source,yaml]
+[source,yaml,role=copypaste]
 ----
 ---
 - name: Deploy Apache using Collection
@@ -222,13 +222,13 @@ Create a playbook named `deploy_apache.yml` within `~/lab_inventory` directory t
 
 The Ansible playbook requires the `ansible.posix` collection. Create and add this requirement to your `requirements.yml` file that shall reside under `~/lab_inventory`
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 collections:
   - name: ansible.posix
 ----
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-galaxy collection install -r requirements.yml
 ----
@@ -237,12 +237,12 @@ ansible-galaxy collection install -r requirements.yml
 
 Run the playbook using `ansible-playbook`:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ansible-playbook -i hosts deploy_apache.yml
 ----
 
-[source,text]
+[source,text,role=copypaste]
 ----
 PLAY [Deploy Apache using Collection] ******************************************
 
@@ -286,19 +286,19 @@ node3                      : ok=6    changed=3    unreachable=0    failed=0    s
 
 After the playbook runs, verify Apache is active on the web servers:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 ssh node1 "systemctl status httpd"
 ----
 
 You should see output confirming Apache is running. Finally, confirm the web page is served:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 curl http://node1
 ----
 
-[source,html]
+[source,html,role=copypaste]
 ----
 <html>
 <head>
