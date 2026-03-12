@@ -28,34 +28,35 @@ chmod 600 /home/student/.ssh/id_rsa* 2>/dev/null || true
 # ─── Firewall ───
 systemctl stop firewalld
 
-# ─── Code-server setup (switch to run as student user) ───
+# ─── Code-server setup (runs as rhel, opens /home/student) ───
 systemctl stop code-server || true
+[ -f /home/rhel/.config/code-server/config.yaml ] && \
+  mv /home/rhel/.config/code-server/config.yaml /home/rhel/.config/code-server/config.bk.yaml || true
 
-# Create code-server config for student user
-sudo -H -u student mkdir -p /home/student/.config/code-server
-cat > /home/student/.config/code-server/config.yaml << 'EOF'
+mkdir -p /home/rhel/.config/code-server
+tee /home/rhel/.config/code-server/config.yaml << 'EOF'
 bind-addr: 0.0.0.0:8080
 auth: none
 cert: false
 EOF
-chown -R student:student /home/student/.config/code-server
 
-# Override code-server systemd service to run as student
+# Make student's home accessible to code-server (rhel user)
+chmod 755 /home/student
+
+# Override code-server to open /home/student by default
 mkdir -p /etc/systemd/system/code-server.service.d
 CODE_SERVER_BIN=$(grep -oP 'ExecStart=\K\S+' /usr/lib/systemd/system/code-server*.service 2>/dev/null | head -1)
 CODE_SERVER_BIN=${CODE_SERVER_BIN:-/usr/bin/code-server}
 cat > /etc/systemd/system/code-server.service.d/override.conf << EOF
 [Service]
-User=student
-Group=student
 ExecStart=
 ExecStart=${CODE_SERVER_BIN} /home/student
 EOF
 systemctl daemon-reload
 
-# Hide dotfiles and clutter from VS Code explorer
-sudo -H -u student mkdir -p /home/student/.local/share/code-server/User
-cat > /home/student/.local/share/code-server/User/settings.json << 'SETTINGS'
+# Configure VS Code settings: hide dotfiles and set terminal to login as student
+mkdir -p /home/rhel/.local/share/code-server/User
+cat > /home/rhel/.local/share/code-server/User/settings.json << 'SETTINGS'
 {
   "files.exclude": {
     "**/.ssh": true,
@@ -67,10 +68,16 @@ cat > /home/student/.local/share/code-server/User/settings.json << 'SETTINGS'
     "**/.bash_profile": true,
     "**/.bashrc": true,
     "**/.ansible-navigator.yml": true
-  }
+  },
+  "terminal.integrated.profiles.linux": {
+    "student": {
+      "path": "/usr/bin/sudo",
+      "args": ["-iu", "student"]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "student"
 }
 SETTINGS
-chown -R student:student /home/student/.local
 
 systemctl start code-server || true
 
