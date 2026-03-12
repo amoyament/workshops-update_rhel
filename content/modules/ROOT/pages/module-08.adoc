@@ -14,13 +14,28 @@ Ansible Automation Platform (AAP) is a comprehensive automation solution that pr
 
 . *Enhanced Security and Governance*: AAP supports role-based access control (RBAC), ensuring that only authorized users can create and execute automation. This security layer is crucial for maintaining compliance and governance across IT operations.
 
+== Logging into Automation Controller
+
+To access the automation controller web UI, click the *AAP* tab at the top of the Showroom interface. Log in with the following credentials:
+
+[cols="1,1"]
+|===
+|Parameter |Value
+
+|Username
+|`admin`
+
+|Password
+|`ansible123!`
+|===
+
 == Ansible Automation Controller
 
 The *automation controller* is a key component of Ansible Automation Platform. It offers a web-based interface that provides a centralized point to manage, monitor, and control automation.
 
 === Key Features of Automation Controller:
 
-* *User-Friendly Dashboard*: The controller's dashboard offers a real-time view of recent job activity, managed hosts and hands-on quick starts to get you started as quickly as possible with Ansible Automation Platform.
+* *User-Friendly Dashboard*: After logging in, the controller's dashboard offers a real-time view of recent job activity, managed hosts and hands-on quick starts to get you started as quickly as possible with Ansible Automation Platform.
 
 image::exercise-2-1-intro/aap25-dashboard.png[Ansible Automation Platform dashboard]
 
