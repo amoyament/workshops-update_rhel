@@ -29,17 +29,9 @@ cd ~/lab_inventory
 cat hosts
 ----
 
-An example INI-style inventory might look like:
+Your inventory should look like this:
 
-[source,ini,role=copypaste]
-----
-[web]
-node1
-node2
-
-[db]
-node3
-----
+image::exercise-1-1-setup/inventory_terminal.png[Inventory file contents]
 
 In a playbook, the `hosts` key selects which inventory hosts/groups to target. Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
 

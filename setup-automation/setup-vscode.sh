@@ -63,7 +63,7 @@ SETTINGS
 systemctl start code-server || true
 
 # ─── Install packages ───
-dnf install -y unzip nano git podman python3-pip || true
+dnf install -y unzip nano git podman python3-pip sshpass || true
 
 # Install ansible-core and ansible-navigator via pip (not available via dnf on this image)
 export PATH="/usr/local/bin:$PATH"
