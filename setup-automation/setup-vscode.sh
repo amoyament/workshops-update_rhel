@@ -44,6 +44,8 @@ systemctl daemon-reload
 mkdir -p /home/rhel/.local/share/code-server/User
 cat > /home/rhel/.local/share/code-server/User/settings.json << 'SETTINGS'
 {
+  "workbench.colorTheme": "Default Dark+",
+  "window.menuBarVisibility": "classic",
   "files.exclude": {
     "**/.ssh": true,
     "**/.config": true,
