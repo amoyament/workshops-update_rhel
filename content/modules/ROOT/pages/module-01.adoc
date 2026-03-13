@@ -29,9 +29,17 @@ cd ~/lab_inventory
 cat hosts
 ----
 
-Your inventory should look like this:
+An example INI-style inventory might look like:
 
-image::exercise-1-1-setup/inventory_terminal.png[Inventory file contents]
+[source,ini]
+----
+[web]
+node1
+node2
+
+[db]
+node3
+----
 
 In a playbook, the `hosts` key selects which inventory hosts/groups to target. Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
 
@@ -84,12 +92,12 @@ The basic structure looks as follows:
   hosts: node1
   become: true
   tasks:
-    - name: Ensure latest versions of core packages
+    - name: Ensure core packages are installed
       ansible.builtin.package:
         name:
           - bash
           - sudo
-        state: latest
+        state: present
 
     - name: Create a new user
       ansible.builtin.user:
@@ -97,11 +105,6 @@ The basic structure looks as follows:
         state: present
         create_home: true
 ----
-
-[NOTE]
-====
-Keeping the update to a small set of packages makes the run fast for class.
-====
 
 * About the `package` module: This modules manages packages on a target without specifying a package manager module
 
@@ -118,23 +121,7 @@ ansible-playbook -i hosts system_setup.yml
 
 Review the output to ensure each task is completed successfully.
 
-[source,bash,role=copypaste]
-----
-
-PLAY [Basic System Setup] ****************************************************************
-
-TASK [Gathering Facts] ************************************************************************
-ok: [node1]
-
-TASK [Ensure latest versions of core packages] **************************************************
-changed: [node1]
-
-TASK [Create a new user] ************************************************************************
-changed: [node1]
-
-PLAY RECAP **************************************************************************************
-node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
+image::exercise-1-1-setup/system_setup_output.png[Playbook output]
 
 == Checking the Playbook
 
@@ -151,12 +138,18 @@ Now, let's create a second playbook for post-configuration checks, named `system
       ansible.builtin.command:
         cmd: id myuser
       register: user_check
+      changed_when: false
 
     - name: Report user status
       ansible.builtin.debug:
         msg: "User 'myuser' exists."
       when: user_check.rc == 0
 ----
+
+[NOTE]
+====
+`changed_when: false` tells Ansible that this command is read-only and should never report a change. Without it, the `command` module always reports `changed` even for commands that don't modify anything, which would break idempotency reporting.
+====
 
 Run the checks playbook:
 
@@ -167,25 +160,7 @@ ansible-playbook -i hosts system_checks.yml
 
 Review the output to ensure the user creation was successful.
 
-[source,bash,role=copypaste]
-----
-
-PLAY [System Configuration Checks] **************************************************************
-
-TASK [Gathering Facts] ************************************************************************
-ok: [node1]
-
-TASK [Check user existence] ********************************************************************
-changed: [node1]
-
-TASK [Report user status] **********************************************************************
-ok: [node1] => {
-    "msg": "User 'myuser' exists."
-}
-
-PLAY RECAP **************************************************************************************
-node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
+image::exercise-1-1-setup/system_checks_output.png[System checks playbook output]
 
 == Summary
 
