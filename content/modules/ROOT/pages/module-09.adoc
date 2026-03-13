@@ -24,7 +24,7 @@ Machine credentials are essential for establishing secure SSH connections to man
 * *Accessing Credentials:* Navigate to *Automation Execution → Infrastructure → Credentials* and select _Workshop Credential_.
 * *Credential Details:* The 'Workshop Credentials' is configured with:
 ** *Credential Type:* Machine (for SSH).
-** *Username:* A predefined user, such as `ec2-user`.
+** *Username:* A predefined user, such as `rhel`.
 ** *SSH Private Key:* Encrypted, providing secure access to hosts.
 
 === 4. Additional Credential Types

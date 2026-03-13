@@ -52,11 +52,10 @@ retry "dnf install -y python3-pip python3-libsemanage"
 systemctl stop systemd-tmpfiles-setup.service 2>/dev/null || true
 systemctl disable systemd-tmpfiles-setup.service 2>/dev/null || true
 
-# Create student user for workshop exercises
-echo "Creating student user..."
-useradd -m student 2>/dev/null || true
-echo "student:ansible123!" | chpasswd
-echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
+# Ensure rhel user has password and sudo
+echo "Configuring rhel user..."
+echo "rhel:ansible123!" | chpasswd
+echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 
 # Install Ansible collections available from Galaxy
 echo "Installing Ansible collections..."
@@ -64,16 +63,16 @@ ansible-galaxy collection install ansible.posix --force
 ansible-galaxy collection install community.general --force
 # ansible.controller is bundled with the AAP image, not available on Galaxy
 
-# Create lab directories for student user
+# Create lab directories for rhel user
 echo "Creating lab directories..."
-mkdir -p /home/student/lab_inventory
-mkdir -p /home/student/rhel-workshop
-chown -R student:student /home/student/lab_inventory
-chown -R student:student /home/student/rhel-workshop
+mkdir -p /home/rhel/lab_inventory
+mkdir -p /home/rhel/rhel-workshop
+chown -R rhel:rhel /home/rhel/lab_inventory
+chown -R rhel:rhel /home/rhel/rhel-workshop
 
 # Create inventory file for command-line exercises
 echo "Creating inventory file..."
-cat > /home/student/lab_inventory/hosts << 'EOF'
+cat > /home/rhel/lab_inventory/hosts << 'EOF'
 [web]
 node01
 node02
@@ -82,19 +81,19 @@ node02
 node03
 
 [all:vars]
-ansible_user=student
+ansible_user=rhel
 ansible_password=ansible123!
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 EOF
 
-chown student:student /home/student/lab_inventory/hosts
-chmod 644 /home/student/lab_inventory/hosts
+chown rhel:rhel /home/rhel/lab_inventory/hosts
+chmod 644 /home/rhel/lab_inventory/hosts
 
 # Create ansible.cfg for easier command-line usage
-cat > /home/student/lab_inventory/ansible.cfg << 'EOF'
+cat > /home/rhel/lab_inventory/ansible.cfg << 'EOF'
 [defaults]
 inventory = hosts
-remote_user = student
+remote_user = rhel
 host_key_checking = False
 deprecation_warnings = False
 
@@ -105,8 +104,8 @@ become_user = root
 become_ask_pass = False
 EOF
 
-chown student:student /home/student/lab_inventory/ansible.cfg
-chmod 644 /home/student/lab_inventory/ansible.cfg
+chown rhel:rhel /home/rhel/lab_inventory/ansible.cfg
+chmod 644 /home/rhel/lab_inventory/ansible.cfg
 
 # Configure Automation Controller using ansible.controller collection
 echo "Configuring AAP controller..."
@@ -144,7 +143,7 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         controller_password: "{{ controller_password }}"
         validate_certs: "{{ validate_certs }}"
         inputs:
-          username: student
+          username: rhel
           password: ansible123!
 
     - name: Create Workshop Inventory
@@ -249,6 +248,6 @@ EOFAAP
 ANSIBLE_COLLECTIONS_PATH="/root/ansible-automation-platform-containerized-setup/collections/:/root/.ansible/collections/" ansible-playbook /tmp/aap-setup.yml
 
 # Set proper ownership
-chown -R student:student /home/student
+chown -R rhel:rhel /home/rhel
 
 echo "Control node setup completed successfully!"
