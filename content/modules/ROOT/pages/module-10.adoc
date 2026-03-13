@@ -94,7 +94,7 @@ Enter the URL into the Project configuration:
 
 The new project will be synced automatically after creation. But you can also do this manually: Sync the project again by clicking the sync icon on the Projects list page.
 
-image::exercise-2-3-projects/project_sync.png[Project Sync]
+image::exercise-2-3-projects/project_sync.png[Project Sync,link=self,window=_blank,width=60%]
 
 After starting the sync job, go to the *Jobs* view, and you'll find the job doing the project update.
 
@@ -161,11 +161,11 @@ You can start the job by clicking the *Launch template* option from the template
 
 Template Details
 
-image::exercise-2-3-projects/template_detail.png[template details]
+image::exercise-2-3-projects/template_detail.png[template details,link=self,window=_blank,width=60%]
 
 Job Run
 
-image::exercise-2-3-projects/job_run.png[job_run]
+image::exercise-2-3-projects/job_run.png[job_run,link=self,window=_blank,width=60%]
 
 Since this might take some time, have a closer look at all the details provided:
 
@@ -196,7 +196,7 @@ WARNING: *Solution Below*
 
 * Go to *Automation Execution → Infrastructure → Inventories* → *Workshop Inventory*
 
-* In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory*, select the *Hosts* tab and select `node1`, `node2`, `node3` and click *Run Command*
+* In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory*, select the *Hosts* tab and select `node01`, `node02`, `node03` and click *Run Command*
 
 Within the *Details* window, select *Module* `command`, in *Arguments* type `systemctl status httpd` and click *Next*.
 

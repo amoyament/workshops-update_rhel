@@ -31,7 +31,7 @@ Exact labels may vary. Your instructor/backend provides the specific integration
 . Click Remediate
 . In the Remediation wizard:
 * Name: Enable time synchronization
-* Systems: select node1 (and optionally node2)
+* Systems: select node01 (and optionally node02)
 * Execution method: Run with Ansible Automation Platform
 * Integration: choose your "Workshop Controller" (configured in Step 1)
 . Click Create remediation, then Launch
@@ -61,10 +61,12 @@ On a managed host, verify the specific change (e.g., service status, config pres
 
 [source,bash,role=copypaste]
 ----
-ssh node1
-# Example verification depending on the remediation performed
-sudo systemctl status chronyd || true
-rpm -q bash || true
+ansible node01 -i hosts -m command -a "systemctl status chronyd"
+----
+
+[source,bash,role=copypaste]
+----
+ansible node01 -i hosts -m command -a "rpm -q bash"
 ----
 
 === Step 5 - (Optional) Parameterize with a Survey
@@ -121,8 +123,7 @@ ansible-playbook -i hosts remediate_timesync.yml
 
 [source,bash,role=copypaste]
 ----
-ssh node1
-timedatectl
+ansible node01 -i hosts -m command -a "timedatectl"
 ----
 
 == Summary

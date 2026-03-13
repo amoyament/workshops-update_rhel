@@ -49,7 +49,7 @@ Let's create a user:
 
 . Click *Create user*.
 
-image::exercise-2-5-rbac/create_user.png[create user]
+image::exercise-2-5-rbac/create_user.png[create user,link=self,window=_blank,width=60%]
 
 === Ansible Automation Controller Teams
 
@@ -67,7 +67,7 @@ Teams are subdivisions of an organization that include users, projects, credenti
 . Click the *Teams* tab.
 . User-team associations are managed through the role assignments covered in the next section.
 
-image::exercise-2-5-rbac/add_user.png[users list]
+image::exercise-2-5-rbac/add_user.png[users list,link=self,window=_blank,width=60%]
 
 === Granting Permissions
 
@@ -94,9 +94,9 @@ Once the job completes, verify the result by relogging back in as an admin user 
 
 Go to Automation Execution → Infrastructure → Inventories → Workshop Inventory
 
-In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node1 and click Run Command
+In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node01 and click Run Command
 
-Within the Details window, select Module command, in Arguments type `curl http://node1` and click Next.
+Within the Details window, select Module command, in Arguments type `curl http://node01` and click Next.
 
 Within the Execution Environment window, select Default execution environment and click Next.
 

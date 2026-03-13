@@ -247,39 +247,39 @@ ansible-playbook -i hosts deploy_apache.yml
 PLAY [Deploy Apache using Collection] ******************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [node3]
-ok: [node1]
-ok: [node2]
+ok: [node03]
+ok: [node01]
+ok: [node02]
 
 TASK [webops.apache.apache : Install Apache web server] ************************
-changed: [node3]
-changed: [node1]
-changed: [node2]
+changed: [node03]
+changed: [node01]
+changed: [node02]
 
 TASK [webops.apache.apache : Ensure Apache is running and enabled] *************
-changed: [node3]
-changed: [node1]
-changed: [node2]
+changed: [node03]
+changed: [node01]
+changed: [node02]
 
 TASK [webops.apache.apache : Install firewalld] ********************************
-changed: [node3]
-changed: [node1]
-changed: [node2]
+changed: [node03]
+changed: [node01]
+changed: [node02]
 
 TASK [webops.apache.apache : Allow HTTP traffic on web servers] ****************
-ok: [node3]
-ok: [node1]
-ok: [node2]
+ok: [node03]
+ok: [node01]
+ok: [node02]
 
 TASK [webops.apache.apache : Deploy custom index.html] *************************
-ok: [node3]
-ok: [node2]
-ok: [node1]
+ok: [node03]
+ok: [node02]
+ok: [node01]
 
 PLAY RECAP *********************************************************************
-node1                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node2                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node3                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node01                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node02                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node03                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
 == Step 7 - Verify Apache is Running
@@ -288,24 +288,24 @@ After the playbook runs, verify Apache is active on the web servers:
 
 [source,bash,role=copypaste]
 ----
-ssh node1 "systemctl status httpd"
+ansible node01 -i hosts -m command -a "systemctl status httpd"
 ----
 
 You should see output confirming Apache is running. Finally, confirm the web page is served:
 
 [source,bash,role=copypaste]
 ----
-curl http://node1
+curl http://node01
 ----
 
 [source,html,role=copypaste]
 ----
 <html>
 <head>
-  <title>Welcome to node1</title>
+  <title>Welcome to node01</title>
 </head>
 <body>
-  <h1>Hello from node1</h1>
+  <h1>Hello from node01</h1>
 </body>
 </html>
 ----

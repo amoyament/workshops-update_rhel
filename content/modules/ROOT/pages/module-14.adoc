@@ -8,11 +8,11 @@ This is the final challenge where you put most of what you have learned together
 
 The teams have put together these requirements:
 
-* All webservers (`node1`, `node2` and `node3`) should go in one group.
+* All webservers (`node01`, `node02` and `node03`) should go in one group.
 
 * As the webservers can be used for development purposes or in production, there has to be a way to flag them accordingly as "stage dev" or "stage prod".
 
-** Currently `node1` and `node3` are used as a development system and `node2` is in production.
+** Currently `node01` and `node03` are used as a development system and `node02` is in production.
 
 * Of course the content of the world famous application "index.html" will be different between dev and prod stages.
 
@@ -73,11 +73,11 @@ Within the *Variables* textbox define a variable labeled `stage` with the value 
 stage: dev
 ----
 
-Within the `Webserver` group, click the *Hosts* tab, then click *Add existing host*. Select `node1`, `node2`, `node3` as the hosts to be part of the `Webserver` group.
+Within the `Webserver` group, click the *Hosts* tab, then click *Add existing host*. Select `node01`, `node02`, `node03` as the hosts to be part of the `Webserver` group.
 
-Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node2`. Click the kebab menu (⋮) and select *Edit host*, then add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
+Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node02`. Click the kebab menu (⋮) and select *Edit host*, then add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
 
-image::exercise-2-7-wrap/edit_host.png[edit host]
+image::exercise-2-7-wrap/edit_host.png[edit host,link=self,window=_blank,width=60%]
 
 Within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
 
@@ -125,7 +125,7 @@ prod_content: "default prod content"
 
 Click *Create job template*.
 
-image::exercise-2-7-wrap/web_content_job_template.png[web_content_job_template]
+image::exercise-2-7-wrap/web_content_job_template.png[web_content_job_template,link=self,window=_blank,width=60%]
 
 Run the template by selecting *Launch template* from the template's kebab menu (⋮) on the Templates list.
 
@@ -165,13 +165,13 @@ Snippet of output:
 [source,bash,role=copypaste]
 ----
 TASK [debug] *******************************************************************
-ok: [node1] => {
+ok: [node01] => {
     "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
 }
-ok: [node2] => {
+ok: [node02] => {
     "content.content": "<body>\n<h1>This is a production webserver, take care!</h1>\nprod wweb</body>\n"
 }
-ok: [node3] => {
+ok: [node03] => {
     "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
 }
 ----

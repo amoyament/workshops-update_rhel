@@ -124,28 +124,28 @@ PLAY [Basic System Setup] ******************************************************
 .
 
 TASK [Update MOTD from Jinja2 Template] ****************************************
-changed: [node1]
-changed: [node2]
-changed: [node3]
+changed: [node01]
+changed: [node02]
+changed: [node03]
 changed: [control]
 
 PLAY RECAP *********************************************************************
 control                  : ok=4    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
-node1                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node2                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node3                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node01                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node02                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node03                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
-Verify the changes by SSHing into the node, and you should see the message of the day:
+Verify the message of the day was deployed correctly:
+
+[source,bash,role=copypaste]
+----
+ansible node01 -i hosts -m command -a "cat /etc/motd"
+----
 
 [source,plaintext,role=copypaste]
 ----
-ssh node1
-----
-
-[source,plaintext,role=copypaste]
-----
-Welcome to node1.
+Welcome to node01.
 OS: RedHat 8.7
 Architecture: x86_64
 Register this system with Red Hat Insights: insights-client --register
@@ -159,7 +159,7 @@ Exit the SSH session to return to your control node before continuing to the nex
 ----
 exit
 logout
-Connection to node1 closed.
+Connection to node01 closed.
 ----
 
 == Summary

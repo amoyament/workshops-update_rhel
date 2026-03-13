@@ -66,7 +66,7 @@ Now, let's create a new Template that includes a survey.
 
 . Click *Create job template*.
 
-image::exercise-2-4-surveys/template_details.png[template details]
+image::exercise-2-4-surveys/template_details.png[template details,link=self,window=_blank,width=60%]
 
 WARNING: *Do not run the template yet!*
 
@@ -89,7 +89,7 @@ WARNING: *Do not run the template yet!*
 |Text
 |===
 
-image::exercise-2-4-surveys/survey_q1.png[Survey Q1]
+image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank,width=60%]
 
 . Click *Create survey question*.
 . Click *Create survey question* to create a second survey question:
@@ -108,7 +108,7 @@ image::exercise-2-4-surveys/survey_q1.png[Survey Q1]
 |Text
 |===
 
-image::exercise-2-4-surveys/survey_q2.png[Survey Q2]
+image::exercise-2-4-surveys/survey_q2.png[Survey Q2,link=self,window=_blank,width=60%]
 
 . Click *Create survey question*.
 . Enable the survey by toggling the *Survey enabled* switch to the on position.
@@ -119,17 +119,17 @@ Now, launch the *Create index.html* job template by selecting *Launch template* 
 
 Before the job starts, the survey will prompt for *First Line* and *Second Line*. Enter your text and click *Next*. The *Review* page shows the values—if all looks good, click *Finish* to start the job.
 
-image::exercise-2-4-surveys/survey_launch.png[Survey Launch]
+image::exercise-2-4-surveys/survey_launch.png[Survey Launch,link=self,window=_blank,width=60%]
 
-image::exercise-2-4-surveys/survey_review.png[Survey Review]
+image::exercise-2-4-surveys/survey_review.png[Survey Review,link=self,window=_blank,width=60%]
 
 Once the job completes, verify the Apache homepage by running the following `curl` command in the SSH console on the control host:
 
 Go to Automation Execution → Infrastructure → Inventories → Workshop Inventory
 
-In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node1 and click Run Command
+In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node01 and click Run Command
 
-Within the Details window, select Module command, in Arguments type `curl http://node1` and click Next.
+Within the Details window, select Module command, in Arguments type `curl http://node01` and click Next.
 
 Within the Execution Environment window, select Default execution environment and click Next.
 
@@ -145,7 +145,7 @@ Verify that the output result is as expected.
 * Keep the survey enabled to collect required inputs
 * Organize or tag templates per your organization's portal conventions so users can easily find and launch approved automation
 
-image::exercise-2-4-surveys/run_command.png[Run Command]
+image::exercise-2-4-surveys/run_command.png[Run Command,link=self,window=_blank,width=60%]
 
 == Summary
 

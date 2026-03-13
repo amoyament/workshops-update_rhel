@@ -87,54 +87,54 @@ ansible-navigator run deploy_apache.yml -m stdout -vv
 
 TASK [apache : Display Variable Value] *****************************************
 task path: /home/rhel/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:20
-ok: [node1] => {
+ok: [node01] => {
     "apache_service_name": "httpd"
 }
-ok: [node2] => {
+ok: [node02] => {
     "apache_service_name": "httpd"
 }
-ok: [node3] => {
+ok: [node03] => {
     "apache_service_name": "httpd"
 }
 
 TASK [apache : Display Custom Message] *****************************************
 task path: /home/rhel/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:24
-ok: [node1] => {
+ok: [node01] => {
     "msg": "Apache service name is httpd"
 }
-ok: [node2] => {
+ok: [node02] => {
     "msg": "Apache service name is httpd"
 }
-ok: [node3] => {
+ok: [node03] => {
     "msg": "Apache service name is httpd"
 }
 
 TASK [apache : Copy Apache configuration] **************************************
 task path: /home/rhel/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:30
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
-fatal: [node3]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+fatal: [node03]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
-fatal: [node1]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+fatal: [node01]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
-fatal: [node2]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+fatal: [node02]: FAILED! => {"changed": false, "msg": "Could not find or access 'files/missing_apache.conf'\nSearched in:\n\t/home/rhel/lab_inventory/roles/apache/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/roles/apache/tasks/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/files/missing_apache.conf\n\t/home/rhel/lab_inventory/files/missing_apache.conf on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
 
 
 TASK [apache : Handle Missing Configuration] ***********************************
 task path: /home/rhel/lab_inventory/collections/ansible_collections/webops/apache/roles/apache/tasks/main.yml:39
-ok: [node1] => {
+ok: [node01] => {
     "msg": "Missing Apache configuration file 'files/missing_apache.conf'. Using default settings."
 }
-ok: [node2] => {
+ok: [node02] => {
     "msg": "Missing Apache configuration file 'files/missing_apache.conf'. Using default settings."
 }
-ok: [node3] => {
+ok: [node03] => {
     "msg": "Missing Apache configuration file 'files/missing_apache.conf'. Using default settings."
 }
 
 PLAY RECAP *********************************************************************
-node1                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
-node2                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
-node3                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
+node01                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
+node02                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
+node03                      : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0
 ----
 
 Notice how the playbook shows there was an error copying the Apache Configuration file but the playbook was able to handle it via the rescue block that was provided. If you notice the final task 'Handle Missing Configuration' details that the file was missing and it would use the default settings.

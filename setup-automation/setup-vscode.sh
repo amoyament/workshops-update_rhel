@@ -14,6 +14,7 @@ echo "rhel:ansible123!" | chpasswd
 echo "rhel ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/rhel_sudoers
 chmod 440 /etc/sudoers.d/rhel_sudoers
 
+
 # ─── Firewall ───
 systemctl stop firewalld
 
@@ -88,11 +89,11 @@ mkdir -p /home/rhel/lab_inventory
 
 cat > /home/rhel/lab_inventory/hosts << 'INVENTORY'
 [web]
-node1 ansible_host=node01
-node2 ansible_host=node02
+node01
+node02
 
 [db]
-node3 ansible_host=node03
+node03
 
 [all:vars]
 ansible_user=rhel

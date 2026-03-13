@@ -33,13 +33,13 @@ You'll work in a pre-configured environment with the following hosts:
 |control
 
 |Managed Host 1
-|node1
+|node01
 
 |Managed Host 2
-|node2
+|node02
 
 |Managed Host 3
-|node3
+|node03
 |===
 
 == Section 1 - Command-line Ansible Exercises

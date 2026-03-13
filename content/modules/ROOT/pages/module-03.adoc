@@ -16,7 +16,7 @@ Conditionals in Ansible control whether a task should run based on certain condi
 
 [NOTE]
 ====
-Previous examples had hosts set to node1 but now it is set to all. This means when you run this updated Ansible playbook you will notice updates for the new systems being automated against, the user Roger created on all new systems and the Apache web server package httpd installed on all the hosts within the web group.
+Previous examples had hosts set to node01 but now it is set to all. This means when you run this updated Ansible playbook you will notice updates for the new systems being automated against, the user Roger created on all new systems and the Apache web server package httpd installed on all the hosts within the web group.
 ====
 
 [source,yaml,role=copypaste]
@@ -123,34 +123,34 @@ NOTE: Notice how the name of the handler is used within the notify section of th
 PLAY [Basic System Setup] ******************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [node3]
-ok: [node1]
-ok: [node2]
+ok: [node03]
+ok: [node01]
+ok: [node02]
 ok: [control]
 
 TASK [Ensure latest versions of core packages] *********************************
-ok: [node1]
+ok: [node01]
 changed: [control]
-changed: [node3]
-changed: [node2]
+changed: [node03]
+changed: [node02]
 
 TASK [Create a new user] *******************************************************
-changed: [node3]
-ok: [node1]
-changed: [node2]
+changed: [node03]
+ok: [node01]
+changed: [node02]
 changed: [control]
 
 TASK [Install Apache on web servers] *******************************************
 skipping: [control]
-ok: [node3]
-ok: [node1]
-ok: [node2]
+ok: [node03]
+ok: [node01]
+ok: [node02]
 
 PLAY RECAP *********************************************************************
 control                  : ok=3    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-node1                      : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node2                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node3                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node01                      : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node02                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node03                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
 == Loops
@@ -202,17 +202,17 @@ PLAY [Basic System Setup] ******************************************************
 .
 
 TASK [Create a new user] *******************************************************
-changed: [node3] => (item=alice)
-changed: [node1] => (item=alice)
-changed: [node2] => (item=alice)
+changed: [node03] => (item=alice)
+changed: [node01] => (item=alice)
+changed: [node02] => (item=alice)
 changed: [control] => (item=alice)
-changed: [node3] => (item=bob)
-changed: [node1] => (item=bob)
-changed: [node2] => (item=bob)
-changed: [node3] => (item=carol)
+changed: [node03] => (item=bob)
+changed: [node01] => (item=bob)
+changed: [node02] => (item=bob)
+changed: [node03] => (item=carol)
 changed: [control] => (item=bob)
-changed: [node1] => (item=carol)
-changed: [node2] => (item=carol)
+changed: [node01] => (item=carol)
+changed: [node02] => (item=carol)
 changed: [control] => (item=carol)
 
 .
@@ -222,9 +222,9 @@ changed: [control] => (item=carol)
 
 PLAY RECAP *********************************************************************
 control                  : ok=3    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node3                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node01                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node02                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+node03                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ----
 
 == Summary

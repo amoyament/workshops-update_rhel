@@ -13,7 +13,7 @@ To open a terminal in VS Code:
 . Click on the *Terminal* menu at the top
 . Select *New Terminal*
 
-image::exercise-1-1-setup/vscode-new-terminal.png[Opening a new terminal in VS Code]
+image::exercise-1-1-setup/vscode-new-terminal.png[Opening a new terminal in VS Code,link=self,window=_blank,width=60%]
 
 You will use this terminal to run all commands in the exercises that follow.
 
@@ -34,11 +34,11 @@ An example INI-style inventory might look like:
 [source,ini]
 ----
 [web]
-node1
-node2
+node01
+node02
 
 [db]
-node3
+node03
 ----
 
 In a playbook, the `hosts` key selects which inventory hosts/groups to target. Before moving on, verify connectivity with an ad-hoc ping using the provided inventory:
@@ -49,7 +49,7 @@ cd ~/lab_inventory
 ansible -i hosts all -m ping
 ----
 
-You can substitute `all` with a specific group (e.g., `web`) or host (e.g., `node1`). This helps confirm the inventory is correct before running playbooks.
+You can substitute `all` with a specific group (e.g., `web`) or host (e.g., `node01`). This helps confirm the inventory is correct before running playbooks.
 
 == Playbook Basics
 
@@ -89,7 +89,7 @@ The basic structure looks as follows:
 ----
 ---
 - name: Basic System Setup
-  hosts: node1
+  hosts: node01
   become: true
   tasks:
     - name: Ensure core packages are installed
@@ -121,7 +121,7 @@ ansible-playbook -i hosts system_setup.yml
 
 Review the output to ensure each task is completed successfully.
 
-image::exercise-1-1-setup/system_setup_output.png[Playbook output]
+image::exercise-1-1-setup/system_setup_output.png[Playbook output,link=self,window=_blank,width=60%]
 
 == Checking the Playbook
 
@@ -131,7 +131,7 @@ Now, let's create a second playbook for post-configuration checks, named `system
 ----
 ---
 - name: System Configuration Checks
-  hosts: node1
+  hosts: node01
   become: true
   tasks:
     - name: Check user existence
@@ -160,7 +160,7 @@ ansible-playbook -i hosts system_checks.yml
 
 Review the output to ensure the user creation was successful.
 
-image::exercise-1-1-setup/system_checks_output.png[System checks playbook output]
+image::exercise-1-1-setup/system_checks_output.png[System checks playbook output,link=self,window=_blank,width=60%]
 
 == Summary
 
