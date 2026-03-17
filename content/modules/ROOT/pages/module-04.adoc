@@ -57,7 +57,7 @@ Modify the `system_setup.yml` Playbook with the following content:
       ansible.builtin.package:
         name:
           - git
-          - httpd
+          - vim
         state: latest
 
     - name: Create a new user

@@ -96,7 +96,7 @@ The basic structure looks as follows:
       ansible.builtin.package:
         name:
           - git
-          - httpd
+          - vim
         state: present
 
     - name: Create a new user

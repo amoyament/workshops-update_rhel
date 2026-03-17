@@ -33,7 +33,7 @@ Update the `system_setup.yml` playbook to include and use a variable:
       ansible.builtin.package:
         name:
           - git
-          - httpd
+          - vim
         state: present
 
     - name: Create a new user
@@ -43,12 +43,6 @@ Update the `system_setup.yml` playbook to include and use a variable:
         create_home: true
 ----
 
-Run this playbook with:
-
-[source,bash,role=copypaste]
-----
-ansible-playbook -i hosts system_setup.yml
-----
 
 == Running the Modified Playbook
 
@@ -69,6 +63,8 @@ Verify the user creation via:
 ----
 ssh node01 id Roger
 ----
+
+NOTE: When prompted for a password, enter `ansible123!`
 
 == Advanced Variable Usage in Checks Playbook
 

@@ -33,7 +33,7 @@ Previous examples had hosts set to node01 but now it is set to all. This means w
       ansible.builtin.package:
         name:
           - git
-          - httpd
+          - vim
         state: latest
 
     - name: Create a new user
@@ -71,7 +71,7 @@ Let's say we want to ensure the firewall is configured correctly on all web serv
       ansible.builtin.package:
         name:
           - git
-          - httpd
+          - vim
         state: latest
 
     - name: Create a new user
