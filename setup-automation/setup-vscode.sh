@@ -63,6 +63,21 @@ SETTINGS
 
 systemctl start code-server || true
 
+# ─── Repo configuration ───
+# Re-enable RHSM repo management (AWS images set manage_repos=0)
+sed -i 's/^manage_repos.*=.*0/manage_repos = 1/' /etc/rhsm/rhsm.conf
+
+# Disable unreachable AWS RHUI repos
+dnf config-manager --set-disabled '*rhui*' 2>/dev/null || true
+
+# Disable Amazon ID dnf plugin that errors in non-AWS environments
+if [ -f /etc/dnf/plugins/amazon-id.conf ]; then
+    sed -i 's/enabled.*=.*1/enabled=0/' /etc/dnf/plugins/amazon-id.conf
+fi
+
+# Enable RHEL 9 repos from satellite
+subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms --enable=rhel-9-for-x86_64-appstream-rpms
+
 # ─── Install packages ───
 dnf install -y unzip nano git podman python3-pip sshpass || true
 
