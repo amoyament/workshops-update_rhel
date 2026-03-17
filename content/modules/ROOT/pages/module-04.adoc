@@ -53,11 +53,11 @@ Modify the `system_setup.yml` Playbook with the following content:
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Ensure latest versions of core packages
+    - name: Install required packages
       ansible.builtin.package:
         name:
-          - bash
-          - sudo
+          - git
+          - httpd
         state: latest
 
     - name: Create a new user

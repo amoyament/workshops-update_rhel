@@ -92,11 +92,11 @@ The basic structure looks as follows:
   hosts: node01
   become: true
   tasks:
-    - name: Ensure core packages are installed
+    - name: Install required packages
       ansible.builtin.package:
         name:
-          - bash
-          - sudo
+          - git
+          - httpd
         state: present
 
     - name: Create a new user

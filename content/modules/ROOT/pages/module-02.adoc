@@ -29,11 +29,11 @@ Update the `system_setup.yml` playbook to include and use a variable:
   vars:
     user_name: 'Roger'
   tasks:
-    - name: Ensure core packages are installed
+    - name: Install required packages
       ansible.builtin.package:
         name:
-          - bash
-          - sudo
+          - git
+          - httpd
         state: present
 
     - name: Create a new user

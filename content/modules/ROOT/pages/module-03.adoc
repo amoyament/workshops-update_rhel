@@ -29,11 +29,11 @@ Previous examples had hosts set to node01 but now it is set to all. This means w
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Ensure latest versions of core packages
+    - name: Install required packages
       ansible.builtin.package:
         name:
-          - bash
-          - sudo
+          - git
+          - httpd
         state: latest
 
     - name: Create a new user
@@ -67,11 +67,11 @@ Let's say we want to ensure the firewall is configured correctly on all web serv
     user_name: 'Roger'
     package_name: httpd
   tasks:
-    - name: Ensure latest versions of core packages
+    - name: Install required packages
       ansible.builtin.package:
         name:
-          - bash
-          - sudo
+          - git
+          - httpd
         state: latest
 
     - name: Create a new user
