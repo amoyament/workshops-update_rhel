@@ -25,13 +25,15 @@ mkdir -p ~/lab_inventory/templates
 
 === Develop the MOTD Template
 
-Create a file named `motd.j2` in the templates directory with the following content:
+Create a file named `motd.j2` in the templates directory:
 
-[source,jinja,role=copypaste]
+[source,bash,role=copypaste]
 ----
+cat > ~/lab_inventory/templates/motd.j2 << 'EOF'
 Welcome to {{ ansible_hostname }}.
 OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
 Architecture: {{ ansible_architecture }}
+EOF
 ----
 
 This template dynamically displays the hostname, OS distribution, version, and architecture of each managed host.
@@ -44,7 +46,6 @@ Modify the `system_setup.yml` Playbook with the following content:
 
 [source,yaml,role=copypaste]
 ----
----
 ---
 - name: Basic System Setup
   hosts: all
@@ -95,8 +96,9 @@ Modify the `system_setup.yml` Playbook with the following content:
 
     - name: Update MOTD from Jinja2 Template
       ansible.builtin.template:
-        src: templates/motd.j2
+        src: motd.j2
         dest: /etc/motd
+        mode: '0644'
 
   handlers:
     - name: Reload Firewall
@@ -116,50 +118,24 @@ Run the playbook to apply your custom MOTD across all managed hosts:
 ansible-playbook -i hosts system_setup.yml
 ----
 
-[source,plaintext,role=copypaste]
-----
-PLAY [Basic System Setup] ******************************************************
-.
-.
-.
+image::exercise-1-4-templates/system_setup_output.png[system_setup.yml output,link=self,window=_blank,width=60%]
 
-TASK [Update MOTD from Jinja2 Template] ****************************************
-changed: [node01]
-changed: [node02]
-changed: [node03]
-changed: [control]
-
-PLAY RECAP *********************************************************************
-control                  : ok=4    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
-node01                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node02                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node03                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
-
-Verify the message of the day was deployed correctly:
+Verify the message of the day was deployed correctly by SSHing into node01 — the MOTD will display automatically on login:
 
 [source,bash,role=copypaste]
 ----
-ansible node01 -i hosts -m command -a "cat /etc/motd"
+ssh node01
 ----
 
-[source,plaintext,role=copypaste]
-----
-Welcome to node01.
-OS: RedHat 8.7
-Architecture: x86_64
-Register this system with Red Hat Insights: insights-client --register
-Create an account or view all your systems at https://red.ht/insights-dashboard
-Last login: Mon Jan 29 16:30:31 2024 from 10.5.1.29
-----
+NOTE: When prompted for a password, enter `ansible123!`
+
+image::exercise-1-4-templates/motd_verification_output.png[MOTD verification output,link=self,window=_blank,width=60%]
 
 Exit the SSH session to return to your control node before continuing to the next exercise:
 
-[source,plaintext,role=copypaste]
+[source,bash,role=copypaste]
 ----
 exit
-logout
-Connection to node01 closed.
 ----
 
 == Summary
