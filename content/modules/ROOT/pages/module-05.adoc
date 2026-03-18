@@ -99,6 +99,7 @@ Use `ansible-galaxy` to initialize the collection structure:
 ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
 ----
 
+
 This creates the following structure:
 
 [source,bash]
@@ -221,15 +222,13 @@ Create a playbook named `deploy_apache.yml` within `~/lab_inventory` directory t
 - name: Deploy Apache using Collection
   hosts: web
   become: true
-  collections:
-    - webops.apache
   roles:
-    - apache
+    - webops.apache.apache
 ----
 
 == Create a `requirements.yml` file and run it
 
-The Ansible playbook requires the `ansible.posix` collection. Create and add this requirement to your `requirements.yml` file that shall reside under `~/lab_inventory`
+A `requirements.yml` file is the standard way to declare collection dependencies in Ansible projects. This makes your automation portable — anyone running your playbook can install all required collections with a single command. Create a `requirements.yml` file under `~/lab_inventory` with the following content:
 
 [source,bash,role=copypaste]
 ----
@@ -239,6 +238,7 @@ collections:
 
 [source,bash,role=copypaste]
 ----
+cd ~/lab_inventory
 ansible-galaxy collection install -r requirements.yml
 ----
 
@@ -251,45 +251,7 @@ Run the playbook using `ansible-playbook`:
 ansible-playbook -i hosts deploy_apache.yml
 ----
 
-[source,text,role=copypaste]
-----
-PLAY [Deploy Apache using Collection] ******************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [node03]
-ok: [node01]
-ok: [node02]
-
-TASK [webops.apache.apache : Install Apache web server] ************************
-changed: [node03]
-changed: [node01]
-changed: [node02]
-
-TASK [webops.apache.apache : Ensure Apache is running and enabled] *************
-changed: [node03]
-changed: [node01]
-changed: [node02]
-
-TASK [webops.apache.apache : Install firewalld] ********************************
-changed: [node03]
-changed: [node01]
-changed: [node02]
-
-TASK [webops.apache.apache : Allow HTTP traffic on web servers] ****************
-ok: [node03]
-ok: [node01]
-ok: [node02]
-
-TASK [webops.apache.apache : Deploy custom index.html] *************************
-ok: [node03]
-ok: [node02]
-ok: [node01]
-
-PLAY RECAP *********************************************************************
-node01                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node02                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node03                      : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
+image::exercise-1-5-collections/deploy_apache_output.png[deploy_apache.yml output,link=self,window=_blank,width=60%]
 
 == Verify Apache is Running
 
@@ -297,8 +259,10 @@ After the playbook runs, verify Apache is active on the web servers:
 
 [source,bash,role=copypaste]
 ----
-ansible node01 -i hosts -m command -a "systemctl status httpd"
+ssh node01 "systemctl status httpd"
 ----
+
+NOTE: When prompted for a password, enter `ansible123!`
 
 You should see output confirming Apache is running. Finally, confirm the web page is served:
 
@@ -307,17 +271,7 @@ You should see output confirming Apache is running. Finally, confirm the web pag
 curl http://node01
 ----
 
-[source,html,role=copypaste]
-----
-<html>
-<head>
-  <title>Welcome to node01</title>
-</head>
-<body>
-  <h1>Hello from node01</h1>
-</body>
-</html>
-----
+image::exercise-1-5-collections/curl_output.png[curl output,link=self,window=_blank,width=60%]
 
 == Summary
 
