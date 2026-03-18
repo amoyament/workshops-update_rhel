@@ -34,7 +34,14 @@ Small programs that perform specific automation tasks on *local machines, APIs, 
 
 == Step 2 - Cleaning up the Environment
 
-Before we build the collection, let's clean up any previous Apache installations.
+Before we build the collection, let's clean up any previous Apache installations. Create a file called `cleanup.yml` in your `~/lab_inventory` directory:
+
+[source,bash,role=copypaste]
+----
+touch ~/lab_inventory/cleanup.yml
+----
+
+Then add the following content to `cleanup.yml`:
 
 [source,yaml,role=copypaste]
 ----
@@ -71,6 +78,7 @@ Before we build the collection, let's clean up any previous Apache installations
       ansible.builtin.copy:
         dest: /etc/motd
         content: ''
+        mode: '0644'
 ----
 
 Now run the playbook to clean the environment
@@ -93,7 +101,7 @@ ansible-galaxy collection init webops.apache --init-path ./collections/ansible_c
 
 This creates the following structure:
 
-[source,bash,role=copypaste]
+[source,bash]
 ----
 .
 └── collections
@@ -200,6 +208,7 @@ Add the template deployment task to roles/apache/tasks/main.yml:
   ansible.builtin.template:
     src: index.html.j2
     dest: /var/www/html/index.html
+    mode: '0644'
 ----
 
 == Step 4 - Using the Collection in a Playbook

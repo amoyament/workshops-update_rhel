@@ -47,6 +47,7 @@ Wrap tasks that could potentially fail in a block and define a rescue section to
       ansible.builtin.copy:
         src: "{{ apache_conf_src }}"
         dest: "/etc/httpd/conf/httpd.conf"
+        mode: '0644'
   rescue:
     - name: Handle Missing Configuration
       ansible.builtin.debug:
