@@ -45,7 +45,6 @@ In a playbook, the `hosts` key selects which inventory hosts/groups to target. B
 
 [source,bash,role=copypaste]
 ----
-cd ~/lab_inventory
 ansible -i hosts all -m ping
 ----
 

@@ -95,8 +95,8 @@ fi
 
 # ─── Ansible collections (used across modules 3-7) ───
 echo "Installing Ansible collections..."
-ansible-galaxy collection install ansible.posix --force
-ansible-galaxy collection install community.general --force
+sudo -u rhel ansible-galaxy collection install ansible.posix --force
+sudo -u rhel ansible-galaxy collection install community.general --force
 
 # ─── Lab Inventory Setup ───
 echo "Creating lab_inventory for rhel user..."
