@@ -9,7 +9,7 @@ In this exercise you will learn the basics of Ansible Navigator and Execution En
 We intentionally introduce Navigator after the command-line basics to reduce onboarding friction for new users.
 ====
 
-== Step 1 - What is an Execution Environment?
+== What is an Execution Environment?
 
 An Execution Environment is a container image that includes:
 
@@ -24,7 +24,7 @@ Using an EE helps ensure consistent results across developer desktops and automa
 Your lab environment provides a default EE. Backend image pull and updates are handled for you.
 ====
 
-== Step 2 - Running a playbook with ansible-navigator
+== Running a playbook with ansible-navigator
 
 Change to your working directory:
 
@@ -42,7 +42,7 @@ ansible-navigator run system_setup.yml -m stdout
 
 Observe that execution uses the default EE configured for your environment.
 
-== Step 3 - Explore docs and collections
+== Explore docs and collections
 
 Use Navigator to view documentation for commonly used modules:
 
@@ -59,7 +59,7 @@ List available collections inside the EE:
 ansible-navigator collections -m stdout
 ----
 
-== Step 4 - Compare to ansible-playbook
+== Compare to ansible-playbook
 
 Earlier, you ran the same playbooks using `ansible-playbook`. Navigator complements that workflow by:
 
