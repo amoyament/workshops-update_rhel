@@ -118,40 +118,7 @@ The handler "Reload Firewall" is triggered only if the task "Allow HTTP traffic 
 
 NOTE: Notice how the name of the handler is used within the notify section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
 
-[source,bash,role=copypaste]
-----
-PLAY [Basic System Setup] ******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [node03]
-ok: [node01]
-ok: [node02]
-ok: [control]
-
-TASK [Ensure latest versions of core packages] *********************************
-ok: [node01]
-changed: [control]
-changed: [node03]
-changed: [node02]
-
-TASK [Create a new user] *******************************************************
-changed: [node03]
-ok: [node01]
-changed: [node02]
-changed: [control]
-
-TASK [Install Apache on web servers] *******************************************
-skipping: [control]
-ok: [node03]
-ok: [node01]
-ok: [node02]
-
-PLAY RECAP *********************************************************************
-control                  : ok=3    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-node01                      : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node02                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node03                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
+image::exercise-1-3-conditionals/system_setup_output.png[system_setup.yml output,link=self,window=_blank,width=60%]
 
 == Loops
 
@@ -191,41 +158,7 @@ When you run the updated playbook, this task is executed three times, once for e
 
 Snippet of the output for creating a new user on all the nodes.
 
-[source,bash,role=copypaste]
-----
-ansible-playbook -i hosts system_setup.yml
-
-PLAY [Basic System Setup] ******************************************************
-
-.
-.
-.
-
-TASK [Create a new user] *******************************************************
-changed: [node03] => (item=alice)
-changed: [node01] => (item=alice)
-changed: [node02] => (item=alice)
-changed: [control] => (item=alice)
-changed: [node03] => (item=bob)
-changed: [node01] => (item=bob)
-changed: [node02] => (item=bob)
-changed: [node03] => (item=carol)
-changed: [control] => (item=bob)
-changed: [node01] => (item=carol)
-changed: [node02] => (item=carol)
-changed: [control] => (item=carol)
-
-.
-.
-.
-
-
-PLAY RECAP *********************************************************************
-control                  : ok=3    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-node01                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node02                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-node03                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-----
+image::exercise-1-3-conditionals/user_creation_output.png[User creation output,link=self,window=_blank,width=60%]
 
 == Summary
 
