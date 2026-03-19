@@ -90,18 +90,17 @@ ansible-playbook -i hosts cleanup.yml
 
 == Building an Apache Collection
 
-1. Create the Collection Structure
-
+. Create the Collection Structure
++
 Use `ansible-galaxy` to initialize the collection structure:
-
++
 [source,bash,role=copypaste]
 ----
 ansible-galaxy collection init webops.apache --init-path ./collections/ansible_collections
 ----
-
-
++
 This creates the following structure:
-
++
 [source,bash]
 ----
 .
@@ -119,18 +118,18 @@ This creates the following structure:
                 └── roles
 ----
 
-2. Create the `apache` role within your `webops.apache` collection:
-
+. Create the `apache` role within your `webops.apache` collection:
++
 [source,bash,role=copypaste]
 ----
 cd collections/ansible_collections/webops/apache/roles
 ansible-galaxy role init apache
 ----
 
-3. Define Role Variables:
-
-Add Apache-specific variables in roles/apache/vars/main.yml:
-
+. Define Role Variables:
++
+Add Apache-specific variables in `roles/apache/vars/main.yml`:
++
 [source,yaml,role=copypaste]
 ----
 ---
@@ -138,10 +137,10 @@ apache_package_name: httpd
 apache_service_name: httpd
 ----
 
-4. Create Role Tasks:
-
-Add the following tasks to roles/apache/tasks/main.yml to install and configure Apache:
-
+. Create Role Tasks:
++
+Add the following tasks to `roles/apache/tasks/main.yml` to install and configure Apache:
++
 [source,yaml,role=copypaste]
 ----
 ---
@@ -170,10 +169,10 @@ Add the following tasks to roles/apache/tasks/main.yml to install and configure 
   notify: Reload Firewall
 ----
 
-5. Add Handlers:
-
-Create a handler to reload the firewall in roles/apache/handlers/main.yml:
-
+. Add Handlers:
++
+Create a handler to reload the firewall in `roles/apache/handlers/main.yml`:
++
 [source,yaml,role=copypaste]
 ----
 ---
@@ -183,10 +182,10 @@ Create a handler to reload the firewall in roles/apache/handlers/main.yml:
     state: reloaded
 ----
 
-6. Create a Custom Webpage Template:
-
-Add a Jinja2 template for the web page in roles/apache/templates/index.html.j2:
-
+. Create a Custom Webpage Template:
++
+Add a Jinja2 template for the web page in `roles/apache/templates/index.html.j2`:
++
 [source,html,role=copypaste]
 ----
 <html>
@@ -199,10 +198,10 @@ Add a Jinja2 template for the web page in roles/apache/templates/index.html.j2:
 </html>
 ----
 
-7. Deploy the Template:
-
-Add the template deployment task to roles/apache/tasks/main.yml:
-
+. Deploy the Template:
++
+Add the template deployment task to `roles/apache/tasks/main.yml`:
++
 [source,yaml,role=copypaste]
 ----
 - name: Deploy custom index.html
@@ -241,13 +240,8 @@ Install the declared collections with:
 [source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
-ansible-galaxy collection install -r requirements.yml
+ansible-galaxy collection install -r requirements.yml -f
 ----
-
-[NOTE]
-====
-Since `ansible.posix` is already installed in this lab environment, you will see a message indicating nothing needed to be changed. That is expected.
-====
 
 
 == Summary

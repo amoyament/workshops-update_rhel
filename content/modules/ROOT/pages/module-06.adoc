@@ -22,11 +22,6 @@ An *Execution Environment* is a container image that bundles together:
 
 Because everything is packaged in one image, every team member and every controller job uses the identical runtime — no more "works on my machine" issues.
 
-[NOTE]
-====
-Your lab environment provides a pre-built EE image. The setup script has already pulled it for you.
-====
-
 == Examining the Execution Environment
 
 Change to your working directory:
@@ -42,6 +37,11 @@ Run `ansible-navigator images` to list the Execution Environments available on y
 ----
 ansible-navigator images
 ----
+
+[NOTE]
+====
+The EE image will be pulled on first run. This will take a minute — once complete, the TUI will launch automatically.
+====
 
 image::exercise-1-6-navigator/navigator_images.png[ansible-navigator images TUI,link=self,window=_blank,width=60%]
 
