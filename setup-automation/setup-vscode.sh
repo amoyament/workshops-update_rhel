@@ -157,8 +157,6 @@ ansible-navigator:
     volume-mounts:
     - src: "/etc/ansible/"
       dest: "/etc/ansible/"
-    - src: "/usr/share/ansible/collections/"
-      dest: "/usr/share/ansible/collections/"
     - src: "/home/rhel/.ansible/collections/"
       dest: "/home/rhel/.ansible/collections/"
 

@@ -242,37 +242,6 @@ cd ~/lab_inventory
 ansible-galaxy collection install -r requirements.yml
 ----
 
-== Collection Execution and Validation
-
-Run the playbook using `ansible-playbook`:
-
-[source,bash,role=copypaste]
-----
-ansible-playbook -i hosts deploy_apache.yml
-----
-
-image::exercise-1-5-collections/deploy_apache_output.png[deploy_apache.yml output,link=self,window=_blank,width=60%]
-
-== Verify Apache is Running
-
-After the playbook runs, verify Apache is active on the web servers:
-
-[source,bash,role=copypaste]
-----
-ssh node01 "systemctl status httpd"
-----
-
-NOTE: When prompted for a password, enter `ansible123!`
-
-You should see output confirming Apache is running. Finally, confirm the web page is served:
-
-[source,bash,role=copypaste]
-----
-curl http://node01
-----
-
-image::exercise-1-5-collections/curl_output.png[curl output,link=self,window=_blank,width=60%]
-
 == Summary
 
 In this exercise you:
@@ -281,6 +250,6 @@ In this exercise you:
 * Cleaned up a previous environment to prepare for a fresh deployment
 * Built a custom `webops.apache` collection with roles, tasks, handlers, and templates
 * Created a playbook that uses the collection to deploy Apache
-* Installed collection dependencies via `requirements.yml`
-* Executed and validated the collection-based deployment
-* Verified that Apache was running and serving the custom web page
+* Declared collection dependencies using `requirements.yml` for portability
+
+In the next exercise you will run this playbook inside an Execution Environment using `ansible-navigator`.

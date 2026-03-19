@@ -1,30 +1,33 @@
-= Ansible Navigator and Execution Environments (basics)
+= Ansible Navigator and Execution Environments
 :toc:
 :toc-placement: auto
 
-In this exercise you will learn the basics of Ansible Navigator and Execution Environments (EEs). You will understand how EEs package Python dependencies, ansible-core, and collections, run an existing playbook using `ansible-navigator`, browse module docs from the CLI, and contrast with the `ansible-playbook` command used earlier. This exercise builds on the playbooks you created earlier in the workshop.
+In the previous exercise you built a custom `webops.apache` collection and ran it with `ansible-playbook`. In this exercise you will learn how *Ansible Navigator* and *Execution Environments* (EEs) change that workflow — packaging everything your automation needs into a portable container image and giving you a consistent runtime whether you are running locally or in Automation Controller.
 
-[NOTE]
-====
-We intentionally introduce Navigator after the command-line basics to reduce onboarding friction for new users.
-====
+== What is ansible-navigator?
+
+`ansible-navigator` is a text-based user interface (TUI) and command-line tool for developing and running Ansible automation. It extends the `ansible-playbook` workflow by:
+
+* Running playbooks inside a containerized *Execution Environment*
+* Providing an interactive TUI for exploring playbook output, module docs, and EE contents
+* Matching the runtime your Automation Controller uses, so what works locally works in production
 
 == What is an Execution Environment?
 
-An Execution Environment is a container image that includes:
+An *Execution Environment* is a container image that bundles together:
 
-* ansible-core
-* Python runtimes and libraries
-* Ansible collections and dependencies
+* `ansible-core`
+* Python runtimes and dependencies
+* Ansible collections and their prerequisites
 
-Using an EE helps ensure consistent results across developer desktops and automation controller.
+Because everything is packaged in one image, every team member and every controller job uses the identical runtime — no more "works on my machine" issues.
 
 [NOTE]
 ====
-Your lab environment provides a default EE. Backend image pull and updates are handled for you.
+Your lab environment provides a pre-built EE image. The setup script has already pulled it for you.
 ====
 
-== Running a playbook with ansible-navigator
+== Examining the Execution Environment
 
 Change to your working directory:
 
@@ -33,47 +36,156 @@ Change to your working directory:
 cd ~/lab_inventory
 ----
 
-Run the playbook you created earlier using Navigator in stdout mode:
+Run `ansible-navigator images` to list the Execution Environments available on your control node:
 
 [source,bash,role=copypaste]
 ----
-ansible-navigator run system_setup.yml -m stdout
+ansible-navigator images
 ----
 
-Observe that execution uses the default EE configured for your environment.
+image::exercise-1-6-navigator/navigator_images.png[ansible-navigator images TUI,link=self,window=_blank,width=60%]
 
-== Explore docs and collections
+You will see the `rhel_90_ee` image listed. Press the number shown next to it to open the EE detail menu.
 
-Use Navigator to view documentation for commonly used modules:
+image::exercise-1-6-navigator/navigator_ee_menu.png[EE detail menu,link=self,window=_blank,width=60%]
+
+From the detail menu, select option *2* — *Ansible version and collections* — to inspect what is packaged inside the EE:
+
+image::exercise-1-6-navigator/navigator_ee_collections.png[EE collections list,link=self,window=_blank,width=60%]
+
+Here you can see the `ansible-core` version and every collection bundled into the image, including `ansible.posix` which your collection depends on.
+
+Press `Esc` to exit the TUI when you are done exploring.
+
+[NOTE]
+====
+The output you see may differ slightly from the screenshots above — this reflects the specific EE image built for this lab.
+====
+
+== Examining the ansible-navigator Configuration
+
+Your environment includes a pre-configured `~/.ansible-navigator.yml` file. View it with:
 
 [source,bash,role=copypaste]
 ----
-ansible-navigator doc ansible.builtin.package -m stdout
-ansible-navigator doc ansible.builtin.user -m stdout
+cat ~/.ansible-navigator.yml
 ----
 
-List available collections inside the EE:
+You should see output similar to the following:
+
+[source,yaml]
+----
+---
+ansible-navigator:
+  ansible:
+    inventory:
+      entries:
+      - /home/rhel/lab_inventory/hosts
+
+  execution-environment:
+    image: quay.io/acme_corp/rhel_90_ee:latest
+    enabled: true
+    container-engine: podman
+    pull:
+      policy: missing
+    volume-mounts:
+    - src: "/etc/ansible/"
+      dest: "/etc/ansible/"
+    - src: "/home/rhel/.ansible/collections/"
+      dest: "/home/rhel/.ansible/collections/"
+
+  mode: stdout
+----
+
+Key parameters to note:
+
+* `inventory.entries` — points navigator to your lab inventory file, so you do not need to pass `-i hosts` on the command line
+* `execution-environment.image` — the container image used for every playbook run
+* `execution-environment.container-engine` — uses `podman` to run the EE rootlessly
+* `execution-environment.pull.policy: missing` — pulls the image only if it is not already present locally
+* `volume-mounts` — mounts your local collection paths into the EE so the `webops.apache` collection you built in the previous exercise is available inside the container
+* `mode: stdout` — prints playbook output directly to the terminal instead of launching the TUI
+
+== Running the Collection Playbook with ansible-navigator
+
+In the previous exercise you ran `deploy_apache.yml` directly with `ansible-playbook`. Now run the same playbook through `ansible-navigator` so it executes inside the EE:
 
 [source,bash,role=copypaste]
 ----
-ansible-navigator collections -m stdout
+ansible-navigator run deploy_apache.yml -m stdout
 ----
 
-== Compare to ansible-playbook
+image::exercise-1-6-navigator/navigator_run_output.png[ansible-navigator run output,link=self,window=_blank,width=60%]
 
-Earlier, you ran the same playbooks using `ansible-playbook`. Navigator complements that workflow by:
+Notice that the playbook output looks identical to what `ansible-playbook` produces — the difference is that the tasks ran inside the containerized EE rather than directly on the control node.
 
-* Standardizing the runtime via EEs
-* Offering helpful TUI and stdout experiences
-* Providing built-in docs exploration
+== Verify Apache is Running
 
-Use whichever is appropriate for your team's workflow. In automation controller, jobs run with EEs by default.
+After the playbook completes, verify Apache is active on the web servers:
+
+[source,bash,role=copypaste]
+----
+ssh node01 "systemctl status httpd"
+----
+
+NOTE: When prompted for a password, enter `ansible123!`
+
+You should see output confirming Apache is running. Confirm the web page is being served:
+
+[source,bash,role=copypaste]
+----
+curl http://node01
+----
+
+image::exercise-1-6-navigator/curl_output.png[curl output,link=self,window=_blank,width=60%]
+
+== Exploring Module Documentation
+
+One advantage of `ansible-navigator` is built-in access to module documentation pulled from inside the EE:
+
+[source,bash,role=copypaste]
+----
+ansible-navigator doc ansible.builtin.template -m stdout
+----
+
+[source,bash,role=copypaste]
+----
+ansible-navigator doc ansible.posix.firewalld -m stdout
+----
+
+This ensures the docs you read match the exact collection versions packaged in your EE.
+
+== ansible-navigator vs ansible-playbook
+
+Both tools run Ansible playbooks, but they serve different purposes:
+
+[cols="1,1",options="header"]
+|===
+| ansible-playbook | ansible-navigator
+
+| Runs directly on the control node
+| Runs inside a containerized EE
+
+| Uses locally installed collections and Python
+| Uses the versions packaged in the EE image
+
+| Standard for ad-hoc and simple workflows
+| Standard for team and controller-aligned workflows
+
+| No built-in TUI or doc browser
+| Includes TUI, doc browser, and EE inspection
+|===
+
+In *Automation Controller*, all jobs run with Execution Environments by default. Using `ansible-navigator` locally means your development environment matches production exactly.
 
 == Summary
 
 In this exercise you:
 
-* Learned what Execution Environments are and why they provide consistent automation runtimes
-* Ran an existing playbook using `ansible-navigator` in stdout mode
-* Explored module documentation and available collections from the CLI
-* Compared the `ansible-navigator` and `ansible-playbook` workflows
+* Learned what Execution Environments are and why they provide a consistent automation runtime
+* Used `ansible-navigator images` to inspect the EE and view its bundled collections and `ansible-core` version
+* Examined the `~/.ansible-navigator.yml` configuration file and understood its key parameters
+* Ran the `deploy_apache.yml` collection playbook inside an EE using `ansible-navigator`
+* Verified that Apache was running and serving the custom web page
+* Explored module documentation directly from the EE using `ansible-navigator doc`
+* Compared the `ansible-playbook` and `ansible-navigator` workflows and when to use each
