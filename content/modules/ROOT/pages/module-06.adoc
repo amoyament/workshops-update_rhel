@@ -71,29 +71,7 @@ Your environment includes a pre-configured `~/.ansible-navigator.yml` file. View
 cat ~/.ansible-navigator.yml
 ----
 
-You should see output similar to the following:
-
-[source,yaml]
-----
----
-ansible-navigator:
-  ansible:
-    inventory:
-      entries:
-      - /home/rhel/lab_inventory/hosts
-
-  execution-environment:
-    image: quay.io/acme_corp/rhel_90_ee:latest
-    enabled: true
-    container-engine: podman
-    pull:
-      policy: missing
-    volume-mounts:
-    - src: "/etc/ansible/"
-      dest: "/etc/ansible/"
-    - src: "/home/rhel/.ansible/collections/"
-      dest: "/home/rhel/.ansible/collections/"
-----
+image::exercise-1-6-navigator/navigator_config.png[ansible-navigator configuration,link=self,window=_blank,width=60%]
 
 Key parameters to note:
 
