@@ -93,8 +93,6 @@ ansible-navigator:
       dest: "/etc/ansible/"
     - src: "/home/rhel/.ansible/collections/"
       dest: "/home/rhel/.ansible/collections/"
-
-  mode: stdout
 ----
 
 Key parameters to note:
@@ -104,7 +102,6 @@ Key parameters to note:
 * `execution-environment.container-engine` — uses `podman` to run the EE rootlessly
 * `execution-environment.pull.policy: missing` — pulls the image only if it is not already present locally
 * `volume-mounts` — mounts your local collection paths into the EE so the `webops.apache` collection you built in the previous exercise is available inside the container
-* `mode: stdout` — prints playbook output directly to the terminal instead of launching the TUI
 
 == Running the Collection Playbook with ansible-navigator
 

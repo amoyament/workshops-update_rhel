@@ -226,21 +226,29 @@ Create a playbook named `deploy_apache.yml` within `~/lab_inventory` directory t
     - webops.apache.apache
 ----
 
-== Create a `requirements.yml` file and run it
+== Create a `requirements.yml` file
 
-A `requirements.yml` file is the standard way to declare collection dependencies in Ansible projects. This makes your automation portable — anyone running your playbook can install all required collections with a single command. Create a `requirements.yml` file under `~/lab_inventory` with the following content:
+A `requirements.yml` file is the standard way to declare collection dependencies in Ansible projects. Rather than expecting collaborators to know which collections to install manually, you ship this file with your project so dependencies are explicit and reproducible. Create a `requirements.yml` file under `~/lab_inventory` with the following content:
 
-[source,bash,role=copypaste]
+[source,yaml,role=copypaste]
 ----
 collections:
   - name: ansible.posix
 ----
+
+Install the declared collections with:
 
 [source,bash,role=copypaste]
 ----
 cd ~/lab_inventory
 ansible-galaxy collection install -r requirements.yml
 ----
+
+[NOTE]
+====
+Since `ansible.posix` is already installed in this lab environment, you will see a message indicating nothing needed to be changed. That is expected.
+====
+
 
 == Summary
 

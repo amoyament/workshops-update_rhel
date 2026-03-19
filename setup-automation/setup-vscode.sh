@@ -159,8 +159,6 @@ ansible-navigator:
       dest: "/etc/ansible/"
     - src: "/home/rhel/.ansible/collections/"
       dest: "/home/rhel/.ansible/collections/"
-
-  mode: stdout
 EOF
 
 chown rhel:rhel /home/rhel/.ansible-navigator.yml
