@@ -8,7 +8,7 @@ An Ansible automation controller *Project* is a logical collection of Ansible pl
 
 For this demonstration, we will use playbooks stored in a Git repository:
 
-link:https://github.com/ansible/workshop-examples[]
+link:https://github.com/ansible/workshop-examples[workshop-examples,window=_blank]
 
 A playbook to install the Apache web server has already been committed to the directory *rhel/apache*, `apache_install.yml`:
 
@@ -92,6 +92,8 @@ Enter the URL into the Project configuration:
 
 * Click *Create project*
 
+image::exercise-2-3-projects/create_project.png[Create project,link=self,window=_blank,width=60%]
+
 The new project will be synced automatically after creation. But you can also do this manually: Sync the project again by clicking the sync icon on the Projects list page.
 
 image::exercise-2-3-projects/project_sync.png[Project Sync,link=self,window=_blank,width=60%]
@@ -151,6 +153,8 @@ Remember that you can often click on the question mark with a circle to get more
 
 * Click *Create job template*
 
+image::exercise-2-3-projects/create_job_template.png[Create job template,link=self,window=_blank,width=60%]
+
 [TIP]
 ====
 * Job templates run inside an Execution Environment to standardize the runtime between developer machines and controller.
@@ -167,7 +171,7 @@ Job Run
 
 image::exercise-2-3-projects/job_run.png[job_run,link=self,window=_blank,width=60%]
 
-Since this might take some time, have a closer look at all the details provided:
+While the job completes, explore the *Details* tab to review what was captured:
 
 * All details of the job template like inventory, project, credentials and playbook are shown.
 
@@ -177,41 +181,31 @@ Since this might take some time, have a closer look at all the details provided:
 
 * The *Output* tab shows the output of the running playbook. Click on a node underneath a task and see that detailed information are provided for each task of each node.
 
-After the Job has finished go to the main *Jobs* view: All jobs are listed here, you should see directly before the Playbook run an Source Control Update was started. This is the Git update we configured for the *Project* on launch!
+After the Job has finished go to the main *Jobs* view:
+
+image::exercise-2-3-projects/jobs_view.png[Jobs view,link=self,window=_blank,width=60%]
+
+All jobs are listed here, you should see directly before the Playbook run an Source Control Update was started. This is the Git update we configured for the *Project* on launch!
 
 === Challenge Lab: Check the Result
 
-Time for a little challenge:
-
-* Use an ad hoc command on both hosts to make sure Apache has been installed and is running.
-
-You have already been through all the steps needed, so try this for yourself.
+Verify that Apache is installed and running on the web hosts by running an ad hoc command directly from automation controller — without writing a playbook.
 
 [TIP]
 ====
-What about `systemctl status httpd`?
+Try running `systemctl status httpd` against the web hosts using the *Run Command* feature in the Inventories view.
 ====
 
 WARNING: *Solution Below*
 
-* Go to *Automation Execution → Infrastructure → Inventories* → *Workshop Inventory*
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01` and `node02`, then click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `systemctl status httpd`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credentials*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-* In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory*, select the *Hosts* tab and select `node01`, `node02`, `node03` and click *Run Command*
-
-Within the *Details* window, select *Module* `command`, in *Arguments* type `systemctl status httpd` and click *Next*.
-
-Within the *Execution Environment* window, select *Default execution environment* and click *Next*.
-
-Within the *Credential* window, select *Workshop Credentials* and click *Next*.
-
-Review your inputs and click *Finish*.
-
-Verify that the output result is as expected.
-
-[TIP]
-====
-The output of the results is displayed once the command has completed.
-====
+The output will display once the command completes — confirm that Apache is active and running on each host.
 
 == Summary
 

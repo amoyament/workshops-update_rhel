@@ -25,7 +25,7 @@ Machine credentials are essential for establishing secure SSH connections to man
 * *Credential Details:* The 'Workshop Credentials' is configured with:
 ** *Credential Type:* Machine (for SSH).
 ** *Username:* A predefined user, such as `rhel`.
-** *SSH Private Key:* Encrypted, providing secure access to hosts.
+** *Password:* Encrypted, providing secure access to hosts.
 
 === 4. Additional Credential Types
 

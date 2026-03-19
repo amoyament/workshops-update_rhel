@@ -187,18 +187,6 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node01 to web group
-      ansible.controller.group:
-        name: web
-        inventory: "Workshop Inventory"
-        hosts:
-          - node01
-        controller_host: "{{ controller_host }}"
-        controller_username: "{{ controller_username }}"
-        controller_password: "{{ controller_password }}"
-        validate_certs: "{{ validate_certs }}"
-        state: present
-
     - name: Add node02 to inventory
       ansible.controller.host:
         name: node02
@@ -209,11 +197,12 @@ cat > /tmp/aap-setup.yml << 'EOFAAP'
         validate_certs: "{{ validate_certs }}"
         state: present
 
-    - name: Add node02 to web group
+    - name: Add node01 and node02 to web group
       ansible.controller.group:
         name: web
         inventory: "Workshop Inventory"
         hosts:
+          - node01
           - node02
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
