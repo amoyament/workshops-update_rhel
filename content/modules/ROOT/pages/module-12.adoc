@@ -49,7 +49,7 @@ Let's create a user:
 
 . Click *Create user*.
 
-image::exercise-2-5-rbac/create_user.png[create user,link=self,window=_blank,width=60%]
+image::exercise-2-5-rbac/create_user.png[create user,link=self,window=_blank]
 
 === Ansible Automation Controller Teams
 
@@ -67,7 +67,7 @@ Teams are subdivisions of an organization that include users, projects, credenti
 . Click the *Teams* tab.
 . User-team associations are managed through the role assignments covered in the next section.
 
-image::exercise-2-5-rbac/add_user.png[users list,link=self,window=_blank,width=60%]
+image::exercise-2-5-rbac/add_user.png[users list,link=self,window=_blank]
 
 === Granting Permissions
 

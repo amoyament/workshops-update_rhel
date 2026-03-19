@@ -116,7 +116,7 @@ Run the playbook to apply your custom MOTD across all managed hosts:
 ansible-playbook -i hosts system_setup.yml
 ----
 
-image::exercise-1-4-templates/system_setup_output.png[system_setup.yml output,link=self,window=_blank,width=60%]
+image::exercise-1-4-templates/system_setup_output.png[system_setup.yml output,link=self,window=_blank]
 
 Verify the message of the day was deployed correctly by SSHing into node01 — the MOTD will display automatically on login:
 
@@ -127,7 +127,7 @@ ssh node01
 
 NOTE: When prompted for a password, enter `ansible123!`
 
-image::exercise-1-4-templates/motd_verification_output.png[MOTD verification output,link=self,window=_blank,width=60%]
+image::exercise-1-4-templates/motd_verification_output.png[MOTD verification output,link=self,window=_blank]
 
 Exit the SSH session to return to your control node before continuing to the next exercise:
 

@@ -68,7 +68,7 @@ a|
 
 Click *Create project*.
 
-image::exercise-2-6-workflows/create_project.png[create_project,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/create_project.png[create_project,link=self,window=_blank]
 
 Repeat the process to set up the *Webdev Git Repo*, using the branch `webdev`.
 
@@ -131,7 +131,7 @@ Within *Automation Execution → Templates*, click the *Create template* dropdow
 |tasks need to run as root so check *Privilege Escalation*
 |===
 
-image::exercise-2-6-workflows/create_template_webops.png[create_template_webops,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/create_template_webops.png[create_template_webops,link=self,window=_blank]
 
 Click *Create job template*, and then repeat the process for the *Node.js Deploy* template, changing the project to *Webdev Git Repo* and the playbook to `rhel/webdev/install_node_app.yml`.
 
@@ -149,25 +149,25 @@ Within *Automation Execution → Templates*, click the *Create template* dropdow
 
 Click *Create workflow job template* to open the *Workflow Visualizer*.
 
-image::exercise-2-6-workflows/visualizer_add_step.png[add_step,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/visualizer_add_step.png[add_step,link=self,window=_blank]
 
 Click the *Add step* button and assign the *Web App Deploy* job template to the first node. Add a second node by clicking the kebab menu (⋮) on the first node, selecting *Add step and link*, and assign the *Node.js Deploy* template with the *On Success* run type. Select *Next* and *Finish* to complete the workflow.
 
-image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy,link=self,window=_blank]
 
-image::exercise-2-6-workflows/visualizer_add_step_add_link.png[add_link,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/visualizer_add_step_add_link.png[add_link,link=self,window=_blank]
 
-image::exercise-2-6-workflows/visualizer_add_step_nodejs.png[add_nodejs,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/visualizer_add_step_nodejs.png[add_nodejs,link=self,window=_blank]
 
 Click *Save* to finalize the workflow.
 
-image::exercise-2-6-workflows/visualizer_overview.png[overview,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/visualizer_overview.png[overview,link=self,window=_blank]
 
 === Launch workflow
 
 From the *Deploy Webapp Server* template, select *Launch template* from the kebab menu (⋮) or from the template detail page.
 
-image::exercise-2-6-workflows/launch_template.png[launch_template,link=self,window=_blank,width=60%]
+image::exercise-2-6-workflows/launch_template.png[launch_template,link=self,window=_blank]
 
 Once the workflow completes, verify the result.
 

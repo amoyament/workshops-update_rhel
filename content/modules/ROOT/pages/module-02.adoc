@@ -53,7 +53,7 @@ Execute the updated playbook:
 ansible-playbook -i hosts system_setup.yml
 ----
 
-image::exercise-1-2-variables/system_setup_output.png[system_setup.yml output,link=self,window=_blank,width=60%]
+image::exercise-1-2-variables/system_setup_output.png[system_setup.yml output,link=self,window=_blank]
 
 Notice how the updated playbook shows a status of changed in the Create a new user task. The user, 'Roger', specified within the vars section has been created.
 
@@ -109,7 +109,7 @@ Run the checks playbook:
 ansible-playbook -i hosts system_checks.yml
 ----
 
-image::exercise-1-2-variables/system_checks_output.png[system_checks.yml output,link=self,window=_blank,width=60%]
+image::exercise-1-2-variables/system_checks_output.png[system_checks.yml output,link=self,window=_blank]
 
 Review the output to confirm the user existence check is correctly using the variable and conditional logic.
 

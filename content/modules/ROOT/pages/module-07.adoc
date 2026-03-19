@@ -79,7 +79,7 @@ Run your playbook with the `-vv` option to get detailed logs:
 ansible-navigator run deploy_apache.yml -m stdout -vv
 ----
 
-image::exercise-1-7-debugging/verbose_output.png[ansible-navigator verbose output,link=self,window=_blank,width=60%]
+image::exercise-1-7-debugging/verbose_output.png[ansible-navigator verbose output,link=self,window=_blank]
 
 Notice how the playbook shows there was an error copying the Apache Configuration file but the playbook was able to handle it via the rescue block that was provided. If you notice the final task 'Handle Missing Configuration' details that the file was missing and it would use the default settings.
 

@@ -43,15 +43,15 @@ ansible-navigator images
 The EE image will be pulled on first run. This will take a minute — once complete, the TUI will launch automatically.
 ====
 
-image::exercise-1-6-navigator/navigator_images.png[ansible-navigator images TUI,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/navigator_images.png[ansible-navigator images TUI,link=self,window=_blank]
 
 You will see the `rhel_90_ee` image listed. Press the number shown next to it to open the EE detail menu.
 
-image::exercise-1-6-navigator/navigator_ee_menu.png[EE detail menu,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/navigator_ee_menu.png[EE detail menu,link=self,window=_blank]
 
 From the detail menu, select option *2* — *Ansible version and collections* — to inspect what is packaged inside the EE:
 
-image::exercise-1-6-navigator/navigator_ee_collections.png[EE collections list,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/navigator_ee_collections.png[EE collections list,link=self,window=_blank]
 
 Here you can see the `ansible-core` version and every collection bundled into the image, including `ansible.posix` which your collection depends on.
 
@@ -71,7 +71,7 @@ Your environment includes a pre-configured `~/.ansible-navigator.yml` file. View
 cat ~/.ansible-navigator.yml
 ----
 
-image::exercise-1-6-navigator/navigator_config.png[ansible-navigator configuration,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/navigator_config.png[ansible-navigator configuration,link=self,window=_blank]
 
 Key parameters to note:
 
@@ -90,7 +90,7 @@ In the previous exercise you ran `deploy_apache.yml` directly with `ansible-play
 ansible-navigator run deploy_apache.yml -m stdout
 ----
 
-image::exercise-1-6-navigator/navigator_run_output.png[ansible-navigator run output,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/navigator_run_output.png[ansible-navigator run output,link=self,window=_blank]
 
 Notice that the playbook output looks identical to what `ansible-playbook` produces — the difference is that the tasks ran inside the containerized EE rather than directly on the control node.
 
@@ -112,7 +112,7 @@ You should see output confirming Apache is running. Confirm the web page is bein
 curl http://node01
 ----
 
-image::exercise-1-6-navigator/curl_output.png[curl output,link=self,window=_blank,width=60%]
+image::exercise-1-6-navigator/curl_output.png[curl output,link=self,window=_blank]
 
 == Exploring Module Documentation
 

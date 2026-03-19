@@ -11,7 +11,7 @@ The survey feature provides a simple query for data but does not support dynamic
 
 === The Apache-Configuration Role
 
-The playbook and role with the Jinja2 template are located in the GitHub repository link:https://github.com/ansible/workshop-examples[] in the `rhel/apache` directory.
+The playbook and role with the Jinja2 template are located in the GitHub repository link:https://github.com/ansible/workshop-examples[https://github.com/ansible/workshop-examples,window=_blank] in the `rhel/apache` directory.
 
 * Have a look at the playbook `apache_role_install.yml`, which references the role.
 * The role is located in the `roles/role_apache` subdirectory.
@@ -66,7 +66,7 @@ Now, let's create a new Template that includes a survey.
 
 . Click *Create job template*.
 
-image::exercise-2-4-surveys/template_details.png[template details,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/template_details.png[template details,link=self,window=_blank]
 
 WARNING: *Do not run the template yet!*
 
@@ -80,7 +80,7 @@ WARNING: *Do not run the template yet!*
 |Parameter |Value
 
 |Question
-|First Line
+|What would you like as the headline of your web page?
 
 |Answer Variable Name
 |first_line
@@ -89,7 +89,7 @@ WARNING: *Do not run the template yet!*
 |Text
 |===
 
-image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank]
 
 . Click *Create survey question*.
 . Click *Create survey question* to create a second survey question:
@@ -99,7 +99,7 @@ image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank,widt
 |Parameter |Value
 
 |Question
-|Second Line
+|What would you like as the subheading of your web page?
 
 |Answer Variable Name
 |second_line
@@ -108,20 +108,22 @@ image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank,widt
 |Text
 |===
 
-image::exercise-2-4-surveys/survey_q2.png[Survey Q2,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/survey_q2.png[Survey Q2,link=self,window=_blank]
 
 . Click *Create survey question*.
 . Enable the survey by toggling the *Survey enabled* switch to the on position.
+
+image::exercise-2-4-surveys/survey_enabled.png[Survey enabled,link=self,window=_blank]
 
 === Launch the Template
 
 Now, launch the *Create index.html* job template by selecting *Launch template* from the template's kebab menu (⋮) on the Templates list page.
 
-Before the job starts, the survey will prompt for *First Line* and *Second Line*. Enter your text and click *Next*. The *Review* page shows the values—if all looks good, click *Finish* to start the job.
+Before the job starts, the survey will prompt you for a headline and subheading for your web page. Enter your text and click *Next*. The *Review* page shows the values—if all looks good, click *Finish* to start the job.
 
-image::exercise-2-4-surveys/survey_launch.png[Survey Launch,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/survey_launch.png[Survey Launch,link=self,window=_blank]
 
-image::exercise-2-4-surveys/survey_review.png[Survey Review,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/survey_review.png[Survey Review,link=self,window=_blank]
 
 Once the job completes, verify the Apache homepage by running the following `curl` command in the SSH console on the control host:
 
@@ -145,7 +147,7 @@ Verify that the output result is as expected.
 * Keep the survey enabled to collect required inputs
 * Organize or tag templates per your organization's portal conventions so users can easily find and launch approved automation
 
-image::exercise-2-4-surveys/run_command.png[Run Command,link=self,window=_blank,width=60%]
+image::exercise-2-4-surveys/run_command.png[Run Command,link=self,window=_blank]
 
 == Summary
 

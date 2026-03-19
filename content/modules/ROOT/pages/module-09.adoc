@@ -15,7 +15,7 @@ The _Workshop Inventory_ is preloaded in your lab environment, representing a st
 * *Accessing the Inventory:* Navigate to *Automation Execution → Infrastructure → Inventories* in the web UI, and select _Workshop Inventory_.
 * *Viewing Hosts:* Within the _Workshop Inventory_, open the *Hosts* tab to see the predefined hosts, similar to those in a traditional Ansible inventory file.
 
-image::exercise-2-2-cred/hosts.png[Hosts,link=self,window=_blank,width=60%]
+image::exercise-2-2-cred/hosts.png[Hosts,link=self,window=_blank]
 
 === Understanding Machine Credentials
 

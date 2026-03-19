@@ -13,7 +13,7 @@ To open a terminal in VS Code:
 . Click on the *Terminal* menu at the top
 . Select *New Terminal*
 
-image::exercise-1-1-setup/vscode-new-terminal.png[Opening a new terminal in VS Code,link=self,window=_blank,width=60%]
+image::exercise-1-1-setup/vscode-new-terminal.png[Opening a new terminal in VS Code,link=self,window=_blank]
 
 You will use this terminal to run all commands in the exercises that follow.
 
@@ -120,7 +120,7 @@ ansible-playbook -i hosts system_setup.yml
 
 Review the output to ensure each task is completed successfully.
 
-image::exercise-1-1-setup/system_setup_output.png[Playbook output,link=self,window=_blank,width=60%]
+image::exercise-1-1-setup/system_setup_output.png[Playbook output,link=self,window=_blank]
 
 == Checking the Playbook
 
@@ -159,7 +159,7 @@ ansible-playbook -i hosts system_checks.yml
 
 Review the output to ensure the user creation was successful.
 
-image::exercise-1-1-setup/system_checks_output.png[System checks playbook output,link=self,window=_blank,width=60%]
+image::exercise-1-1-setup/system_checks_output.png[System checks playbook output,link=self,window=_blank]
 
 == Summary
 

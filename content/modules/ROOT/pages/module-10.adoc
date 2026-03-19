@@ -8,7 +8,7 @@ An Ansible automation controller *Project* is a logical collection of Ansible pl
 
 For this demonstration, we will use playbooks stored in a Git repository:
 
-link:https://github.com/ansible/workshop-examples[workshop-examples,window=_blank]
+link:https://github.com/ansible/workshop-examples[https://github.com/ansible/workshop-examples,window=_blank]
 
 A playbook to install the Apache web server has already been committed to the directory *rhel/apache*, `apache_install.yml`:
 

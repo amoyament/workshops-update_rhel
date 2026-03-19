@@ -32,7 +32,7 @@ Project fields:
 
 Click *Create project* and wait for the sync to complete.
 
-image::exercise-2-8-system-roles/demo-project.png[system roles project,link=self,window=_blank,width=60%]
+image::exercise-2-8-system-roles/demo-project.png[system roles project,link=self,window=_blank]
 
 === Step 2 - Review the playbook
 
@@ -123,7 +123,7 @@ Template fields:
 |Workshop Credential
 |===
 
-image::exercise-2-8-system-roles/job.png[job template,link=self,window=_blank,width=60%]
+image::exercise-2-8-system-roles/job.png[job template,link=self,window=_blank]
 
 . Add a Survey to toggle roles:
 
@@ -131,15 +131,15 @@ image::exercise-2-8-system-roles/job.png[job template,link=self,window=_blank,wi
 ** CONFIGURE FIREWALL? (boolean) → sets harden_firewall
 ** CONFIGURE TIME? (boolean) → sets harden_time
 
-image::exercise-2-8-system-roles/survey.png[survey,link=self,window=_blank,width=60%]
+image::exercise-2-8-system-roles/survey.png[survey,link=self,window=_blank]
 
 Click Launch:
 
-image::exercise-2-8-system-roles/launch.png[launch,link=self,window=_blank,width=60%]
+image::exercise-2-8-system-roles/launch.png[launch,link=self,window=_blank]
 
 If a confirmation step is shown:
 
-image::exercise-2-8-system-roles/next.png[next button,link=self,window=_blank,width=60%]
+image::exercise-2-8-system-roles/next.png[next button,link=self,window=_blank]
 
 Review the EXTRA VARIABLES to see how the survey sets the role switches and proceed.
 

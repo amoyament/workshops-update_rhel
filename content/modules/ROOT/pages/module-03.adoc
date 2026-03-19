@@ -118,7 +118,7 @@ The handler "Reload Firewall" is triggered only if the task "Allow HTTP traffic 
 
 NOTE: Notice how the name of the handler is used within the notify section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
 
-image::exercise-1-3-conditionals/system_setup_output.png[system_setup.yml output,link=self,window=_blank,width=60%]
+image::exercise-1-3-conditionals/system_setup_output.png[system_setup.yml output,link=self,window=_blank]
 
 == Loops
 
@@ -158,7 +158,7 @@ When you run the updated playbook, this task is executed three times, once for e
 
 Snippet of the output for creating a new user on all the nodes.
 
-image::exercise-1-3-conditionals/user_creation_output.png[User creation output,link=self,window=_blank,width=60%]
+image::exercise-1-3-conditionals/user_creation_output.png[User creation output,link=self,window=_blank]
 
 == Summary
 
