@@ -92,11 +92,11 @@ Enter the URL into the Project configuration:
 
 * Click *Create project*
 
-image::exercise-2-3-projects/create_project.png[Create project,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/create_project.png[Create project,link=self,window=_blank]
 
 The new project will be synced automatically after creation. But you can also do this manually: Sync the project again by clicking the sync icon on the Projects list page.
 
-image::exercise-2-3-projects/project_sync.png[Project Sync,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/project_sync.png[Project Sync,link=self,window=_blank]
 
 After starting the sync job, go to the *Jobs* view, and you'll find the job doing the project update.
 
@@ -153,7 +153,7 @@ Remember that you can often click on the question mark with a circle to get more
 
 * Click *Create job template*
 
-image::exercise-2-3-projects/create_job_template.png[Create job template,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/create_job_template.png[Create job template,link=self,window=_blank]
 
 [TIP]
 ====
@@ -165,11 +165,11 @@ You can start the job by clicking the *Launch template* option from the template
 
 Template Details
 
-image::exercise-2-3-projects/template_detail.png[template details,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/template_detail.png[template details,link=self,window=_blank]
 
 Job Run
 
-image::exercise-2-3-projects/job_run.png[job_run,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/job_run.png[job_run,link=self,window=_blank]
 
 While the job completes, explore the *Details* tab to review what was captured:
 
@@ -183,7 +183,7 @@ While the job completes, explore the *Details* tab to review what was captured:
 
 After the Job has finished go to the main *Jobs* view:
 
-image::exercise-2-3-projects/jobs_view.png[Jobs view,link=self,window=_blank,width=60%]
+image::exercise-2-3-projects/jobs_view.png[Jobs view,link=self,window=_blank]
 
 All jobs are listed here, you should see directly before the Playbook run an Source Control Update was started. This is the Git update we configured for the *Project* on launch!
 

@@ -4,11 +4,11 @@
 
 This exercise provides practical experience with managing inventories and credentials in automation controller. You'll learn how to navigate a preloaded inventory, understand its structure, and set up machine credentials for accessing managed hosts.
 
-=== 1. Introduction to Inventories
+=== Introduction to Inventories
 
 In automation controller, inventories define and organize the hosts your playbooks will target. They can be static (a fixed list of hosts) or dynamic (sourced from external systems).
 
-=== 2. Exploring the Workshop Inventory
+=== Exploring the Workshop Inventory
 
 The _Workshop Inventory_ is preloaded in your lab environment, representing a static inventory configuration.
 
@@ -17,7 +17,7 @@ The _Workshop Inventory_ is preloaded in your lab environment, representing a st
 
 image::exercise-2-2-cred/hosts.png[Hosts,link=self,window=_blank,width=60%]
 
-=== 3. Understanding Machine Credentials
+=== Understanding Machine Credentials
 
 Machine credentials are essential for establishing secure SSH connections to managed hosts.
 
@@ -27,7 +27,7 @@ Machine credentials are essential for establishing secure SSH connections to man
 ** *Username:* A predefined user, such as `rhel`.
 ** *Password:* Encrypted, providing secure access to hosts.
 
-=== 4. Additional Credential Types
+=== Additional Credential Types
 
 Automation controller supports over 30 different credential types for various automation tasks. Here are a few common ones:
 
