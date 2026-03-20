@@ -87,7 +87,9 @@ Enter the URL into the Project configuration:
 |`https://github.com/ansible/workshop-examples.git`
 
 |Options
-|Select Clean, Delete, Update Revision on Launch to request a fresh copy of the repository and to update the repository when launching a job.
+|✓ Clean +
+✓ Delete +
+✓ Update Revision on Launch
 |===
 
 * Click *Create project*
@@ -148,7 +150,7 @@ Remember that you can often click on the question mark with a circle to get more
 |web
 
 |Options
-|tasks need to run as root so check *Privilege Escalation*
+|✓ Privilege Escalation
 |===
 
 * Click *Create job template*

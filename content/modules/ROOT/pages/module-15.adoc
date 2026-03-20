@@ -77,7 +77,7 @@ Within the `Webserver` group, click the *Hosts* tab, then click *Add existing ho
 
 Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node02`. Click the kebab menu (⋮) and select *Edit host*, then add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
 
-image::exercise-2-7-wrap/edit_host.png[edit host,link=self,window=_blank]
+image::exercise-2-8-wrap/edit_host.png[edit host,link=self,window=_blank]
 
 Within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
 
@@ -120,12 +120,12 @@ a|dev_content: "default dev content"
 prod_content: "default prod content"
 
 |Options
-|Privilege Escalation
+|✓ Privilege Escalation
 |===
 
 Click *Create job template*.
 
-image::exercise-2-7-wrap/web_content_job_template.png[web_content_job_template,link=self,window=_blank]
+image::exercise-2-8-wrap/web_content_job_template.png[web_content_job_template,link=self,window=_blank]
 
 Run the template by selecting *Launch template* from the template's kebab menu (⋮) on the Templates list.
 

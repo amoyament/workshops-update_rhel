@@ -60,15 +60,12 @@ Within *Automation Execution → Projects*, click *Create project* to set up the
 |`webops`
 
 |Options
-a|
-* ✓ Clean
-* ✓ Delete
-* ✓ Update Revision on Launch
+|✓ Clean +
+✓ Delete +
+✓ Update Revision on Launch
 |===
 
 Click *Create project*.
-
-image::exercise-2-6-workflows/create_project.png[create_project,link=self,window=_blank]
 
 Repeat the process to set up the *Webdev Git Repo*, using the branch `webdev`.
 
@@ -95,10 +92,9 @@ Repeat the process to set up the *Webdev Git Repo*, using the branch `webdev`.
 |`webdev`
 
 |Options
-a|
-* ✓ Clean
-* ✓ Delete
-* ✓ Update Revision on Launch
+|✓ Clean +
+✓ Delete +
+✓ Update Revision on Launch
 |===
 
 === Set up job templates
@@ -128,10 +124,8 @@ Within *Automation Execution → Templates*, click the *Create template* dropdow
 |Workshop Credentials
 
 |Options
-|tasks need to run as root so check *Privilege Escalation*
+|✓ Privilege Escalation
 |===
-
-image::exercise-2-6-workflows/create_template_webops.png[create_template_webops,link=self,window=_blank]
 
 Click *Create job template*, and then repeat the process for the *Node.js Deploy* template, changing the project to *Webdev Git Repo* and the playbook to `rhel/webdev/install_node_app.yml`.
 
@@ -151,7 +145,44 @@ Click *Create workflow job template* to open the *Workflow Visualizer*.
 
 image::exercise-2-6-workflows/visualizer_add_step.png[add_step,link=self,window=_blank]
 
-Click the *Add step* button and assign the *Web App Deploy* job template to the first node. Add a second node by clicking the kebab menu (⋮) on the first node, selecting *Add step and link*, and assign the *Node.js Deploy* template with the *On Success* run type. Select *Next* and *Finish* to complete the workflow.
+. Click *Add step* and fill in the following for the first node:
++
+[cols="1,1"]
+|===
+|Parameter |Value
+
+|Node type
+|Job Template
+
+|Job template
+|Web App Deploy
+
+|Convergence
+|Any
+|===
++
+Click *Next* then *Finish*.
+
+. On the first node, click the kebab menu (⋮) and select *Add step and link*. Fill in the following for the second node:
++
+[cols="1,1"]
+|===
+|Parameter |Value
+
+|Node type
+|Job Template
+
+|Job template
+|Node.js Deploy
+
+|Status
+|Run on success
+
+|Convergence
+|Any
+|===
++
+Click *Next* then *Finish*.
 
 image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy,link=self,window=_blank]
 

@@ -61,7 +61,7 @@ Now, let's create a new Template that includes a survey.
 |web
 
 |Options
-|Privilege Escalation
+|✓ Privilege Escalation
 |===
 
 . Click *Create job template*.

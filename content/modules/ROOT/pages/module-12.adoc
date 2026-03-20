@@ -65,9 +65,9 @@ Teams are subdivisions of an organization that include users, projects, credenti
 
 . Navigate to *Access Management → Users* and select the `wweb` user.
 . Click the *Teams* tab.
-. User-team associations are managed through the role assignments covered in the next section.
+. Click *Assign teams*, select `Web Content`, and click *Confirm*.
 
-image::exercise-2-5-rbac/add_user.png[users list,link=self,window=_blank]
+image::exercise-2-5-rbac/users_list.png[users list,link=self,window=_blank]
 
 === Granting Permissions
 
@@ -78,7 +78,7 @@ To grant users the ability to execute tasks, permissions need to be set.
 . Navigate to *Automation Execution → Templates*.
 . Select the template `Create index.html`.
 . Click the *User Access* tab.
-. Click the kebab menu (⋮) and select *Add roles*, or navigate directly to the *Assign users* page.
+. Click *Assign users*.
 . In *Select user(s)*, check the box for `wweb` and click *Next*.
 . In *Select roles to apply*, choose *JobTemplate Admin* and/or *JobTemplate Execute*, depending on the required level of access, then click *Next*.
 . Review the selections and click *Finish*.
@@ -88,35 +88,37 @@ To grant users the ability to execute tasks, permissions need to be set.
 Now, log out and log in again as the `wweb` user.
 
 . Navigate to *Automation Execution → Templates*. You should only see the `Create index.html` template listed.
-. Run the job by selecting *Launch template* from the template's kebab menu (⋮). Enter the required values for the survey questions and launch the job.
+. Run the job by selecting *Launch template*. Enter the required values for the survey questions and launch the job.
 
-Once the job completes, verify the result by relogging back in as an admin user to the Ansible Automation Platform dashboard.
+Once the job completes, log back in as `admin` and verify the result using *Run Command*:
 
-Go to Automation Execution → Infrastructure → Inventories → Workshop Inventory
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01` and click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credentials*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node01 and click Run Command
+Verify that the output contains the content set by `wweb` in the survey.
 
-Within the Details window, select Module command, in Arguments type `curl http://node01` and click Next.
-
-Within the Execution Environment window, select Default execution environment and click Next.
-
-Within the Credential window, select Workshop Credentials and click Next.
-
-Review your inputs and click Finish.
-
-Verify that the output result is as expected.
-
-Just recall what you have just done: You enabled a restricted user to run an Ansible playbook
+[NOTE]
+====
+Think about what you just accomplished. You enabled a restricted user to run an Ansible playbook:
 
 * Without having access to the credentials
-
 * Without being able to change the playbook itself
+* But with the ability to change variables you predefined
 
-* But with the ability to change variables you predefined!
+This is one of the main strengths of Ansible Automation Controller — delegating the power to execute automation without handing out credentials or exposing the underlying code.
+====
 
-Effectively you provided the power to execute automation to another user without handing out your credentials or giving the user the ability to change the automation code. And yet, at the same time the user can still modify things based on the surveys you created.
+[NOTE]
+.Taking Self-Service Further
+====
+The RBAC model you just configured works great inside automation controller, but what if your end users didn't have to log into controller at all?
 
-This capability is one of the main strengths of Ansible automation controller!
+AAP offers a *Self-Service Portal* — a separate web interface that presents approved job templates as a simple catalog of actions. A user like `wweb` would open the portal, see a tile for "Deploy Web Content", fill in a short form, and click run — no knowledge of Ansible or controller required. The same RBAC rules you configure in controller govern what each user can see and launch in the portal.
+====
 
 == Summary
 
