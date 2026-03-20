@@ -31,7 +31,7 @@ Now, let's create a new Template that includes a survey.
 . Go to *Automation Execution → Templates*, click the *Create template* dropdown, and choose *Create job template*.
 
 . Fill out the following details:
-
++
 [cols="1,1"]
 |===
 |Parameter |Value
@@ -65,7 +65,7 @@ Now, let's create a new Template that includes a survey.
 |===
 
 . Click *Create job template*.
-
++
 image::exercise-2-4-surveys/template_details.png[template details,link=self,window=_blank]
 
 WARNING: *Do not run the template yet!*
@@ -73,8 +73,9 @@ WARNING: *Do not run the template yet!*
 ==== Add the Survey
 
 . In the Template, click the *Survey* tab, then click the kebab menu (⋮) and select *Create survey question*.
-. Fill out the following for the first survey question:
 
+. Fill out the following for the first survey question:
++
 [cols="1,1"]
 |===
 |Parameter |Value
@@ -88,12 +89,12 @@ WARNING: *Do not run the template yet!*
 |Answer Type
 |Text
 |===
-
-image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank]
++
 
 . Click *Create survey question*.
-. Click *Create survey question* to create a second survey question:
 
+. Click *Create survey question* to create a second survey question:
++
 [cols="1,1"]
 |===
 |Parameter |Value
@@ -107,12 +108,12 @@ image::exercise-2-4-surveys/survey_q1.png[Survey Q1,link=self,window=_blank]
 |Answer Type
 |Text
 |===
-
-image::exercise-2-4-surveys/survey_q2.png[Survey Q2,link=self,window=_blank]
++
 
 . Click *Create survey question*.
-. Enable the survey by toggling the *Survey enabled* switch to the on position.
 
+. Enable the survey by toggling the *Survey enabled* switch to the on position.
++
 image::exercise-2-4-surveys/survey_enabled.png[Survey enabled,link=self,window=_blank]
 
 === Launch the Template
@@ -125,21 +126,20 @@ image::exercise-2-4-surveys/survey_launch.png[Survey Launch,link=self,window=_bl
 
 image::exercise-2-4-surveys/survey_review.png[Survey Review,link=self,window=_blank]
 
-Once the job completes, verify the Apache homepage by running the following `curl` command in the SSH console on the control host:
+=== Verify the Result
 
-Go to Automation Execution → Infrastructure → Inventories → Workshop Inventory
+Once the job completes, verify the Apache homepage is serving your custom content by running a `curl` command via *Run Command*:
 
-In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node01 and click Run Command
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01` and click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credentials*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-Within the Details window, select Module command, in Arguments type `curl http://node01` and click Next.
+Verify that the output contains the headline and subheading you entered in the survey.
 
-Within the Execution Environment window, select Default execution environment and click Next.
-
-Within the Credential window, select Workshop Credentials and click Next.
-
-Review your inputs and click Finish.
-
-Verify that the output result is as expected.
+image::exercise-2-4-surveys/curl_output.png[curl output,link=self,window=_blank]
 
 === Optional: Make this template available in a self-service view
 
