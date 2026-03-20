@@ -65,9 +65,8 @@ Early exercises (1.1–1.5) use `ansible-playbook` in the provided lab environme
 * xref:module-11.adoc[Exercise 2.4 - Surveys]
 * xref:module-12.adoc[Exercise 2.5 - Role-based Access Control]
 * xref:module-13.adoc[Exercise 2.6 - Workflows]
-* xref:module-14.adoc[Exercise 2.7 - Wrap up]
-* xref:module-15.adoc[Exercise 2.8 - System Roles]
-* xref:module-16.adoc[Exercise 2.9 - RHEL MCP + AAP]
+* xref:module-14.adoc[Exercise 2.7 - System Roles]
+* xref:module-15.adoc[Exercise 2.8 - Wrap up]
 
 == Supplemental Exercises
 

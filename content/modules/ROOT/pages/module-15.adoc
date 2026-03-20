@@ -1,108 +1,101 @@
-= System Roles (Controller-driven)
+= Wrap Up
 :toc:
 :toc-placement: auto
 
-In this exercise, you will use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller. You will leverage Linux System Roles and RHEL System Roles with a simple Survey-driven job to manage firewall and timesync configuration.
+This is the final challenge where you put most of what you have learned together. Your operations and application development teams want to use Ansible automation controller in their environment with specific requirements around web content staging and role-based access.
 
-=== Step 1 - Create the project
+=== Let's set the stage
 
-In the Ansible Automation Controller UI navigate to *Automation Execution → Projects* and click *Create project*.
+The teams have put together these requirements:
 
-Project fields:
+* All webservers (`node01`, `node02` and `node03`) should go in one group.
+
+* As the webservers can be used for development purposes or in production, there has to be a way to flag them accordingly as "stage dev" or "stage prod".
+
+** Currently `node01` and `node03` are used as a development system and `node02` is in production.
+
+* Of course the content of the world famous application "index.html" will be different between dev and prod stages.
+
+** There should be a title on the page stating the environment
+** There should be a content field
+
+* The content writer `wweb` should have access to a survey to change the content for dev and prod servers.
+
+=== The Git Repository
+
+All code is already in place - this is a automation controller lab after all. Check out the *Workshop Project* git repository at link:https://github.com/ansible/workshop-examples[]. There you will find the playbook `webcontent.yml`, which calls the role `role_webcontent`.
+
+Compared to the previous Apache installation role there is a major difference: there are now two versions of an `index.html` template, and a task deploying the template file which has a variable as part of the source file name:
+
+`dev_index.html.j2`
+
+[source,html,role=copypaste]
+----
+<body>
+<h1>This is a development webserver, have fun!</h1>
+{{ dev_content }}
+</body>
+----
+
+`prod_index.html.j2`
+
+[source,html,role=copypaste]
+----
+<body>
+<h1>This is a production webserver, take care!</h1>
+{{ prod_content }}
+</body>
+----
+
+`main.yml`
+
+[source,yaml,role=copypaste]
+----
+[...]
+- name: Deploy index.html from template
+  template:
+    src: "{{ stage }}_index.html.j2"
+    dest: /var/www/html/index.html
+  notify: apache-restart
+----
+
+=== Prepare Inventory
+
+Navigate to *Automation Execution → Infrastructure → Inventories*. Select 'Workshop Inventory' and complete the following:
+
+. Go to the *Groups* tab, click the *Create group* button, and create a new group labeled `Webserver`. Click *Create group*.
+. In the `Webserver` group, click the kebab menu (⋮) and select *Edit group* to define the following variable:
+
+Within the *Variables* textbox define a variable labeled `stage` with the value `dev` and click *Save group*.
+
+[source,yaml,role=copypaste]
+----
+stage: dev
+----
+
+Within the `Webserver` group, click the *Hosts* tab, then click *Add existing host*. Select `node01`, `node02`, `node03` as the hosts to be part of the `Webserver` group.
+
+Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node02`. Click the kebab menu (⋮) and select *Edit host*, then add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
+
+image::exercise-2-7-wrap/edit_host.png[edit host,link=self,window=_blank]
+
+Within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
+
+[source,yaml,role=copypaste]
+----
+stage: prod
+----
+
+=== Create the Template
+
+Within *Automation Execution → Templates*, click the *Create template* dropdown and select *Create job template*. Fill as follows:
 
 [cols="1,1"]
 |===
 |Parameter |Value
 
 |Name
-|System Roles Project
-
-|Organization
-|Default
-
-|Execution Environment
-|Default execution environment
-
-|Source Control Type
-|Git
-
-|Source Control URL
-|`https://github.com/ansible/product-demos`
-|===
-
-Click *Create project* and wait for the sync to complete.
-
-image::exercise-2-8-system-roles/demo-project.png[system roles project,link=self,window=_blank]
-
-=== Step 2 - Review the playbook
-
-Open the repository in your browser and navigate to:
-
-* linux/hardening.yml
-** link:https://github.com/ansible/product-demos/blob/main/linux/hardening.yml[]
-
-Relevant tasks (roles are conditionally included):
-
-[source,yaml,role=copypaste]
-----
-- name: Configure Firewall
-  when: harden_firewall | bool
-  ansible.builtin.include_role:
-    name: linux-system-roles.firewall
-
-- name: Configure Timesync
-  when: harden_time | bool
-  ansible.builtin.include_role:
-    name: redhat.rhel_system_roles.timesync
-----
-
-Role naming tips:
-
-* Collection role: namespace.collection.role (e.g., redhat.rhel_system_roles.timesync)
-* Standalone role: namespace.role (e.g., linux-system-roles.firewall)
-
-=== Step 3 - About Linux and RHEL System Roles
-
-System Roles provide consistent interfaces for subsystem configuration, abstracting implementation differences.
-
-Examples:
-
-* firewall (linux-system-roles.firewall)
-** Controls services such as http/https and more
-** Example var:
-+
-[source,yaml,role=copypaste]
-----
-vars:
-  firewall:
-    service: 'http'
-    state: 'enabled'
-----
-
-* timesync (redhat.rhel_system_roles.timesync)
-** Manages chrony or ntp as appropriate
-** Example var:
-+
-[source,yaml,role=copypaste]
-----
-vars:
-  timesync_ntp_servers:
-    - hostname: pool.ntp.org
-      iburst: yes
-----
-
-=== Step 4 - Create and launch the Job Template with a Survey
-
-. In Controller, go to *Automation Execution → Templates*, click the *Create template* dropdown and select *Create job template*.
-
-Template fields:
-
-[cols="1,1"]
-|===
-|Parameter |Value
-
-|Name
-|SERVER / Hardening
+|Create Web Content
 
 |Job Type
 |Run
@@ -111,67 +104,152 @@ Template fields:
 |Workshop Inventory
 
 |Project
-|System Roles Project
+|Workshop Project
 
 |Playbook
-|`linux/hardening.yml`
+|rhel/apache/webcontent.yml
 
 |Execution Environment
 |Default execution environment
 
 |Credentials
-|Workshop Credential
+|Workshop Credential \| Machine
+
+|Variables
+a|dev_content: "default dev content"
+prod_content: "default prod content"
+
+|Options
+|Privilege Escalation
 |===
 
-image::exercise-2-8-system-roles/job.png[job template,link=self,window=_blank]
+Click *Create job template*.
 
-. Add a Survey to toggle roles:
+image::exercise-2-7-wrap/web_content_job_template.png[web_content_job_template,link=self,window=_blank]
 
-* Survey Questions:
-** CONFIGURE FIREWALL? (boolean) → sets harden_firewall
-** CONFIGURE TIME? (boolean) → sets harden_time
+Run the template by selecting *Launch template* from the template's kebab menu (⋮) on the Templates list.
 
-image::exercise-2-8-system-roles/survey.png[survey,link=self,window=_blank]
+=== Check the Results
 
-Click Launch:
+This time we use the power of Ansible to check the results: execute uri to get the web content from each node, orchestrated by an Ansible playbook labeled `check_url.yml`
 
-image::exercise-2-8-system-roles/launch.png[launch,link=self,window=_blank]
+[TIP]
+====
+We are using the `ansible_host` variable in the URL to access every node in the inventory group.
+====
 
-If a confirmation step is shown:
+[source,yaml,role=copypaste]
+----
+---
+- name: Check URL results
+  hosts: web
 
-image::exercise-2-8-system-roles/next.png[next button,link=self,window=_blank]
+  tasks:
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      ansible.builtin.uri:
+        url: "http://{{ ansible_host }}"
+        return_content: yes
+      register: content
 
-Review the EXTRA VARIABLES to see how the survey sets the role switches and proceed.
-
-=== Step 5 - Verify configuration
-
-From the control node, verify time configuration:
+    - ansible.builtin.debug:
+       var: content.content
+----
 
 [source,bash,role=copypaste]
 ----
-ansible node01 -i hosts -m command -a "systemctl status chronyd.service"
+ansible-navigator run check_url.yml -m stdout
 ----
+
+Snippet of output:
 
 [source,bash,role=copypaste]
 ----
-ansible node01 -i hosts -m command -a "timedatectl"
+TASK [debug] *******************************************************************
+ok: [node01] => {
+    "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
+}
+ok: [node02] => {
+    "content.content": "<body>\n<h1>This is a production webserver, take care!</h1>\nprod wweb</body>\n"
+}
+ok: [node03] => {
+    "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
+}
 ----
 
-Example commands:
+=== Add Survey
+
+Add a Survey to the template to allow changing the variables `dev_content` and `prod_content`.
+
+In the Template, click the *Survey* tab, then click the kebab menu (⋮) next to the *Survey enabled* toggle and select *Create survey question*.
+
+Fill out the following information:
+
+[cols="1,1"]
+|===
+|Parameter |Value
+
+|Question
+|What should the value of dev_content be?
+
+|Answer Variable Name
+|dev_content
+
+|Answer Type
+|Text
+|===
+
+* Click *Create survey question*
+
+In the same fashion add a second *Survey Question*
+
+[cols="1,1"]
+|===
+|Parameter |Value
+
+|Question
+|What should the value of prod_content be?
+
+|Answer Variable Name
+|prod_content
+
+|Answer Type
+|Text
+|===
+
+* Click *Create survey question*
+* Enable the survey by toggling the *Survey enabled* switch to the on position.
+
+* Add permissions to the team `Web Content` so the template *Create Web Content* can be executed by `wweb`.
+* Within *Automation Execution → Templates*, click *Create Web Content*, select the *User Access* tab, and click the kebab menu (⋮) to select *Add roles* (or navigate to the *Assign users* page).
+** *Select user(s)* → check the box for `wweb`, click *Next*.
+** *Select roles to apply* → check the box for *JobTemplate Execute* and click *Next*.
+** *Review* → click *Finish*.
+* Run the survey as user `wweb`
+** Logout of the user `admin` of your Ansible automation controller.
+** Login as `wweb` and go to *Automation Execution → Templates* and run the *Create Web Content* template.
+
+Check the results again from your automation controller host. We will use the dedicated `uri` module within an Ansible playbook. As arguments it needs the actual URL and a flag to output the body in the results.
 
 [source,bash,role=copypaste]
 ----
-chronyc tracking
-chronyc sources
-chronyc sourcestats
-chronyc activity
+ansible-navigator run check_url.yml -m stdout
 ----
+
+=== Solution
+
+WARNING: *Solution Not Below*
+
+You have done all the required configuration steps in the lab already. If unsure, just refer back to the respective chapters.
+
+== Congratulations
+
+You finished your labs! We hope you enjoyed your first encounter with Ansible automation controller as much as we enjoyed creating the labs.
 
 == Summary
 
 In this exercise you:
 
-* [x] Created a project pointing to the Product Demos repository with Linux and RHEL System Roles
-* [x] Reviewed how firewall and timesync roles are conditionally included
-* [x] Created a Job Template with a Survey to toggle role behavior
-* [x] Launched the job and verified time synchronization configuration on managed hosts
+* [x] Created a Webserver inventory group with dev/prod staging variables
+* [x] Built a job template using stage-aware templates for web content
+* [x] Verified dev and prod content was deployed correctly to the right hosts
+* [x] Added a survey for dynamic content input and configured RBAC for the wweb user

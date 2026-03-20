@@ -16,9 +16,8 @@
 * xref:module-11.adoc[2.4 Surveys]
 * xref:module-12.adoc[2.5 Role-based Access Control]
 * xref:module-13.adoc[2.6 Workflows]
-* xref:module-14.adoc[2.7 Wrap up]
-* xref:module-15.adoc[2.8 System Roles]
-* xref:module-16.adoc[2.9 RHEL MCP + AAP]
+* xref:module-14.adoc[2.7 System Roles]
+* xref:module-15.adoc[2.8 Wrap up]
 
 //.Supplemental
 //* xref:supplemental-image-mode.adoc[Bonus: RHEL Image Mode]

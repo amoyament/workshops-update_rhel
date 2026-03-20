@@ -141,14 +141,6 @@ Verify that the output contains the headline and subheading you entered in the s
 
 image::exercise-2-4-surveys/curl_output.png[curl output,link=self,window=_blank]
 
-=== Optional: Make this template available in a self-service view
-
-* Grant launch permissions to the intended users or teams via RBAC
-* Keep the survey enabled to collect required inputs
-* Organize or tag templates per your organization's portal conventions so users can easily find and launch approved automation
-
-image::exercise-2-4-surveys/run_command.png[Run Command,link=self,window=_blank]
-
 == Summary
 
 In this exercise you:
