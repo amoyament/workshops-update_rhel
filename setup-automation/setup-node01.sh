@@ -15,7 +15,7 @@ fi
 echo "rhel:ansible123!" | chpasswd
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 
-dnf module enable nodejs:development -y
+dnf module enable nodejs:18 -y
 dnf install httpd nano -y
 
 cat <<EOF | tee /var/www/html/index.html

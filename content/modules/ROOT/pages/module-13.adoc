@@ -198,7 +198,7 @@ image::exercise-2-6-workflows/visualizer_overview.png[overview,link=self,window=
 
 === Launch workflow
 
-From the *Deploy Webapp Server* template, select *Launch template* from the kebab menu (⋮).
+From the *Deploy Webapp Server* template, select *Launch template*.
 
 image::exercise-2-6-workflows/launch_template.png[launch_template,link=self,window=_blank]
 
