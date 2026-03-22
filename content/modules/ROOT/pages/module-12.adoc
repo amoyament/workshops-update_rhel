@@ -93,7 +93,7 @@ Now, log out and log in again as the `wweb` user.
 Once the job completes, log back in as `admin` and verify the result using *Run Command*:
 
 . Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
-. Select `node01` and click *Run Command*.
+. Select `node01` and `node02`, then click *Run Command*.
 . In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
 . In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
 . In the *Credential* window, select *Workshop Credentials*. Click *Next*.

@@ -205,7 +205,7 @@ image::exercise-2-6-workflows/launch_template.png[launch_template,link=self,wind
 Once the workflow completes, verify the result using *Run Command*:
 
 . Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
-. Select `node01` and click *Run Command*.
+. Select `node01` and `node02`, then click *Run Command*.
 . In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost/nodejs`. Click *Next*.
 . In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
 . In the *Credential* window, select *Workshop Credentials*. Click *Next*.

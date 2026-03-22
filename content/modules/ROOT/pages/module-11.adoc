@@ -131,7 +131,7 @@ image::exercise-2-4-surveys/survey_review.png[Survey Review,link=self,window=_bl
 Once the job completes, verify the Apache homepage is serving your custom content by running a `curl` command via *Run Command*:
 
 . Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
-. Select `node01` and click *Run Command*.
+. Select `node01` and `node02`, then click *Run Command*.
 . In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
 . In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
 . In the *Credential* window, select *Workshop Credentials*. Click *Next*.

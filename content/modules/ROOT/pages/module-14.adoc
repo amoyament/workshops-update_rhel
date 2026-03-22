@@ -27,19 +27,17 @@ Project fields:
 |Git
 
 |Source Control URL
-|`https://github.com/ansible/product-demos`
+|`https://github.com/ansible-tmm/RHEL-workshop-examples`
 |===
 
 Click *Create project* and wait for the sync to complete.
-
-image::exercise-2-7-system-roles/demo-project.png[system roles project,link=self,window=_blank]
 
 === Step 2 - Review the playbook
 
 Open the repository in your browser and navigate to:
 
 * linux/hardening.yml
-** link:https://github.com/ansible/product-demos/blob/main/linux/hardening.yml[]
+** link:https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/linux/hardening.yml[https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/linux/hardening.yml,window=_blank]
 
 Relevant tasks (roles are conditionally included):
 
@@ -48,18 +46,13 @@ Relevant tasks (roles are conditionally included):
 - name: Configure Firewall
   when: harden_firewall | bool
   ansible.builtin.include_role:
-    name: linux-system-roles.firewall
+    name: redhat.rhel_system_roles.firewall
 
 - name: Configure Timesync
   when: harden_time | bool
   ansible.builtin.include_role:
     name: redhat.rhel_system_roles.timesync
 ----
-
-Role naming tips:
-
-* Collection role: namespace.collection.role (e.g., redhat.rhel_system_roles.timesync)
-* Standalone role: namespace.role (e.g., linux-system-roles.firewall)
 
 === Step 3 - About Linux and RHEL System Roles
 
@@ -123,49 +116,73 @@ Template fields:
 |Workshop Credential
 |===
 
-image::exercise-2-7-system-roles/job.png[job template,link=self,window=_blank]
+image::exercise-2-6-workflows/job.png[launch_template,link=self,window=_blank]
 
-. Add a Survey to toggle roles:
+. Click *Create job template*, then click the *Survey* tab and select *Create survey question*.
 
-* Survey Questions:
-** CONFIGURE FIREWALL? (boolean) → sets harden_firewall
-** CONFIGURE TIME? (boolean) → sets harden_time
+. Fill out the following for the first survey question:
++
+[cols="1,1"]
+|===
+|Parameter |Value
 
-image::exercise-2-7-system-roles/survey.png[survey,link=self,window=_blank]
+|Question
+|Configure Firewall?
 
-Click Launch:
+|Answer Variable Name
+|harden_firewall
 
-image::exercise-2-7-system-roles/launch.png[launch,link=self,window=_blank]
+|Answer Type
+|Multiple Choice (single select)
 
-If a confirmation step is shown:
+|Multiple Choice Options
+|true +
+false
+|===
++
+Click *Create survey question*.
 
-image::exercise-2-7-system-roles/next.png[next button,link=self,window=_blank]
+. Click *Create survey question* to add a second question:
++
+[cols="1,1"]
+|===
+|Parameter |Value
 
-Review the EXTRA VARIABLES to see how the survey sets the role switches and proceed.
+|Question
+|Configure Time?
+
+|Answer Variable Name
+|harden_time
+
+|Answer Type
+|Multiple Choice (single select)
+
+|Multiple Choice Options
+|true +
+false
+|===
++
+Click *Create survey question*.
+
+. Enable the survey by toggling the *Survey enabled* switch to the on position.
+
+. Click *Launch template*. The survey will prompt you with two questions:
+** *Configure Firewall?* — select `true`
+** *Configure Time?* — select `true`
+. Click *Next*, review the extra variables to confirm the survey values, then click *Finish*.
 
 === Step 5 - Verify configuration
 
-From the control node, verify time configuration:
+Once the job completes, verify the time configuration is active using *Run Command*:
 
-[source,bash,role=copypaste]
-----
-ansible node01 -i hosts -m command -a "systemctl status chronyd.service"
-----
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01` and `node02`, then click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `timedatectl`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credentials*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-[source,bash,role=copypaste]
-----
-ansible node01 -i hosts -m command -a "timedatectl"
-----
-
-Example commands:
-
-[source,bash,role=copypaste]
-----
-chronyc tracking
-chronyc sources
-chronyc sourcestats
-chronyc activity
-----
+Verify that the output shows NTP is active and synchronized.
 
 == Summary
 
