@@ -161,9 +161,15 @@ image::exercise-2-6-workflows/visualizer_add_step.png[add_step,link=self,window=
 |Any
 |===
 +
+
+image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy,link=self,window=_blank]
+
 Click *Next* then *Finish*.
 
 . On the first node, click the kebab menu (⋮) and select *Add step and link*. Fill in the following for the second node:
+
+image::exercise-2-6-workflows/visualizer_add_step_add_link.png[add_link,link=self,window=_blank]
+
 +
 [cols="1,1"]
 |===
@@ -175,18 +181,14 @@ Click *Next* then *Finish*.
 |Job template
 |Node.js Deploy
 
-|Status
-|Run on success
-
 |Convergence
 |Any
+
+|Run type
+|On Success
 |===
 +
 Click *Next* then *Finish*.
-
-image::exercise-2-6-workflows/visualizer_add_step_app_deploy.png[app_deploy,link=self,window=_blank]
-
-image::exercise-2-6-workflows/visualizer_add_step_add_link.png[add_link,link=self,window=_blank]
 
 image::exercise-2-6-workflows/visualizer_add_step_nodejs.png[add_nodejs,link=self,window=_blank]
 
@@ -196,25 +198,20 @@ image::exercise-2-6-workflows/visualizer_overview.png[overview,link=self,window=
 
 === Launch workflow
 
-From the *Deploy Webapp Server* template, select *Launch template* from the kebab menu (⋮) or from the template detail page.
+From the *Deploy Webapp Server* template, select *Launch template* from the kebab menu (⋮).
 
 image::exercise-2-6-workflows/launch_template.png[launch_template,link=self,window=_blank]
 
-Once the workflow completes, verify the result.
+Once the workflow completes, verify the result using *Run Command*:
 
-Go to Automation Execution → Infrastructure → Inventories → Workshop Inventory
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01` and click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost/nodejs`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credentials*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-In the *Automation Execution → Infrastructure → Inventories → Workshop Inventory, select the Hosts tab and select node01 and click Run Command
-
-Within the Details window, select Module command, in Arguments type `curl http://node01/nodejs` and click Next.
-
-Within the Execution Environment window, select Default execution environment and click Next.
-
-Within the Credential window, select Workshop Credentials and click Next.
-
-Review your inputs and click Finish.
-
-Verify that the output result shows `Hello World`
+Verify that the output shows `Hello World`.
 
 == Summary
 

@@ -72,7 +72,7 @@ WARNING: *Do not run the template yet!*
 
 ==== Add the Survey
 
-. In the Template, click the *Survey* tab, then click the kebab menu (⋮) and select *Create survey question*.
+. In the Template, click the *Survey* tab, then select *Create survey question*.
 
 . Fill out the following for the first survey question:
 +
