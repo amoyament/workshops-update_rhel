@@ -5,6 +5,12 @@ rpm -Uhv https://${SATELLITE_URL}/pub/katello-ca-consumer-latest.noarch.rpm
 
 subscription-manager register --org=${SATELLITE_ORG} --activationkey=${SATELLITE_ACTIVATIONKEY}
 
+# Disable AWS RHUI repos to avoid conflicts with Satellite
+dnf config-manager --set-disabled '*rhui*' 2>/dev/null || true
+if [ -f /etc/dnf/plugins/amazon-id.conf ]; then
+    sed -i 's/enabled.*=.*1/enabled=0/' /etc/dnf/plugins/amazon-id.conf
+fi
+
 # Ensure rhel user has password and sudo
 echo "rhel:ansible123!" | chpasswd
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
