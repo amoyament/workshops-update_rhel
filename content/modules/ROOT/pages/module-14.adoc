@@ -4,16 +4,10 @@
 
 In this exercise, you will use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller. You will leverage Linux System Roles and RHEL System Roles with a simple Survey-driven job to manage firewall and timesync configuration.
 
-=== Confirm the project
-
-This exercise uses the same *Workshop Project* created in a previous exercise. In the Ansible Automation Controller UI, navigate to *Automation Execution → Projects* and confirm that *Workshop Project* has synced successfully before continuing.
-
 === Review the playbook
 
-Open the repository in your browser and navigate to:
-
-* hardening.yml
-** link:https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml[https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml,window=_blank]
+Open the repository in your browser and navigate to hardening.yml
+* link:https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml[https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml,window=_blank]
 
 Relevant tasks (roles are conditionally included):
 
@@ -116,7 +110,7 @@ image::exercise-2-7-system-roles/job.png[launch_template,link=self,window=_blank
 false
 |===
 +
-Click *Create survey question*.
+. Click *Create survey question*.
 
 . Click *Create survey question* to add a second question:
 +
@@ -138,7 +132,7 @@ Click *Create survey question*.
 false
 |===
 +
-Click *Create survey question*.
+. Click *Create survey question*.
 
 . Enable the survey by toggling the *Survey enabled* switch to the on position.
 

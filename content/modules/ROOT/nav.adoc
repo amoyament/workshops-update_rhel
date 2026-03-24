@@ -18,6 +18,3 @@
 * xref:module-13.adoc[2.6 Workflows]
 * xref:module-14.adoc[2.7 System Roles]
 * xref:module-15.adoc[2.8 Wrap up]
-
-//.Supplemental
-//* xref:supplemental-image-mode.adoc[Bonus: RHEL Image Mode]

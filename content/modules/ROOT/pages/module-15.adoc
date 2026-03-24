@@ -187,7 +187,7 @@ In the same fashion add a second *Survey Question*
 * Enable the survey by toggling the *Survey enabled* switch to the on position.
 
 * Add permissions to the team `Web Content` so the template *Create Web Content* can be executed by `wweb`.
-* Within *Automation Execution → Templates*, click *Create Web Content*, select the *User Access* tab, and click the kebab menu (⋮) to select *Add roles* (or navigate to the *Assign users* page).
+* Within *Automation Execution → Templates*, click *Create Web Content*, select the *User Access* tab, and click *Assign users*.
 ** *Select user(s)* → check the box for `wweb`, click *Next*.
 ** *Select roles to apply* → check the box for *JobTemplate Execute* and click *Next*.
 ** *Review* → click *Finish*.

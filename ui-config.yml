@@ -46,19 +46,35 @@ antora:
       label: "2.6 Workflows"
       solveButton: false
     - name: module-14
-      label: "2.7 Wrap up"
+      label: "2.7 System Roles"
       solveButton: false
     - name: module-15
-      label: "2.8 System Roles"
-      solveButton: false
-    - name: module-16
-      label: "2.9 RHEL MCP + AAP"
+      label: "2.8 Wrap Up"
       solveButton: false
 
 tabs:
   - name: AAP
     url: https://control-${guid}.${domain}/
     external: false
+    modules:
+      # - module-01
+      # - module-02
+      # - module-03
+      # - module-04
+      # - module-05
+      # - module-06
+      # - module-07
+      # - module-08
+      - module-09
+      - module-10
+      - module-11
+      - module-12
+      - module-13
+      - module-14
+      - module-15
+  - name: VS Code
+    url: https://vscode-${guid}.${domain}/
+    external: true
     modules:
       - module-01
       - module-02
@@ -68,28 +84,17 @@ tabs:
       - module-06
       - module-07
       - module-08
-      - module-09
-      - module-10
-      - module-11
-      - module-12
-      - module-13
-      - module-14
-      - module-15
-      - module-16
-  - name: VS Code
-    url: https://vscode-${guid}.${domain}/
-    external: true
-  - name: Node 02 Web
-    url: https://node02-${guid}.${domain}/
-    external: true
-    modules:
-      - module-04
-  - name: Node 03 Web
-    url: https://node03-${guid}.${domain}/
-    external: true
-    modules:
-      - module-04
-  - name: Gitea
-    url: https://gitea-${guid}.${domain}/
-    modules:
-      - module-10
+  # - name: Node 02 Web
+  #   url: https://node02-${guid}.${domain}/
+  #   external: true
+  #   modules:
+  #     - module-04
+  # - name: Node 03 Web
+  #   url: https://node03-${guid}.${domain}/
+  #   external: true
+  #   modules:
+  #     - module-04
+  # - name: Gitea
+  #   url: https://gitea-${guid}.${domain}/
+  #   modules:
+  #     - module-10
