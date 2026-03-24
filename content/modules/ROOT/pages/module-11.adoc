@@ -11,7 +11,7 @@ The survey feature provides a simple query for data but does not support dynamic
 
 === The Apache-Configuration Role
 
-The playbook and role with the Jinja2 template are located in the GitHub repository link:https://github.com/ansible/workshop-examples[https://github.com/ansible/workshop-examples,window=_blank] in the `rhel/apache` directory.
+The playbook and role with the Jinja2 template are located in the GitHub repository link:https://github.com/ansible-tmm/RHEL-workshop-examples[https://github.com/ansible-tmm/RHEL-workshop-examples,window=_blank] in the `apache` directory.
 
 * Have a look at the playbook `apache_role_install.yml`, which references the role.
 * The role is located in the `roles/role_apache` subdirectory.
@@ -49,7 +49,7 @@ Now, let's create a new Template that includes a survey.
 |Workshop Project
 
 |Playbook
-|`rhel/apache/apache_role_install.yml`
+|`apache/apache_role_install.yml`
 
 |Execution Environment
 |Default execution environment

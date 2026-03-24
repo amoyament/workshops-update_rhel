@@ -8,9 +8,9 @@ An Ansible automation controller *Project* is a logical collection of Ansible pl
 
 For this demonstration, we will use playbooks stored in a Git repository:
 
-link:https://github.com/ansible/workshop-examples[https://github.com/ansible/workshop-examples,window=_blank]
+link:https://github.com/ansible-tmm/RHEL-workshop-examples[https://github.com/ansible-tmm/RHEL-workshop-examples,window=_blank]
 
-A playbook to install the Apache web server has already been committed to the directory *rhel/apache*, `apache_install.yml`:
+A playbook to install the Apache web server has already been committed to the directory *apache*, `apache_install.yml`:
 
 [source,yaml,role=copypaste]
 ----
@@ -84,7 +84,7 @@ Enter the URL into the Project configuration:
 |Parameter |Value
 
 |Source Control URL
-|`https://github.com/ansible/workshop-examples.git`
+|link:https://github.com/ansible-tmm/RHEL-workshop-examples[https://github.com/ansible-tmm/RHEL-workshop-examples,window=_blank]
 
 |Options
 |✓ Clean +
@@ -138,7 +138,7 @@ Remember that you can often click on the question mark with a circle to get more
 |Workshop Project
 
 |Playbook
-|`rhel/apache/apache_install.yml`
+|`apache/apache_install.yml`
 
 |Execution Environment
 |Default execution environment

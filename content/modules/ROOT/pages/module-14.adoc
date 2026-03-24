@@ -4,40 +4,16 @@
 
 In this exercise, you will use pre-existing content (roles and collections) from Automation Hub and Ansible Galaxy to configure hosts via Ansible Automation Controller. You will leverage Linux System Roles and RHEL System Roles with a simple Survey-driven job to manage firewall and timesync configuration.
 
-=== Step 1 - Create the project
+=== Confirm the project
 
-In the Ansible Automation Controller UI navigate to *Automation Execution → Projects* and click *Create project*.
+This exercise uses the same *Workshop Project* created in a previous exercise. In the Ansible Automation Controller UI, navigate to *Automation Execution → Projects* and confirm that *Workshop Project* has synced successfully before continuing.
 
-Project fields:
-
-[cols="1,1"]
-|===
-|Parameter |Value
-
-|Name
-|System Roles Project
-
-|Organization
-|Default
-
-|Execution Environment
-|Default execution environment
-
-|Source Control Type
-|Git
-
-|Source Control URL
-|`https://github.com/ansible-tmm/RHEL-workshop-examples`
-|===
-
-Click *Create project* and wait for the sync to complete.
-
-=== Step 2 - Review the playbook
+=== Review the playbook
 
 Open the repository in your browser and navigate to:
 
-* linux/hardening.yml
-** link:https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/linux/hardening.yml[https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/linux/hardening.yml,window=_blank]
+* hardening.yml
+** link:https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml[https://github.com/ansible-tmm/RHEL-workshop-examples/blob/main/hardening.yml,window=_blank]
 
 Relevant tasks (roles are conditionally included):
 
@@ -54,7 +30,7 @@ Relevant tasks (roles are conditionally included):
     name: redhat.rhel_system_roles.timesync
 ----
 
-=== Step 3 - About Linux and RHEL System Roles
+=== About Linux and RHEL System Roles
 
 System Roles provide consistent interfaces for subsystem configuration, abstracting implementation differences.
 
@@ -84,10 +60,10 @@ vars:
       iburst: yes
 ----
 
-=== Step 4 - Create and launch the Job Template with a Survey
+=== Create and launch the Job Template with a Survey
 
 . In Controller, go to *Automation Execution → Templates*, click the *Create template* dropdown and select *Create job template*.
-
++
 Template fields:
 
 [cols="1,1"]
@@ -104,10 +80,10 @@ Template fields:
 |Workshop Inventory
 
 |Project
-|System Roles Project
+|Workshop Project
 
 |Playbook
-|`linux/hardening.yml`
+|`hardening.yml`
 
 |Execution Environment
 |Default execution environment
@@ -116,7 +92,7 @@ Template fields:
 |Workshop Credential
 |===
 
-image::exercise-2-6-workflows/job.png[launch_template,link=self,window=_blank]
+image::exercise-2-7-system-roles/job.png[launch_template,link=self,window=_blank]
 
 . Click *Create job template*, then click the *Survey* tab and select *Create survey question*.
 
@@ -171,7 +147,7 @@ Click *Create survey question*.
 ** *Configure Time?* — select `true`
 . Click *Next*, review the extra variables to confirm the survey values, then click *Finish*.
 
-=== Step 5 - Verify configuration
+=== Verify configuration
 
 Once the job completes, verify the time configuration is active using *Run Command*:
 

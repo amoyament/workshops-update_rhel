@@ -23,7 +23,7 @@ The teams have put together these requirements:
 
 === The Git Repository
 
-All code is already in place - this is a automation controller lab after all. Check out the *Workshop Project* git repository at link:https://github.com/ansible/workshop-examples[]. There you will find the playbook `webcontent.yml`, which calls the role `role_webcontent`.
+All code is already in place - this is a automation controller lab after all. Check out the *Workshop Project* git repository at link:https://github.com/ansible-tmm/RHEL-workshop-examples[https://github.com/ansible-tmm/RHEL-workshop-examples,window=_blank]. There you will find the playbook `apache/webcontent.yml`, which calls the role `role_webcontent`.
 
 Compared to the previous Apache installation role there is a major difference: there are now two versions of an `index.html` template, and a task deploying the template file which has a variable as part of the source file name:
 
@@ -63,28 +63,27 @@ Compared to the previous Apache installation role there is a major difference: t
 
 Navigate to *Automation Execution → Infrastructure → Inventories*. Select 'Workshop Inventory' and complete the following:
 
-. Go to the *Groups* tab, click the *Create group* button, and create a new group labeled `Webserver`. Click *Create group*.
-. In the `Webserver` group, click the kebab menu (⋮) and select *Edit group* to define the following variable:
-
-Within the *Variables* textbox define a variable labeled `stage` with the value `dev` and click *Save group*.
-
+. Go to the *Groups* tab, click the *Create group* button, and create a new group labeled `Webserver`. 
+. Within the *Variables* textbox define a variable labeled `stage` with the value `dev`.
++
 [source,yaml,role=copypaste]
 ----
 stage: dev
 ----
 
-Within the `Webserver` group, click the *Hosts* tab, then click *Add existing host*. Select `node01`, `node02`, `node03` as the hosts to be part of the `Webserver` group.
-
-Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node02`. Click the kebab menu (⋮) and select *Edit host*, then add the `stage: prod` variable in the *Variables* window. This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
-
-image::exercise-2-8-wrap/edit_host.png[edit host,link=self,window=_blank]
-
-Within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
+. Click *Create group*.
+. Within the `Webserver` group, click the *Hosts* tab, then click *Add existing host*. Select `node01`, `node02`, `node03` as the hosts to be part of the `Webserver` group.
+. Within *Automation Execution → Infrastructure → Inventories*, select the `Workshop Inventory`. Click on the *Hosts* tab and click on `node02`. Select *Edit host*, and within the *Variables* textbox define a variable labeled `stage` with the value of `prod` and click *Save host*.
 
 [source,yaml,role=copypaste]
 ----
 stage: prod
 ----
+
+[NOTE]
+====
+This overrides the inventory variable due to order of operations of how the variables are accessed during playbook execution.
+====
 
 === Create the Template
 
@@ -107,7 +106,7 @@ Within *Automation Execution → Templates*, click the *Create template* dropdow
 |Workshop Project
 
 |Playbook
-|rhel/apache/webcontent.yml
+|apache/webcontent.yml
 
 |Execution Environment
 |Default execution environment
@@ -116,7 +115,7 @@ Within *Automation Execution → Templates*, click the *Create template* dropdow
 |Workshop Credential \| Machine
 
 |Variables
-a|dev_content: "default dev content"
+a|dev_content: "default dev content" +
 prod_content: "default prod content"
 
 |Options
@@ -131,50 +130,18 @@ Run the template by selecting *Launch template* from the template's kebab menu (
 
 === Check the Results
 
-This time we use the power of Ansible to check the results: execute uri to get the web content from each node, orchestrated by an Ansible playbook labeled `check_url.yml`
+Use AAP's *Run Command* feature to verify the web content on each node.
 
-[TIP]
-====
-We are using the `ansible_host` variable in the URL to access every node in the inventory group.
-====
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01`, `node02`, and `node03`, then click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credential*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-[source,yaml,role=copypaste]
-----
----
-- name: Check URL results
-  hosts: web
+You should see each node return its respective HTML content — development nodes will show "This is a development webserver" and the production node will show "This is a production webserver".
 
-  tasks:
-    - name: Check that you can connect (GET) to a page and it returns a status 200
-      ansible.builtin.uri:
-        url: "http://{{ ansible_host }}"
-        return_content: yes
-      register: content
-
-    - ansible.builtin.debug:
-       var: content.content
-----
-
-[source,bash,role=copypaste]
-----
-ansible-navigator run check_url.yml -m stdout
-----
-
-Snippet of output:
-
-[source,bash,role=copypaste]
-----
-TASK [debug] *******************************************************************
-ok: [node01] => {
-    "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
-}
-ok: [node02] => {
-    "content.content": "<body>\n<h1>This is a production webserver, take care!</h1>\nprod wweb</body>\n"
-}
-ok: [node03] => {
-    "content.content": "<body>\n<h1>This is a development webserver, have fun!</h1>\ndev wweb</body>\n"
-}
-----
+image::exercise-2-8-wrap/curl_output.png[curl output,link=self,window=_blank]
 
 === Add Survey
 
@@ -228,18 +195,17 @@ In the same fashion add a second *Survey Question*
 ** Logout of the user `admin` of your Ansible automation controller.
 ** Login as `wweb` and go to *Automation Execution → Templates* and run the *Create Web Content* template.
 
-Check the results again from your automation controller host. We will use the dedicated `uri` module within an Ansible playbook. As arguments it needs the actual URL and a flag to output the body in the results.
+Once the job completes, log back in as `admin` and verify the results using *Run Command*:
 
-[source,bash,role=copypaste]
-----
-ansible-navigator run check_url.yml -m stdout
-----
+. Go to *Automation Execution → Infrastructure → Inventories → Workshop Inventory* and open the *Hosts* tab.
+. Select `node01`, `node02`, and `node03`, then click *Run Command*.
+. In the *Details* window, set *Module* to `command` and *Arguments* to `curl http://localhost`. Click *Next*.
+. In the *Execution Environment* window, select *Default execution environment*. Click *Next*.
+. In the *Credential* window, select *Workshop Credential*. Click *Next*.
+. Review your inputs and click *Finish*.
 
-=== Solution
+Verify that the updated survey content is reflected in the output for each node.
 
-WARNING: *Solution Not Below*
-
-You have done all the required configuration steps in the lab already. If unsure, just refer back to the respective chapters.
 
 == Congratulations
 
