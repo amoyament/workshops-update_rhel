@@ -1,142 +1,52 @@
-= Zero Touch Platform Template
+= Ansible for Red Hat Enterprise Linux Workshop
 
-Professional template repository for creating interactive labs using Red Hat's Zero Touch platform. Features comprehensive documentation, verified configuration examples, and enterprise-grade patterns.
+A Showroom-based workshop covering Ansible automation for Red Hat Enterprise Linux, built on Ansible Automation Platform 2.6.
 
 == Overview
 
-This template provides a complete foundation for developing Zero Touch labs with:
+This workshop is available in two formats:
 
-* **Professional documentation** following Red Hat Documentation standards
-* **Verified configuration examples** traced to actual backend code
-* **Enterprise patterns** from production labs
-* **Comprehensive citations** for all code blocks (334+ cited examples)
-* **Collapsible navigation** for enhanced user experience
+* *Full version* (~3 hours) — 15 modules covering command-line Ansible and Ansible Automation Platform
+* *90-minute version* — 7 modules focused on core AAP workflows
 
-== Quick Start
+== Structure
 
-=== For Experienced Internal Developers
-Begin with `content/modules/ROOT/pages/quick-start-guide.adoc` (10-15 minutes)
+* `content/` — AsciiDoc workshop modules and navigation files
+** `nav.adoc` — Full workshop navigation
+** `nav-90.adoc` — 90-minute workshop navigation
+* `config/` — Lab instance definitions
+* `setup-automation/` — Lab provisioning playbooks
+* `runtime-automation/` — Runtime automation playbooks
+* `ui-config.yml` — Showroom UI and tab configuration
 
-=== For New Users  
-Start with `content/modules/ROOT/pages/zero-touch-platform-training.adoc` for comprehensive guidance
+== Lab Content
 
-== Template Structure
+=== Full Workshop
+. Writing Your First Playbook
+. Using Variables
+. Conditionals, Handlers and Loops
+. Templates
+. Collections
+. Ansible Navigator & Execution Environments
+. Debugging and Error Handling
+. Introduction to Automation Platform
+. Inventories and Credentials
+. Projects & Job Templates
+. Surveys
+. Role-based Access Control
+. Workflows
+. System Roles
+. Wrap Up
 
-```
-├── config/                          # Lab infrastructure configuration
-│   ├── instances.yaml              # VMs and containers
-│   ├── networks.yaml               # Network topology
-│   └── firewall.yaml               # Security rules
-├── content/                         # Educational content
-│   └── modules/ROOT/pages/          # AsciiDoc documentation
-├── runtime-automation/              # Lab execution scripts
-│   └── main.yml                    # Ansible automation
-├── setup-automation/               # Lab initialization scripts  
-│   └── main.yml                    # Ansible setup
-├── site.yml                        # Antora site configuration
-└── ui-config.yml                   # Lab interface configuration
-```
+=== 90-Minute Workshop
+. Writing Your First Playbook
+. Using Variables
+. Projects & Job Templates
+. Surveys
+. Role-based Access Control
+. System Roles
+. Wrap Up
 
-== Key Features
+== Related Repositories
 
-=== Documentation Standards
-* **Professional tone** matching Red Hat Documentation style
-* **Verified citations** for every code block
-* **Complete bibliographies** with backend source references
-* **Collapsible sections** for improved navigation
-* **Cross-referenced content** with clear navigation paths
-
-=== Configuration Patterns
-* **Enterprise examples** from production labs
-* **Verified against backend code** in AgnosticD/AgnosticV repositories
-* **Common use cases** including Satellite, AAP, and container patterns
-* **Security best practices** with network policies and TLS configuration
-
-=== Development Workflow
-* **Rapid iteration** with local testing capabilities
-* **Systematic validation** of configurations
-* **Professional deployment** patterns
-* **Comprehensive troubleshooting** guidance
-
-## Documentation Coverage
-
-=== Core Learning Modules
-* **Module 1**: Platform fundamentals and template structure (30-40 min)
-* **Module 2**: Hands-on lab creation with VMs, containers, and content (45-60 min)
-
-=== Reference Guides  
-* **VM Configuration**: Complete VM setup and advanced features
-* **Container Patterns**: Multi-service architectures and storage management
-* **Networking**: Multi-tier topologies and security configuration
-* **Enterprise Patterns**: Production-scale configurations
-
-=== Advanced Topics
-* **Architecture Internals**: Backend systems and integration points
-* **Troubleshooting**: Comprehensive debugging techniques  
-* **Development Lifecycle**: Complete development workflow
-* **Platform Features**: OpenShift CNV capabilities and optimization
-
-== Code Verification
-
-All 334+ configuration examples are verified against Red Hat backend implementations including:
-
-* **Base configurations** from AgnosticD deployment engine
-* **Production lab patterns** from AAP and Satellite labs
-* **Enterprise examples** from advanced topic labs
-* **Platform patterns** from AgnosticV catalog system
-
-Each code block includes proper citations ensuring accuracy and traceability.
-
-== Development Workflow
-
-=== Initial Setup
-1. Clone this repository
-2. Review `content/modules/ROOT/pages/zero-touch-platform-training.adoc`
-3. Follow `content/modules/ROOT/pages/template-customization-guide.adoc`
-
-=== Configuration
-1. Modify infrastructure in `config/` directory
-2. Update content in `content/modules/ROOT/pages/`
-3. Configure UI in `ui-config.yml`
-4. Test locally with Antora
-
-=== Deployment
-1. Validate YAML configuration files
-2. Commit changes to Git repository
-3. Deploy through Zero Touch platform
-4. Test student experience end-to-end
-
-## Getting Started
-
-Choose your entry point based on your experience:
-
-=== Quick Start (10-15 minutes)
-**For experienced developers:** Jump directly to the Quick Start Guide for rapid onboarding with directory structure, naming conventions, and common patterns.
-
-=== Complete Training (4-6 hours)  
-**For comprehensive learning:** Follow the full training modules covering platform fundamentals, hands-on lab creation, and advanced features.
-
-=== Reference Documentation
-**For specific topics:** Use the reference guides for VM configuration, container patterns, networking, and enterprise examples.
-
-=== Troubleshooting
-**When you need help:** Each guide includes troubleshooting sections with common issues and solutions.
-
-## Template Usage
-
-=== Development Process
-1. **Plan**: Define your lab objectives and infrastructure requirements
-2. **Configure**: Modify `config/` files for VMs, networks, and security
-3. **Create Content**: Write educational content in `content/modules/ROOT/pages/`
-4. **Test**: Validate locally with Antora before deployment
-5. **Deploy**: Push changes to trigger Zero Touch platform deployment
-
-=== Best Practices
-* Start with existing examples and modify incrementally
-* Test all configurations locally before deployment
-* Follow the established naming conventions
-* Reference the troubleshooting sections when issues arise
-
----
-
-Professional Zero Touch lab development template with comprehensive documentation and verified configuration examples.
+* link:https://github.com/ansible-tmm/RHEL-workshop-examples[RHEL Workshop Examples] — Playbooks and roles used in the lab exercises
